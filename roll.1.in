@@ -1,0 +1,35 @@
+.\" Process this file with
+.\" groff -man -Tascii foo.1
+.\"
+.TH "@PACKAGE_NAME@" 1 "December, 2005", "@PACKAGE_VERSION@" "USER COMMANDS"
+.SH NAME
+@PACKAGE_NAME@ \- rolls a user-defined dice sequence
+.SH SYNOPSIS
+.BR "@PACKAGE_NAME@ " "[" "-vh"  "] [" "--version" "] expression"
+.SH DESCRIPTION
+.B @PACKAGE_NAME@
+Rolls a user-defined dice sequence. The dices to roll are defined
+using dN where N is the number of sides. Dices can be rolled multiple
+times by prepending the number of repetitions (e.g., 3d6) and used in
+simple mathematical expressions (e.g., 2d8+4).
+.SH OPTIONS
+.TP
+.B \-h
+help
+.TP
+.B \-v
+verbose (displays the result for each roll)
+.TP
+.B \--version
+prints the version of the program
+.SH "SEE ALSO"
+.BR random (3)
+.SH "EXIT STATUS"
+@PACKAGE_NAME@ returns a zero exist status if it finds no error in the
+supplied expresssion
+.SH BUGS
+Please report bugs to: Matteo Corti (matteo.corti (at) id.ethz.ch)
+
+.SH AUTHOR
+Matteo Corti (matteo.corti (at) id.ethz.ch)
+
