@@ -1,0 +1,14 @@
+2005-12-11  Matteo Corti  <corti@inf.ethz.ch>
+
+	* 1.0.1: defined srandomdev on system non supporting it (e.g., Linux)
+	* 1.0.1: included roll.h in the distribution
+	* 1.0.1: fixed uninitialized var
+
+2005-12-10  Matteo Corti  <corti@inf.ethz.ch>
+
+	* parser.y: parenthesis
+
+2005-12-09  Matteo Corti  <corti@inf.ethz.ch>
+
+	* 1.0.0: Initial revision
+
