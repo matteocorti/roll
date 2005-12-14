@@ -1,19 +1,20 @@
-2005-12-14  Matteo Corti  <corti@inf.ethz.ch>
+2005-12-14  Matteo Corti  <matteo.corti@gmail.com>
 
+	* autoheader: using config.h
 	* configure.ac: checking for <strings.h>
 	* roll.h: prototypes with "extern"
 
-2005-12-11  Matteo Corti  <corti@inf.ethz.ch>
+2005-12-11  Matteo Corti  <matteo.corti@gmail.com>
 
 	* 1.0.1: defined srandomdev on system non supporting it (e.g., Linux)
 	* 1.0.1: included roll.h in the distribution
 	* 1.0.1: fixed uninitialized var
 
-2005-12-10  Matteo Corti  <corti@inf.ethz.ch>
+2005-12-10  Matteo Corti  <matteo.corti@gmail.com>
 
 	* parser.y: parenthesis
 
-2005-12-09  Matteo Corti  <corti@inf.ethz.ch>
+2005-12-09  Matteo Corti  <matteo.corti@gmail.com>
 
 	* 1.0.0: Initial revision
 

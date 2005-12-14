@@ -3,6 +3,7 @@
 #include <strings.h>
 #include <getopt.h>
 #include <errno.h>
+#include "config.h"
 
 /* booleans */
 
