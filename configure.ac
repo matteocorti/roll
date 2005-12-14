@@ -8,7 +8,7 @@ AC_PROG_YACC
 AC_ISC_POSIX
 
 AC_STDC_HEADERS
-AC_HAVE_HEADERS(stdio.h getopt.h errno.h)
+AC_HAVE_HEADERS(stdio.h getopt.h errno.h strings.h)
 
 AC_CHECK_FUNCS(srandomdev)
 
