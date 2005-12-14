@@ -1,3 +1,8 @@
+2005-12-14  Matteo Corti  <corti@inf.ethz.ch>
+
+	* configure.ac: checking for <strings.h>
+	* roll.h: prototypes with "extern"
+
 2005-12-11  Matteo Corti  <corti@inf.ethz.ch>
 
 	* 1.0.1: defined srandomdev on system non supporting it (e.g., Linux)

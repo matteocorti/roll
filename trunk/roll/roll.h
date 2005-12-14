@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <strings.h>
 #include <getopt.h>
 #include <errno.h>
 
@@ -23,6 +24,6 @@
 
 /* function prototypes */
 
-void usage();
-void error(char * message);
-int  roll(int dice);
+extern void usage();
+extern void error(char * message);
+extern int  roll(int dice);
