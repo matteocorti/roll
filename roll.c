@@ -17,7 +17,7 @@ void usage() {
 
 void error(char * message) {
   fprintf(stderr, "Error: %s\n", message);
-  exit(-1);
+  exit(EXIT_FAILURE);
 }
 
 int roll(int dice) {
