@@ -1,8 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <strings.h>
+#include <string.h>
 #include <getopt.h>
 #include <errno.h>
+#include <time.h>
 #include "config.h"
 
 /* booleans */
@@ -10,21 +12,28 @@
 #define TRUE  1
 #define FALSE 0
 
-/* item types */
-
-#define DICE   1
-#define NUMBER 2
-
 /* various constants */
 #define EXPRESSION_SIZE 1024
 
 /* missing functions */
 #ifndef HAVE_SRANDOMDEV
-#define srandomdev() srand((unsigned) time(NULL)) 
+
+#ifdef HAVE_GETPID
+
+#include <sys/types.h>
+#include <unistd.h>
+
+#define srandomdev() srand((unsigned) time(NULL) & getpid())
+
+#else
+#define srandomdev() srand((unsigned) time(NULL))
+#endif
+
 #endif
 
 /* function prototypes */
 
-extern void usage();
-extern void error(char * message);
+void usage();
+void error(char * message);
+
 extern int  roll(int dice);

@@ -1,3 +1,8 @@
+2007-02-26  Matteo Corti  <matteo.corti@id.ethz.ch>
+
+	* roll.h: if getpid is present the random generator is initialized with time & PID (it gives different results if called twice within a second)
+	* 1.0.2: new version
+
 2005-12-14  Matteo Corti  <matteo.corti@gmail.com>
 
 	* autoheader: using config.h
