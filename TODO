@@ -1,4 +1,1 @@
 * Add doxygen comments.
-
-* Use /dev/urandom where srandomdev is not available (srand(time()) gives the
-  same result if roll is executed in more than once in less than a second)

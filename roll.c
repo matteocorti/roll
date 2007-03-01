@@ -84,8 +84,7 @@ int main(int argc, char **argv) {
     case '?':
       usage();
       /* getopt_long already printed an error message. */
-      exit(1);
-      break;
+      exit(EXIT_SUCCESS);
       
     case 0:
       break;
@@ -98,7 +97,7 @@ int main(int argc, char **argv) {
 
   if (version_flag) {
     printf("%s %s\n", PACKAGE_NAME, PACKAGE_VERSION);
-    exit(0);
+    exit(EXIT_SUCCESS);
   }      
 
   argc -= optind;
@@ -123,7 +122,7 @@ int main(int argc, char **argv) {
     yyparse();
   } else {
     fprintf(stderr, "Error: no expression\n");
-    exit(-1);
+    exit(EXIT_FAILURE);
   }
 
   return 0;
