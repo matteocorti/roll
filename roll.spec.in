@@ -1,0 +1,49 @@
+%define version @PACKAGE_VERSION@
+%define release 0
+%define name    roll
+
+Summary:   roll is a program to roll dices specified in a simple and intuitive way.
+Name:      %{name}
+Version:   %{version}
+Release:   %{release}
+License:   GPL
+Packager:  Joe Klemmer <klemmerj@webtrek.com>
+Group:     Amusements/Games
+BuildRoot: %{_tmppath}/%{name}-%{version}-root
+Source:    http://matteocorti.ch/software/roll/%{name}-%{version}.tar.gz
+BuildRequires: bison, flex
+
+%description
+roll is a program to roll dices specified in a simple and intuitive way.
+
+The dices to roll are defined using dN where N is the number of sides. 
+Dices can be rolled multiple times by prepending the number of 
+repetitions (e.g., 3d6) and used in simple mathematical expressions 
+(e.g., 2d8+4).
+
+%prep
+%setup
+
+%build
+%configure %{_prefix}/usr
+%{__make} %{?_smp_mflags}
+
+%install
+%{__rm} -rf %{buildroot}
+%makeinstall
+
+%clean
+%{__rm} -rf %{buildroot}
+
+%files
+%defattr(-, root, root, 0644)
+%{_mandir}/man1/roll.1.gz
+%doc AUTHORS ChangeLog NEWS README INSTALL TODO COPYING VERSION
+%attr(0755, root, root) %{_prefix}/bin/roll
+
+%changelog
+* Thu Mar  1 2007 Matteo Corti <matteo.corti@id.ethz.ch>
+- Version is updated by autoconf
+
+* Wed Feb 28 2007 Joe Klemmer <klemmerj@webtrek.com>
+- Initial spec file
