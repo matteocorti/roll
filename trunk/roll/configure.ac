@@ -1,5 +1,5 @@
-AC_INIT(roll, 1.0.2, matteo.corti@gmail.com)
-AM_INIT_AUTOMAKE(roll, 1.0.2, matteo.corti@gmail.com)
+AC_INIT(roll, 1.0.3, matteo.corti@gmail.com)
+AM_INIT_AUTOMAKE(roll, 1.0.3, matteo.corti@gmail.com)
 AC_CONFIG_FILES(Makefile)
 AC_CONFIG_HEADERS(config.h)
 
@@ -25,4 +25,4 @@ case "${enable_debug}" in
   *) AC_MSG_ERROR(bad value ${enable_debug} for --enable-debug) ;;
 esac
 
-AC_OUTPUT(roll.1 VERSION)
+AC_OUTPUT(roll.1 VERSION roll.spec)
