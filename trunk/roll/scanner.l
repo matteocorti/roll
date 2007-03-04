@@ -6,13 +6,13 @@
 
 %%
 
-[0-9]+  { yylval = atoi(yytext); return NUMBER; }
+[0-9]+    { yylval = atoi(yytext); return NUMBER; }
 \+        { return PLUS; }
 \-        { return MINUS; }
 d|D       { return DICE; }
 "("       { return LPAREN; }
 ")"       { return RPAREN; }
 
-.         { printf("Error: unknown symbol '%s'\n", yytext); exit(-2); }
+.         { printf("Error: unknown symbol '%s'\n", yytext); exit(EXIT_FAILURE); }
 
 %%
