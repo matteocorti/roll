@@ -52,6 +52,7 @@ term     : NUMBER {
 
 void yyerror (char const * message) {
   fprintf(stderr, "%s\n", message);
+  exit(EXIT_FAILURE);
 }
 
 
