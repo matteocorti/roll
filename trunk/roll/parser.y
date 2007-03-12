@@ -15,6 +15,10 @@ void yyerror (char const *);
 %%
 
 roll       : expression {
+               if ($1 < 0) {
+                 printf("0\n");
+                 exit(EXIT_FAILURE);
+	       }
                printf("%i\n", $1);
              }
 
