@@ -1,1 +1,3 @@
+2007-03-12      1.0.4: correct exit codes and positive results only
+2007-03-01	1.0.3: spec file for RPM generation
 2007-02-26      1.0.2: small fix in the random number generator initialization (see ChangeLog)
