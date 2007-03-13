@@ -1,1 +1,17 @@
+Minor
+=====
+
 * Add doxygen comments.
+
+Major
+=====
+
+* Implement macros (e.g., in a preference file .rollrc) to define
+  common rolls
+  
+  mace = 1D8+3 
+  $ roll mace
+  $ roll mace + 5
+  
+  stat = 3D6
+  $ roll stat
