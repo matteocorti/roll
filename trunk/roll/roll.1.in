@@ -47,16 +47,25 @@ two zeroes means 100.
 
 If you want to roll a single 100-sided die use the "d100" notation.
 
-.SH EXPRESSION GRAMMAR (EBNF)
+.SH Examples
+
+3d6        rolls 3 6-sided dices and sums the results (can be abbreviated with "3d")
+
+1d8 + 3    rolls 1 8-sided die and adds 3 (can be abbreviated by "d8+3")
+
+d%         rolls two 10-sidec dices: one represents tens and the othe units
+
+.SH Grammar (EBNF)
 
 .PD 0
 .TP
 expression := term [ "+" term | "-" term ] .
 .TP
-term       := [ number ] dice [ number] | "(" expression ")" .
+term       :=  number | [ number ] dice | "(" expression ")" .
 .TP
-dice       := "d" | "D" .
+dice       := "d" | "D" [ number | "%" ] .
 .PD 1
+
 .SH "SEE ALSO"
 .BR random (3)
 .SH "EXIT STATUS"
