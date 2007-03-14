@@ -47,6 +47,15 @@ two zeroes means 100.
 
 If you want to roll a single 100-sided die use the "d100" notation.
 
+.SH Multipliers
+
+In some games, the above notation is expanded to allow for a
+multiplier, as in NdXxC or CxNdX, where "x" or "*" denotes
+multiplication (can be replaced by "/" for division) and C is a
+natural number (1 if omitted).
+
+Results are rounded up.
+
 .SH Examples
 
 3d6        rolls 3 6-sided dices and sums the results (can be abbreviated with "3d")
@@ -54,6 +63,8 @@ If you want to roll a single 100-sided die use the "d100" notation.
 1d8 + 3    rolls 1 8-sided die and adds 3 (can be abbreviated by "d8+3")
 
 d%         rolls two 10-sidec dices: one represents tens and the othe units
+
+1d6x5      rolls 1 6-sided dice and multiplies the result by 5
 
 .SH Grammar (EBNF)
 
