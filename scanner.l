@@ -7,13 +7,14 @@
 %%
 
 [0-9]+    { yylval = atoi(yytext); return NUMBER; }
-\+        { return PLUS; }
-\-        { return MINUS; }
-d|D       { return DICE; }
-"("       { return LPAREN; }
-")"       { return RPAREN; }
+\+        { return PLUS;    }
+\-        { return MINUS;   }
+d|D       { return DICE;    }
+"("       { return LPAREN;  }
+")"       { return RPAREN;  }
 "%"       { return PERCENT; }
-["*"x]    { return TIMES; }
+["*"x]    { return TIMES;   }
+\/        { return DIV;     }
 
 .         { printf("Error: unknown symbol '%s'\n", yytext); exit(EXIT_FAILURE); }
 

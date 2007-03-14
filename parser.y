@@ -1,6 +1,7 @@
 %{
 #include <roll.h>
 #include <stdio.h>
+#include <math.h>
 #define YYSTYPE int
 
 int  yylex (void);
@@ -8,7 +9,7 @@ void yyerror (char const *);
 
 %}
 
-%token NUMBER DICE PLUS MINUS RPAREN LPAREN PERCENT TIMES
+%token NUMBER DICE PLUS MINUS RPAREN LPAREN PERCENT TIMES DIV
 
 %start roll
 
@@ -56,14 +57,14 @@ term     :   NUMBER {
            | factor TIMES NUMBER {
                $$ = $1 * $3;
              }
+           | factor DIV NUMBER {
+               $$ = (int) ceil((float)$1 / $3);
+             }
            | NUMBER TIMES factor {
                $$ = $1 * $3;
              }
-           | TIMES factor {
-               $$ = $2;           
-             }
-           | factor TIMES {
-               $$ = $1;
+           | NUMBER DIV factor {
+               $$ = (int) ceil((float)$1 / $3);
              }
            | LPAREN expression RPAREN {
                $$ = $2;
