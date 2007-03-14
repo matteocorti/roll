@@ -14,6 +14,8 @@ AC_HAVE_HEADERS(stdio.h getopt.h errno.h string.h strings.h sys/types.h unistd.h
 AC_CHECK_FUNCS(srandomdev)
 AC_CHECK_FUNCS(getpid)
 
+AC_CHECK_LIB(m, ceil,,[AC_MSG_ERROR([libm not found])])
+
 dnl this macro is used to get the arguments supplied
 dnl to the configure script (./configure --enable-debug)
 AC_MSG_CHECKING(whether to enable debugging)

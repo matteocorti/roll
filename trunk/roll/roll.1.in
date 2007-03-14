@@ -52,7 +52,7 @@ If you want to roll a single 100-sided die use the "d100" notation.
 In some games, the above notation is expanded to allow for a
 multiplier, as in NdXxC or CxNdX, where "x" or "*" denotes
 multiplication (can be replaced by "/" for division) and C is a
-natural number (1 if omitted).
+natural number.
 
 Results are rounded up.
 
@@ -65,6 +65,8 @@ Results are rounded up.
 d%         rolls two 10-sidec dices: one represents tens and the othe units
 
 1d6x5      rolls 1 6-sided dice and multiplies the result by 5
+
+1d6 / 2    rolls 1 6-sided dice and divides the result by 2 (1d3)
 
 .SH Grammar (EBNF)
 
