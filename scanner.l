@@ -12,6 +12,7 @@
 d|D       { return DICE; }
 "("       { return LPAREN; }
 ")"       { return RPAREN; }
+"%"       { return PERCENT; }
 
 .         { printf("Error: unknown symbol '%s'\n", yytext); exit(EXIT_FAILURE); }
 
