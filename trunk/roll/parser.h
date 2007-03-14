@@ -44,7 +44,8 @@
      PLUS = 260,
      MINUS = 261,
      RPAREN = 262,
-     LPAREN = 263
+     LPAREN = 263,
+     PERCENT = 264
    };
 #endif
 /* Tokens.  */
@@ -54,6 +55,7 @@
 #define MINUS 261
 #define RPAREN 262
 #define LPAREN 263
+#define PERCENT 264
 
 
 

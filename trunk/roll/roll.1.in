@@ -37,6 +37,16 @@ final total.
 
 See: http://en.wikipedia.org/wiki/Dice_notation
 
+.SH Percentile dice (d%)
+
+Often, the variable X in the above notation will be "%". Although a
+100-sided die does exist, it is both more common and more uniformly
+random to use a combination of two ten-sided dice known as percentile
+dice, where one die represents tens and the other units.  A roll of
+two zeroes means 100.
+
+If you want to roll a single 100-sided die use the "d100" notation.
+
 .SH EXPRESSION GRAMMAR (EBNF)
 
 .PD 0
