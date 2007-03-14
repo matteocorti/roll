@@ -1,3 +1,7 @@
+2007-03-14  Matteo Corti  <matteo.corti@id.ethz.ch>
+
+	* parser.y: allow Nd (assumes d6)
+
 2007-03-12  Matteo Corti  <corti@id.ethz.ch>
 
 	* parser.y, scanner.l: correct exit code
