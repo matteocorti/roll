@@ -8,7 +8,7 @@ void yyerror (char const *);
 
 %}
 
-%token NUMBER DICE PLUS MINUS RPAREN LPAREN PERCENT
+%token NUMBER DICE PLUS MINUS RPAREN LPAREN PERCENT TIMES
 
 %start roll
 
@@ -33,10 +33,7 @@ expression : term {
              }
            ;
 
-term     :   NUMBER {
-               $$ = $1;
-             }
-           | NUMBER dice {
+factor   :   NUMBER dice {
 	       int res=0;
 	       int i;
                for(i=0; i<$1; i++) {
@@ -45,6 +42,27 @@ term     :   NUMBER {
                $$ = res;
              }
            | dice {
+               $$ = $1;
+             }
+           ;
+
+
+term     :   NUMBER {
+               $$ = $1;
+             }
+           | factor {
+               $$ = $1;
+             }
+           | factor TIMES NUMBER {
+               $$ = $1 * $3;
+             }
+           | NUMBER TIMES factor {
+               $$ = $1 * $3;
+             }
+           | TIMES factor {
+               $$ = $2;           
+             }
+           | factor TIMES {
                $$ = $1;
              }
            | LPAREN expression RPAREN {
