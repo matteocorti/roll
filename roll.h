@@ -14,6 +14,7 @@
 
 /* various constants */
 #define EXPRESSION_SIZE 1024
+#define HUNDRED         -1
 
 /* missing functions */
 #ifndef HAVE_SRANDOMDEV

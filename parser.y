@@ -38,7 +38,18 @@ factor   :   NUMBER dice {
 	       int res=0;
 	       int i;
                for(i=0; i<$1; i++) {
-	         res += $2;
+                 if ($1 != HUNDRED) {
+	           res += roll($2);
+                 } else {
+                   /* d100 -> d10*10+d10 */
+                   int  d1 = roll(10);
+                   int d10 = roll(10);
+                   if (d1 == 0 && d10 == 0) {
+                     $$ = 100;
+                   } else {
+                     $$ = d10*10 + d1;
+                   }
+                 }
                }
                $$ = res;
              }
@@ -72,19 +83,13 @@ term     :   NUMBER {
            ;
 
 dice       : DICE NUMBER {
-	       $$ = roll($2);
+	       $$ = $2;
              }
            | DICE {
-               $$ = roll(6);
+               $$ = 6;
              }
            | DICE PERCENT {
-               int  d1 = roll(10);
-               int d10 = roll(10);
-               if (d1 == 0 && d10 == 0) {
-                 $$ = 100;
-               } else {
-                 $$ = d10*10 + d1;
-               }
+               $$ = HUNDRED;
              }
            ;
 
