@@ -1,7 +1,7 @@
 .\" Process this file with
 .\" groff -man -Tascii foo.1
 .\"
-.TH "@PACKAGE_NAME@" 1 "December, 2005", "@PACKAGE_VERSION@" "USER COMMANDS"
+.TH "@PACKAGE_NAME@" 1 "March, 2007", "@PACKAGE_VERSION@" "USER COMMANDS"
 .SH NAME
 @PACKAGE_NAME@ \- rolls a user-defined dice sequence
 .SH SYNOPSIS
@@ -34,6 +34,8 @@ To this basic notation, an additive modifier can be appended, yielding
 expressions of the form, NdX+C. The plus can be replaced by a minus
 sign ("-") for subtraction. C is a number to be subtracted from the
 final total.
+
+See: http://en.wikipedia.org/wiki/Dice_notation
 
 .SH EXPRESSION GRAMMAR (EBNF)
 
