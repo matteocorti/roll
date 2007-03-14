@@ -33,7 +33,7 @@ expression : term {
              }
            ;
 
-term     : NUMBER {
+term     :   NUMBER {
                $$ = $1;
              }
            | NUMBER DICE NUMBER {
@@ -46,6 +46,17 @@ term     : NUMBER {
              }
            | DICE NUMBER {
                $$ = roll($2);
+             }
+           | NUMBER DICE {
+	       int res=0;
+	       int i;
+               for(i=0; i<$1; i++) {
+	         res += roll(6);
+               }
+               $$ = res;
+             }
+           | DICE {
+               $$ = roll(6);
              }
            | LPAREN expression RPAREN {
                $$ = $2;

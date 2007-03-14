@@ -22,6 +22,29 @@ verbose (displays the result for each roll)
 .TP
 .B \--version
 prints the version of the program
+.SH EXPRESSIONS
+Expressions are in dice notation (also known as dice algebra, common dice notation or RPG dice notation)
+
+Die rolls are expressed in the form NdX or NDX where N is the number of dices
+(1 if omitted) and X the number of dice faces.
+
+If the final number is omitted, it is assumed to be a six.
+
+To this basic notation, an additive modifier can be appended, yielding
+expressions of the form, NdX+C. The plus can be replaced by a minus
+sign ("-") for subtraction. C is a number to be subtracted from the
+final total.
+
+.SH EXPRESSION GRAMMAR (EBNF)
+
+.PD 0
+.TP
+expression := term [ "+" term | "-" term ] .
+.TP
+term       := [ number ] dice [ number] | "(" expression ")" .
+.TP
+dice       := "d" | "D" .
+.PD 1
 .SH "SEE ALSO"
 .BR random (3)
 .SH "EXIT STATUS"
