@@ -15,3 +15,5 @@ Major
   
   stat = 3D6
   $ roll stat
+
+* Implement notation variations (e.g., multiplication) as for http://en.wikipedia.org/wiki/Dice_notation)
