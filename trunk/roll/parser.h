@@ -47,7 +47,8 @@
      LPAREN = 263,
      PERCENT = 264,
      TIMES = 265,
-     DIV = 266
+     DIV = 266,
+     KEEP = 267
    };
 #endif
 /* Tokens.  */
@@ -60,6 +61,7 @@
 #define PERCENT 264
 #define TIMES 265
 #define DIV 266
+#define KEEP 267
 
 
 
