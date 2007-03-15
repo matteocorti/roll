@@ -3,6 +3,10 @@ Minor
 
 * Add doxygen comments.
 
+* Memory allocation: at the moment if 'h' or 'l' are specified all the results are kept sorted and only the relevant are considered.
+  If the number of dices is high to spare some memory one could allocate only h or l elements and for every result scan all the previous results
+  Complexity?
+
 Major
 =====
 
