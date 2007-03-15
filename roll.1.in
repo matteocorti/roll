@@ -56,6 +56,13 @@ natural number.
 
 Results are rounded up.
 
+.SH Selective results
+
+It is possible to keep only the M highest or lowest dices with the following notation:
+
+NdXhM: roll N dices with X sides and keep the highest M results (M must be less or equal N)
+NdXlM: roll N dices with X sides and keep the lowest M results (M must be less or equal N)
+
 .SH Examples
 
 3d6        rolls 3 6-sided dices and sums the results (can be abbreviated with "3d")
@@ -67,6 +74,8 @@ d%         rolls two 10-sidec dices: one represents tens and the othe units
 1d6x5      rolls 1 6-sided dice and multiplies the result by 5
 
 1d6 / 2    rolls 1 6-sided dice and divides the result by 2 (1d3)
+
+4d6h3      rolls 4 6-sided dices and keeps the 3 highest results (discarding the lowest)
 
 .SH Grammar (EBNF)
 
