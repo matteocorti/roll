@@ -10,7 +10,8 @@
 \+        { return PLUS;    }
 \-        { return MINUS;   }
 d|D       { return DICE;    }
-k|K       { return KEEP;    }
+h|H       { return HIGH;    }
+l|L       { return LOW;     }
 "("       { return LPAREN;  }
 ")"       { return RPAREN;  }
 "%"       { return PERCENT; }

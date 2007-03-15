@@ -48,7 +48,8 @@
      PERCENT = 264,
      TIMES = 265,
      DIV = 266,
-     KEEP = 267
+     HIGH = 267,
+     LOW = 268
    };
 #endif
 /* Tokens.  */
@@ -61,7 +62,8 @@
 #define PERCENT 264
 #define TIMES 265
 #define DIV 266
-#define KEEP 267
+#define HIGH 267
+#define LOW 268
 
 
 

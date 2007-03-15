@@ -37,7 +37,7 @@ int compare(const void * p1, const void * p2) {
 
 %}
 
-%token NUMBER DICE PLUS MINUS RPAREN LPAREN PERCENT TIMES DIV KEEP
+%token NUMBER DICE PLUS MINUS RPAREN LPAREN PERCENT TIMES DIV HIGH LOW
 
 %start roll
 
@@ -70,7 +70,7 @@ factor   :   NUMBER dice {
                }
                $$ = res;
              }
-           | NUMBER dice KEEP NUMBER {
+           | NUMBER dice HIGH NUMBER {
 
                int res = 0;
 
@@ -89,6 +89,29 @@ factor   :   NUMBER dice {
                }
                qsort(results, $1, sizeof(int), &compare);
                for(i=($1-$4); i<$1; i++) {
+                 res += results[i];
+               }
+               $$ = res;
+             }
+           | NUMBER dice LOW NUMBER {
+
+               int res = 0;
+
+               if ($4 > $1) {
+                 error("the number of kept dices must be lower than the actual dices");
+               }
+
+               int * results;
+               if (!(results = malloc(sizeof(int)*$1))) {
+                 error("Out of memory");
+               }
+
+	       int i;
+               for(i=0; i<$1; i++) {
+                 results[i] = roll_dice($2);
+               }
+               qsort(results, $1, sizeof(int), &compare);
+               for(i=0; i<$4; i++) {
                  res += results[i];
                }
                $$ = res;
