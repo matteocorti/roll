@@ -10,6 +10,7 @@
 \+        { return PLUS;    }
 \-        { return MINUS;   }
 d|D       { return DICE;    }
+k|K       { return KEEP;    }
 "("       { return LPAREN;  }
 ")"       { return RPAREN;  }
 "%"       { return PERCENT; }

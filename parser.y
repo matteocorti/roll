@@ -7,9 +7,37 @@
 int  yylex (void);
 void yyerror (char const *);
 
+int roll_dice(int sides) {
+  if (sides != HUNDRED) {
+    return roll(sides);
+  } else {
+    /* d100 -> d10*10+d10 */
+    int  d1 = roll(10);
+    int d10 = roll(10);
+    if (d1 == 0 && d10 == 0) {
+      return 100;
+    } else {
+      return d10*10 + d1;
+    }
+  }
+}
+
+int compare(const void * p1, const void * p2) {
+
+  const int i1 = *((const int *)p1);
+  const int i2 = *((const int *)p2);
+
+  if (i1 > i2)
+    return 1;
+  else if (i1 < i2)
+    return -1;
+  else
+    return 0;
+}
+
 %}
 
-%token NUMBER DICE PLUS MINUS RPAREN LPAREN PERCENT TIMES DIV
+%token NUMBER DICE PLUS MINUS RPAREN LPAREN PERCENT TIMES DIV KEEP
 
 %start roll
 
@@ -38,18 +66,30 @@ factor   :   NUMBER dice {
 	       int res=0;
 	       int i;
                for(i=0; i<$1; i++) {
-                 if ($1 != HUNDRED) {
-	           res += roll($2);
-                 } else {
-                   /* d100 -> d10*10+d10 */
-                   int  d1 = roll(10);
-                   int d10 = roll(10);
-                   if (d1 == 0 && d10 == 0) {
-                     $$ = 100;
-                   } else {
-                     $$ = d10*10 + d1;
-                   }
-                 }
+                 res += roll_dice($2);
+               }
+               $$ = res;
+             }
+           | NUMBER dice KEEP NUMBER {
+
+               int res = 0;
+
+               if ($4 > $1) {
+                 error("the number of kept dices must be lower than the actual dices");
+               }
+
+               int * results;
+               if (!(results = malloc(sizeof(int)*$1))) {
+                 error("Out of memory");
+               }
+
+	       int i;
+               for(i=0; i<$1; i++) {
+                 results[i] = roll_dice($2);
+               }
+               qsort(results, $1, sizeof(int), &compare);
+               for(i=($1-$4); i<$1; i++) {
+                 res += results[i];
                }
                $$ = res;
              }
