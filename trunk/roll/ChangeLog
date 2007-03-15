@@ -1,6 +1,13 @@
+2007-03-15  Matteo Corti  <matteo.corti@id.ethz.ch>
+
+	* roll: implemented notation additions
+	  * multipliers
+	  * percentile dices
+	  * selective results
+
 2007-03-14  Matteo Corti  <matteo.corti@id.ethz.ch>
 
-	* parser.y: allow Nd (assumes d6)
+	* parser.y: allow Nd (assumes d6)b
 
 2007-03-12  Matteo Corti  <corti@id.ethz.ch>
 
