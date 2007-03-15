@@ -60,22 +60,30 @@ Results are rounded up.
 
 It is possible to keep only the M highest or lowest dices with the following notation:
 
+
+.PD 0
+.TP
 NdXhM: roll N dices with X sides and keep the highest M results (M must be less or equal N)
+.TP
 NdXlM: roll N dices with X sides and keep the lowest M results (M must be less or equal N)
+.PD 1
 
 .SH Examples
 
+.PD 0
+.TP
 3d6        rolls 3 6-sided dices and sums the results (can be abbreviated with "3d")
-
+.TP
 1d8 + 3    rolls 1 8-sided die and adds 3 (can be abbreviated by "d8+3")
-
-d%         rolls two 10-sidec dices: one represents tens and the othe units
-
+.TP
+d%         rolls 2 10-sided dices: one represents tens and the othe units
+.TP
 1d6x5      rolls 1 6-sided dice and multiplies the result by 5
-
+.TP
 1d6 / 2    rolls 1 6-sided dice and divides the result by 2 (1d3)
-
+.TP
 4d6h3      rolls 4 6-sided dices and keeps the 3 highest results (discarding the lowest)
+.PD 1
 
 .SH Grammar (EBNF)
 
@@ -83,7 +91,9 @@ d%         rolls two 10-sidec dices: one represents tens and the othe units
 .TP
 expression := term [ "+" term | "-" term ] .
 .TP
-term       :=  number | [ number ] dice | "(" expression ")" .
+term       := number | factor [ ("*"|"/") number | number ("*"|"/") factor | "(" expression ")" .
+.TP
+factor     := number dice [ ("h"|"H"|"l"|"L") number ] | dice .
 .TP
 dice       := "d" | "D" [ number | "%" ] .
 .PD 1
