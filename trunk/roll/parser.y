@@ -117,7 +117,7 @@ factor   :   NUMBER dice {
                $$ = res;
              }
            | dice {
-               $$ = $1;
+               $$ = roll_dice($1);
              }
            ;
 
