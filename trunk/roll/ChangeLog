@@ -1,3 +1,7 @@
+2007-03-25  Matteo Corti  <matteo.corti@id.ethz.ch>
+
+	* added a copyright comment to the source files
+
 2007-03-20  Matteo Corti  <matteo.corti@id.ethz.ch>
 
 	* parser.y: dN (without the 1) now correctly rolls a dice
