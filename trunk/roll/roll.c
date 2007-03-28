@@ -18,12 +18,12 @@ void usage() {
   printf(" -h, --help         show this help screen\n");
   printf(" -v, --verbose      increase verbosity\n");
   printf("     --version      prints the program version and exits\n");
-  printf("\n\nPlease see the %s(1) man page for full documentation\n", PACKAGE_NAME);
+  printf("\nPlease see the %s(1) man page for full documentation\n\n", PACKAGE_NAME);
 
 }
 
 void error(char * message) {
-  fprintf(stderr, "Error: %s\n", message);
+  fprintf(stderr, "\nError: %s\n", message);
   exit(EXIT_FAILURE);
 }
 
@@ -117,7 +117,7 @@ int main(int argc, char **argv) {
     argument_size = strlen(*argv);
     expression_size += argument_size;
     if (expression_size >= EXPRESSION_SIZE) {
-      error("Expression too long\n");
+      error("Expression too long!\n");
     }
     strncat(expression, *argv, EXPRESSION_SIZE);
     argc--;
@@ -128,7 +128,7 @@ int main(int argc, char **argv) {
     yy_scan_string(expression);
     yyparse();
   } else {
-    fprintf(stderr, "Error: no expression\n");
+    error("No expression provided!\nPlease use the \"-h\" option.\n");
     exit(EXIT_FAILURE);
   }
 
