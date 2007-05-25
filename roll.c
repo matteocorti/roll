@@ -5,12 +5,20 @@
  * License.  See the file COPYING for more information.
  */
 
+/**
+ * @file   roll.c
+ * @author Matteo Corti
+ * @brief  The main application file
+ */
+
 #include "roll.h"
 
-/* command line arguments */
-static int verbose_flag = FALSE;
-static int version_flag = FALSE;
+static int verbose_flag = FALSE; /**< command line argument: verbose output */
+static int version_flag = FALSE; /**< command line argument: version        */
 
+/**
+ * Prints the program's usage
+ */
 void usage() {
   
   printf("\nusage: %s [OPTION] expression\n\n", PACKAGE_NAME);
@@ -22,11 +30,19 @@ void usage() {
 
 }
 
+/**
+ * Prints the specified error message and exits with a failure status
+ * @param message error message
+ */
 void error(char * message) {
   fprintf(stderr, "\nError: %s\n", message);
   exit(EXIT_FAILURE);
 }
 
+/** Rolls an n-sided dice
+ * @param dice number of sides of the rolled dice
+ * @return     result of the dice roll
+ */
 int roll(int dice) {
 
   /* 
@@ -50,6 +66,11 @@ int roll(int dice) {
 
 }
 
+/**
+ * Main program
+ * @param argc number of command line arguments
+ * @param argv array of strings with the command line arguments
+ */
 int main(int argc, char **argv) {
 
   int    c;

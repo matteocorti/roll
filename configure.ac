@@ -1,5 +1,5 @@
 AC_INIT(roll, 1.1.2, matteo.corti@gmail.com)
-AM_INIT_AUTOMAKE(1.9)
+AM_INIT_AUTOMAKE(roll, 1.1.2, matteo.corti@gmail.com)
 AC_CONFIG_FILES(Makefile)
 AC_CONFIG_HEADERS(config.h)
 

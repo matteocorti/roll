@@ -1,3 +1,10 @@
+2007-05-25  Matteo Corti  <matteo.corti@id.ethz.ch>
+
+	* roll.1: some formatting and indentation and fixed the email
+	* Doxufile: included
+	* roll.c: added doxygen comments
+	* roll.h: added doxygen comments
+
 2007-03-28  Matteo Corti  <matteo.corti@id.ethz.ch>
 
 	* included a patch from Joe Klemmer to improve the error messages

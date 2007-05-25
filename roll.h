@@ -5,6 +5,12 @@
  * License.  See the file COPYING for more information.
  */
 
+/**
+ * @file   roll.h
+ * @author Matteo Corti
+ * @brief  The main include file
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <strings.h>
@@ -14,16 +20,29 @@
 #include <time.h>
 #include "config.h"
 
-/* booleans */
-
+/** @def TRUE
+ * Boolean true
+ */
 #define TRUE  1
+
+/** @def FALSE
+ * Boolean false
+ */
 #define FALSE 0
 
-/* various constants */
+
+/** @todo The maximum expression length should be dynamic */
+/** @def EXPRESSION_SIZE
+ * Maximum expression length
+ */
 #define EXPRESSION_SIZE 1024
+
+/** @def HUNDRED
+ * Constant representing a 1d100 rolled with 1d10 for the units and 1d10 for the tens
+ */
 #define HUNDRED         -1
 
-/* missing functions */
+
 #ifndef HAVE_SRANDOMDEV
 
 #ifdef HAVE_GETPID
@@ -31,10 +50,20 @@
 #include <sys/types.h>
 #include <unistd.h>
 
+/** @def srandomdev
+ * defines srandomdev usig srand of the current time
+ * bitwise anded with the PID if srandomdev is missing
+ */
 #define srandomdev() srand((unsigned) time(NULL) & getpid())
 
 #else
+
+/** @def srandomdev
+ * defines srandomdev usig srand of the current time
+ * if srandomdev and getpid are missing
+ */
 #define srandomdev() srand((unsigned) time(NULL))
+
 #endif
 
 #endif

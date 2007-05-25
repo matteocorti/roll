@@ -72,17 +72,21 @@ NdXlM: roll N dices with X sides and keep the lowest M results (M must be less o
 
 .PD 0
 .TP
-3d6        rolls 3 6-sided dices and sums the results (can be abbreviated with "3d")
+3d6        rolls 3 6-sided dices and sums the results
+    (can be abbreviated with "3d")
 .TP
-1d8 + 3    rolls 1 8-sided die and adds 3 (can be abbreviated by "d8+3")
+1d8 + 3    rolls 1 8-sided die and adds 3
+    (can be abbreviated by "d8+3")
 .TP
-d%         rolls 2 10-sided dices: one represents tens and the othe units
+d%         rolls 2 10-sided dices: one represents the tens and
+    the other units
 .TP
 1d6x5      rolls 1 6-sided dice and multiplies the result by 5
 .TP
 1d6 / 2    rolls 1 6-sided dice and divides the result by 2 (1d3)
 .TP
-4d6h3      rolls 4 6-sided dices and keeps the 3 highest results (discarding the lowest)
+4d6h3      rolls 4 6-sided dices and keeps the 3 highest results
+    (discarding the lowest)
 .PD 1
 
 .SH Grammar (EBNF)
@@ -91,7 +95,8 @@ d%         rolls 2 10-sided dices: one represents tens and the othe units
 .TP
 expression := term [ "+" term | "-" term ] .
 .TP
-term       := number | factor [ ("*"|"/") number | number ("*"|"/") factor | "(" expression ")" .
+term       := number | factor [ ("*"|"/") number |
+       number ("*"|"/") factor | "(" expression ")" .
 .TP
 factor     := number dice [ ("h"|"H"|"l"|"L") number ] | dice .
 .TP
@@ -104,7 +109,7 @@ dice       := "d" | "D" [ number | "%" ] .
 @PACKAGE_NAME@ returns a zero exist status if it finds no error in the
 supplied expresssion
 .SH BUGS
-Please report bugs to: Matteo Corti (matteo.corti (at) id.ethz.ch)
+Please report bugs to: Matteo Corti (matteo.corti (at) gmail.com )
 
 .SH AUTHOR
 Matteo Corti (matteo.corti (at) gmail.com)
