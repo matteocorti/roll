@@ -1,3 +1,5 @@
+* true random generator
+  http://random.irb.hr/
 * Implement macros (e.g., in a preference file .rollrc) to define
   common rolls
   
