@@ -21,9 +21,11 @@ int roll_dice(int sides) {
   } else {
     /* d100 -> d10*10+d10 */
     int  d1 = roll(10);
-    int d10 = roll(10);
+    int d10 = roll(10) % 10;
     if (d1 == 0 && d10 == 0) {
       return 100;
+    } else if (d10 == 0) {
+      return d1;
     } else {
       return d10*10 + d1;
     }
