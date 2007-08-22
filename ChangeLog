@@ -1,3 +1,8 @@
+2007-08-22  Matteo Corti  <matteo.corti@id.ethz.ch>
+
+	* parser.y: correct the behaviour of d% (on dice 0 corresponds to 10 while
+	            it corresponds to 0 on the other)
+
 2007-05-25  Matteo Corti  <matteo.corti@id.ethz.ch>
 
 	* roll.1: some formatting and indentation and fixed the email
