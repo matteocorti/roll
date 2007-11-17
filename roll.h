@@ -42,7 +42,6 @@
  */
 #define HUNDRED         -1
 
-
 #ifndef HAVE_SRANDOMDEV
 
 #ifdef HAVE_GETPID

@@ -1,65 +1,110 @@
 %{
 
-/* Copyright (c) 2005, 2006, 2007  Matteo Corti
- * This file is part of roll
- *
- * You may distribute this file under the terms the GNU General Public
- * License.  See the file COPYING for more information.
- */
-
+  /* Copyright (c) 2005, 2006, 2007  Matteo Corti
+   * This file is part of roll
+   *
+   * You may distribute this file under the terms the GNU General Public
+   * License.  See the file COPYING for more information.
+   */
+  
 #include <roll.h>
 #include <stdio.h>
 #include <math.h>
 #define YYSTYPE int
+  
+  int  yylex (void);
+  void yyerror (char const *);
 
-int  yylex (void);
-void yyerror (char const *);
+  char * out_buf      = NULL; /**< output buffer                         */
+  int    out_buf_pos  = 0;    /**< current position in the output buffer */  
+  int    out_buf_size = 0;    /**< current size of the output buffer     */
 
-int roll_dice(int sides) {
-  if (sides != HUNDRED) {
-    return roll(sides);
-  } else {
-    /* d100 -> d10*10+d10 */
-    int  d1 = roll(10);
-    int d10 = roll(10) % 10;
-    if (d1 == 0 && d10 == 0) {
-      return 100;
-    } else if (d10 == 0) {
-      return d1;
+  char buf[33]; /**< temporary buffer for sprintf results */
+  
+  /** Appends a string to the output buffer
+   * @param string string to append
+   */
+  void append_to_output(char * string) {
+
+    int string_len = strlen(string);
+
+    if (out_buf_pos + string_len > out_buf_size) {
+      out_buf_size = out_buf_pos + string_len;
+    }
+    
+    /* (re)-allocate */
+    out_buf = realloc(out_buf, out_buf_size);
+    if (out_buf == NULL) {
+      fprintf(stderr, "Error: out of memory\n");
+      exit(EXIT_FAILURE);
+    }
+    
+    strcat(out_buf, string);
+    
+  }
+  
+  int roll_dice(int sides) {
+    if (sides != HUNDRED) {
+      return roll(sides);
     } else {
-      return d10*10 + d1;
+      /* d100 -> d10*10+d10 */
+      int  d1 = roll(10);
+      int d10 = roll(10) % 10;
+      if (d1 == 0 && d10 == 0) {
+        return 100;
+      } else if (d10 == 0) {
+        return d1;
+      } else {
+        return d10*10 + d1;
+      }
     }
   }
-}
+  
+  int compare(const void * p1, const void * p2) {
+    
+    const int i1 = *((const int *)p1);
+    const int i2 = *((const int *)p2);
+    
+    if (i1 > i2)
+      return 1;
+    else if (i1 < i2)
+      return -1;
+    else
+      return 0;
+  }
+  
+  %}
 
-int compare(const void * p1, const void * p2) {
-
-  const int i1 = *((const int *)p1);
-  const int i2 = *((const int *)p2);
-
-  if (i1 > i2)
-    return 1;
-  else if (i1 < i2)
-    return -1;
-  else
-    return 0;
-}
-
-%}
-
-%token NUMBER DICE PLUS MINUS RPAREN LPAREN PERCENT TIMES DIV HIGH LOW
+%token NUMBER DICE PLUS MINUS RPAREN LPAREN PERCENT TIMES DIV HIGH LOW COMMA
 
 %start roll
 
 %%
 
-roll       : expression {
-               if ($1 < 0) {
-                 printf("0\n");
-                 exit(EXIT_FAILURE);
-	       }
-               printf("%i\n", $1);
-             }
+roll : list {
+  printf("%s\n", out_buf);
+}
+;
+
+set : LCURLY expression RCURLY {
+  $$ = $2
+}
+| NUMBER X LCURLY expression RCURLY {
+  for (int i=0; i < $1; i++) {
+    
+}
+;
+
+list : expression {
+  sprintf(buf, "%i", $1);
+  append_to_output(buf);
+  
+}
+| list COMMA expression {
+  sprintf(buf, ", %i", $3);
+  append_to _output(buf);
+}    
+;
 
 expression : term {
                $$ = $1;
@@ -172,5 +217,3 @@ void yyerror (char const * message) {
   fprintf(stderr, "%s\n", message);
   exit(EXIT_FAILURE);
 }
-
-

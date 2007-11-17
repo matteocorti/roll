@@ -49,7 +49,8 @@
      TIMES = 265,
      DIV = 266,
      HIGH = 267,
-     LOW = 268
+     LOW = 268,
+     COMMA = 269
    };
 #endif
 /* Tokens.  */
@@ -64,6 +65,7 @@
 #define DIV 266
 #define HIGH 267
 #define LOW 268
+#define COMMA 269
 
 
 
