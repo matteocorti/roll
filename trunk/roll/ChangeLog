@@ -1,3 +1,10 @@
+2007-11-13  Matteo Corti  <matteo.corti@id.ethz.ch>
+
+	* parser.y: series of dice rolls can be specified using commas
+                    ("3d6, 3d4")
+	* parser.y: output is buffered so that it gets not interleaved
+                    with verbose messages
+
 2007-08-22  Matteo Corti  <matteo.corti@id.ethz.ch>
 
 	* parser.y: correct the behaviour of d% (on dice 0 corresponds to 10 while
