@@ -1,9 +1,9 @@
 echo "Updating configuration..."
 echo "Running aclocal"
-aclocal-1.9
+aclocal
 echo "Running autoconf"
 autoconf
 echo "Running autoheader"
 autoheader
 echo "Running automake"
-automake-1.9
+automake -ac

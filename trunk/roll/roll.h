@@ -67,6 +67,23 @@
 
 #endif
 
+/* data types */
+
+#define OP_DICE   1
+#define OP_NUMBER 2
+#define OP_PLUS   3
+#define OP_REP    4
+
+/*!
+ * \struct node
+ * \brief Parse tree node
+ */
+struct node {
+  int           op;    /*!< node type  */
+  struct node * left;  /*!< left node  */
+  struct node * right; /*!< right node */
+};
+
 /* function prototypes */
 
 void usage();

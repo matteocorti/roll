@@ -17,6 +17,9 @@ AC_CHECK_FUNCS(qsort)
 
 AC_CHECK_LIB(m, ceil,,[AC_MSG_ERROR([libm not found])])
 
+SUBDIRS=src
+AM_GNU_GETTEXT
+
 dnl this macro is used to get the arguments supplied
 dnl to the configure script (./configure --enable-debug)
 AC_MSG_CHECKING(whether to enable debugging)

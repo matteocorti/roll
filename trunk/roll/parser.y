@@ -75,7 +75,7 @@
   
   %}
 
-%token NUMBER DICE PLUS MINUS RPAREN LPAREN PERCENT TIMES DIV HIGH LOW COMMA
+%token NUMBER DICE PLUS MINUS RPAREN LPAREN PERCENT TIMES DIV HIGH LOW COMMA LCURLY RCURLY REPEAT
 
 %start roll
 
@@ -86,15 +86,6 @@ roll : list {
 }
 ;
 
-set : LCURLY expression RCURLY {
-  $$ = $2
-}
-| NUMBER X LCURLY expression RCURLY {
-  for (int i=0; i < $1; i++) {
-    
-}
-;
-
 list : expression {
   sprintf(buf, "%i", $1);
   append_to_output(buf);
@@ -102,7 +93,7 @@ list : expression {
 }
 | list COMMA expression {
   sprintf(buf, ", %i", $3);
-  append_to _output(buf);
+  append_to_output(buf);
 }    
 ;
 

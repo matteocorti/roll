@@ -13,8 +13,10 @@
 
 #include "roll.h"
 
-static int verbose_flag = FALSE; /**< command line argument: verbose output */
-static int version_flag = FALSE; /**< command line argument: version        */
+static        int    verbose_flag = FALSE; /**< command line argument: verbose output */
+static        int    version_flag = FALSE; /**< command line argument: version        */
+
+static struct node * tree         = FALSE; /**< root of the parse tree */
 
 /**
  * Prints the program's usage
@@ -28,6 +30,24 @@ void usage() {
   printf("     --version      prints the program version and exits\n");
   printf("\nPlease see the %s(1) man page for full documentation\n\n", PACKAGE_NAME);
 
+}
+
+/**
+ * Allocates a parse tree node
+ * @param left  left branch
+ * @param op    node type
+ * @param right right branch
+ */
+struct node * new_node(struct node * left, int op, struct node * right) {
+  struct node * node = malloc(sizeof(struct node));
+  if (node == NULL) {
+    fprintf(stderr, "Error: out of memory\n");
+    exit(EXIT_FAILURE);
+  }
+  node->left  = left;
+  node->op    = op;
+  node->right = right;
+  return node;
 }
 
 /**
@@ -64,6 +84,18 @@ int roll(int dice) {
 
   return res;
 
+}
+
+void debug_parse_tree (struct node * n) {
+  printf("[ ");
+  if (n->left != NULL) {
+    debug_parse_tree(n->left);
+  }
+  printf(" %i ", n->op);
+  if (n->right != NULL) {
+    debug_parse_tree(n->right);
+  }
+  printf(" ]");
 }
 
 /**

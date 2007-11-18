@@ -50,7 +50,10 @@
      DIV = 266,
      HIGH = 267,
      LOW = 268,
-     COMMA = 269
+     COMMA = 269,
+     LCURLY = 270,
+     RCURLY = 271,
+     REPEAT = 272
    };
 #endif
 /* Tokens.  */
@@ -66,6 +69,9 @@
 #define HIGH 267
 #define LOW 268
 #define COMMA 269
+#define LCURLY 270
+#define RCURLY 271
+#define REPEAT 272
 
 
 
