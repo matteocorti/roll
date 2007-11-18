@@ -19,6 +19,7 @@
 d|D       { return DICE;    }
 h|H       { return HIGH;    }
 l|L       { return LOW;     }
+X         { return REPEAT;  }
 "}"       { return RCURLY;  }
 "{"       { return LCURLY;  }
 "("       { return LPAREN;  }
