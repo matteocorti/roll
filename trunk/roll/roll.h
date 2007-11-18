@@ -73,6 +73,8 @@
 #define OP_NUMBER 2
 #define OP_PLUS   3
 #define OP_REP    4
+#define OP_TIMES  5
+#define OP_DIV    6
 
 /*!
  * \struct node
@@ -88,5 +90,6 @@ struct node {
 
 void usage();
 void error(char * message);
+struct node * new_node(struct node * left, int op, struct node * right);
 
 extern int  roll(int dice);

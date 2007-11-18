@@ -88,12 +88,16 @@ int roll(int dice) {
 
 void debug_parse_tree (struct node * n) {
   printf("[ ");
-  if (n->left != NULL) {
-    debug_parse_tree(n->left);
-  }
-  printf(" %i ", n->op);
-  if (n->right != NULL) {
-    debug_parse_tree(n->right);
+  if (n != NULL) {
+    if (n->left != NULL) {
+      debug_parse_tree(n->left);
+    }
+    printf(" %i ", n->op);
+    if (n->right != NULL) {
+      debug_parse_tree(n->right);
+    }
+  } else {
+    printf("NULL");
   }
   printf(" ]");
 }
@@ -185,6 +189,8 @@ int main(int argc, char **argv) {
     exit(EXIT_FAILURE);
   }
 
+  debug_parse_tree(tree); printf("\n");
+  
   return 0;
 
 }

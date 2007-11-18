@@ -168,39 +168,41 @@ factor   :   NUMBER dice {
            ;
 
 
-term     :   NUMBER {
-               $$ = $1;
-             }
-           | factor {
-               $$ = $1;
-             }
-           | factor TIMES NUMBER {
-               $$ = $1 * $3;
-             }
-           | factor DIV NUMBER {
-               $$ = (int) ceil((float)$1 / $3);
-             }
-           | NUMBER TIMES factor {
-               $$ = $1 * $3;
-             }
-           | NUMBER DIV factor {
-               $$ = (int) ceil((float)$1 / $3);
-             }
-           | LPAREN expression RPAREN {
-               $$ = $2;
-             }
+term : NUMBER {
+  $$ = new_node(NULL, OP_NUMBER, $1);
+}
+| factor {
+  $$ = $1;
+}
+| factor TIMES NUMBER {
+  $$ = new_node($1, OP_TIMES, new_node(NULL, OP_NUMBER, $3));
+}
+| factor DIV NUMBER {
+  //  $$ = (int) ceil((float)$1 / $3);
+  $$ = new_node($1, OP_DIV, new_node(NULL, OP_NUMBER, $3));
+}
+| NUMBER TIMES factor {
+  $$ = new_node(new_node(NULL, OP_NUMBER, $1), OP_TIMES, $3);
+}
+| NUMBER DIV factor {
+  //  $$ = (int) ceil((float)$1 / $3);
+  $$ = new_node(new_node(NULL, OP_NUMBER, $1), OP_DIV, $3);
+}
+| LPAREN expression RPAREN {
+  $$ = $2;
+}
            ;
 
-dice       : DICE NUMBER {
-	       $$ = $2;
-             }
-           | DICE {
-               $$ = 6;
-             }
-           | DICE PERCENT {
-               $$ = HUNDRED;
-             }
-           ;
+dice : DICE NUMBER {
+  $$ = new_node(NULL, OP_DICE, new_node(NULL, OP_NUMBER, $2));
+}
+| DICE {
+  $$ = new_node(NULL, OP_DICE, new_node(NULL, OP_NUMBER, 6));
+}
+| DICE PERCENT {
+  $$ = new_node(NULL, OP_DICE, new_node(NULL, OP_NUMBER, HUNDRED));
+}
+;
 
 %%
 
