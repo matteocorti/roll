@@ -5,3 +5,5 @@ Special thanks to:
   * the RPM spec file
   * some improvements to the error messages
   * his prompt and valuable bug reports
+* Erik Greenwald for the patch which fixes an error in parser.y
+  preventing a correct compilation on FreeBSD

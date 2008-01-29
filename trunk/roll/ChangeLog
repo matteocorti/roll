@@ -1,5 +1,6 @@
 2008-01-29  Matteo Corti  <matteo.corti@id.ethz.ch>
 
+	* parser.y: applyed patch from Erik Greenwald about a missing ;
 	* regen.sh: added --add-missing and --copy to automake
 	* parser.y: corrected an error in the parser which was not accepting
 	            expressions with more than two terms
