@@ -1,3 +1,4 @@
+                1.1.4: fixed an issue which prevented compilation on FreeBSD
 2008-01-29      1.1.3: fixed a bug in the parsing of expressions with more
                        than two terms
 2007-08-22      1.1.2: fix on the percentile dices

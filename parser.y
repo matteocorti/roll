@@ -60,6 +60,7 @@ roll       : expression {
   }
   printf("%i\n", $1);
 }
+;
 
 expression : term {
   $$ = $1;
