@@ -6,4 +6,4 @@ autoconf
 echo "Running autoheader"
 autoheader
 echo "Running automake"
-automake -ac
+automake --add-missing --copy

@@ -1,5 +1,5 @@
-AC_INIT(roll, 1.1.2, matteo.corti@gmail.com)
-AM_INIT_AUTOMAKE(roll, 1.1.2, matteo.corti@gmail.com)
+AC_INIT(roll, 1.1.3, matteo.corti@gmail.com)
+AM_INIT_AUTOMAKE(roll, 1.1.3, matteo.corti@gmail.com)
 AC_CONFIG_FILES(Makefile)
 AC_CONFIG_HEADERS(config.h)
 
@@ -16,9 +16,6 @@ AC_CHECK_FUNCS(getpid)
 AC_CHECK_FUNCS(qsort)
 
 AC_CHECK_LIB(m, ceil,,[AC_MSG_ERROR([libm not found])])
-
-SUBDIRS=src
-AM_GNU_GETTEXT
 
 dnl this macro is used to get the arguments supplied
 dnl to the configure script (./configure --enable-debug)

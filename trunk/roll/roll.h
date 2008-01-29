@@ -42,6 +42,7 @@
  */
 #define HUNDRED         -1
 
+
 #ifndef HAVE_SRANDOMDEV
 
 #ifdef HAVE_GETPID
@@ -67,29 +68,9 @@
 
 #endif
 
-/* data types */
-
-#define OP_DICE   1
-#define OP_NUMBER 2
-#define OP_PLUS   3
-#define OP_REP    4
-#define OP_TIMES  5
-#define OP_DIV    6
-
-/*!
- * \struct node
- * \brief Parse tree node
- */
-struct node {
-  int           op;    /*!< node type  */
-  struct node * left;  /*!< left node  */
-  struct node * right; /*!< right node */
-};
-
 /* function prototypes */
 
 void usage();
 void error(char * message);
-struct node * new_node(struct node * left, int op, struct node * right);
 
 extern int  roll(int dice);
