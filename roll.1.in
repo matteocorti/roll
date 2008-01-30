@@ -93,7 +93,7 @@ d%         rolls 2 10-sided dices: one represents the tens and
 
 .PD 0
 .TP
-expression := term [ "+" term | "-" term ] .
+expression := term { "+" term | "-" term } .
 .TP
 term       := number | factor [ ("*"|"/") number |
        number ("*"|"/") factor | "(" expression ")" .
