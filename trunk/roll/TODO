@@ -1,5 +1,8 @@
 * true random generator
   http://random.irb.hr/
+
+* shell-like environment where expressions can be typed in series
+
 * Implement macros (e.g., in a preference file .rollrc) to define
   common rolls
   
