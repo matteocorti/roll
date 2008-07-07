@@ -15,3 +15,5 @@
 
 * Localization: see 
   http://www-src.lip6.fr/homepages/Alexandre.Duret-Lutz/autotools.html
+
+* separate the UI from the parsing/generating (in a library)
