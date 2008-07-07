@@ -69,9 +69,10 @@ NdXlM: roll N dices with X sides and keep the lowest M results (M must be less o
 
 .SH Series and repetitions
 
-It is possible to concatenate expressions with a comma ("expression,
-expression") and to repeat the execution of an expression or a set of
-expressions by using a counter and curly brackets ("N{ expression}")
+It is possible to concatenate top-level expressions with a comma
+("expression, expression") and to repeat the execution of an
+expression or a set of expressions by using a counter and curly
+brackets ("N{ expression}")
 
 .SH Examples
 

@@ -106,4 +106,3 @@ struct ir_node * allocate_node ( void  );
 struct ir_node * new_number    ( int number );
 struct ir_node * new_op        ( unsigned short int op, struct ir_node * left, struct ir_node * right);
 struct ir_node * new_dice      ( struct ir_node *  sides);
-
