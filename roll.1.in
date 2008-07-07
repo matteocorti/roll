@@ -60,13 +60,18 @@ Results are rounded up.
 
 It is possible to keep only the M highest or lowest dices with the following notation:
 
-
 .PD 0
 .TP
 NdXhM: roll N dices with X sides and keep the highest M results (M must be less or equal N)
 .TP
 NdXlM: roll N dices with X sides and keep the lowest M results (M must be less or equal N)
 .PD 1
+
+.SH Series and repetitions
+
+It is possible to concatenate expressions with a comma ("expression,
+expression") and to repeat the execution of an expression or a set of
+expressions by using a counter and curly brackets ("N{ expression}")
 
 .SH Examples
 
@@ -87,6 +92,10 @@ d%         rolls 2 10-sided dices: one represents the tens and
 .TP
 4d6h3      rolls 4 6-sided dices and keeps the 3 highest results
     (discarding the lowest)
+.TP
+6{3d6}     rolls 3d6 6 times
+.TP
+
 .PD 1
 
 .SH Grammar (EBNF)
