@@ -12,6 +12,8 @@
 
   int  yylex (void);
   void yyerror (char const *);
+
+  extern int sum_flag;
   
 %}
 
@@ -40,25 +42,51 @@
 %type <node> factor
 %type <node> expression
 %type <node> expression_list
-%type <node> roll
+%type <int_type> top_level_expression
+%type <int_type> top_level_expression_list
 
 %start roll
 
 %%
 
-roll : expression_list {
-  roll_expression($1, TRUE);
+roll : top_level_expression_list {
+    if (sum_flag == TRUE) {
+      printf("sum: %i\n", $1);
+    }  
+}
+;
+
+top_level_expression_list : top_level_expression {
+  $$ = $1;
+}
+| top_level_expression COMMA top_level_expression_list {
+  $$ = $1 + $3;
+}
+;
+
+top_level_expression : expression {
+  $$ = roll_expression($1, TRUE);
 }
 | LCURLY expression_list RCURLY {
-  roll_expression($2, TRUE);
+  $$ = roll_expression($2, TRUE);
 }
-| NUMBER LCURLY expression_list RCURLY{
+| NUMBER LCURLY expression_list RCURLY {
+  
   int repetitions = $1;
   int i;
-
+  int res;
+  int sum = 0;
+  
   for (i = 0; i < repetitions; i++) {
-    roll_expression($3, TRUE);
+    res = roll_expression($3, TRUE);
+    if (sum_flag == TRUE) {
+      printf("sum: %i\n", res);
+      sum += res;
+    }
   }
+
+  $$ = res;
+  
 }
 ;
 

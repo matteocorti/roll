@@ -13,6 +13,7 @@
 
 #include "roll.h"
 
+int sum_flag     = FALSE; /**< command line argument: sum series     */
 static int verbose_flag = FALSE; /**< command line argument: verbose output */
 static int version_flag = FALSE; /**< command line argument: version        */
 
@@ -24,6 +25,7 @@ void usage() {
   printf("\nusage: %s [OPTION] expression\n\n", PACKAGE_NAME);
   printf("Options\n");
   printf(" -h, --help         show this help screen\n");
+  printf(" -s, --sum-series   show the sum of roll series\n");
   printf(" -v, --verbose      increase verbosity\n");
   printf("     --version      prints the program version and exits\n");
   printf("\nPlease see the %s(1) man page for full documentation\n\n", PACKAGE_NAME);
@@ -104,6 +106,7 @@ int main(int argc, char **argv) {
   while (TRUE) {
 
     static struct option long_options[] = {
+      {"sum-series",  no_argument,       NULL, 's'},
       {"verbose",     no_argument,       NULL, 'v'},
       {"version",     no_argument,       &version_flag, TRUE},
       {"help",        no_argument,       NULL, 'h'},
@@ -113,7 +116,7 @@ int main(int argc, char **argv) {
     /* getopt_long stores the option index here. */
     int option_index = 0;
      
-    c = getopt_long (argc, argv, "hv",
+    c = getopt_long (argc, argv, "hvs",
 		     long_options, &option_index);
     
     /* Detect the end of the options. */
@@ -126,6 +129,10 @@ int main(int argc, char **argv) {
       verbose_flag = TRUE;
       break;
 
+    case 's':
+      sum_flag = TRUE;
+      break;
+      
     case 'h':
       usage();
       exit(0);
@@ -277,6 +284,7 @@ struct ir_node * new_dice ( struct ir_node * sides) {
 int roll_expression ( struct ir_node * node, int print ) {
 
   int return_value = 0;
+  int sum;
   int i;
   int sides;
   int repetitions;
@@ -288,60 +296,62 @@ int roll_expression ( struct ir_node * node, int print ) {
 
   cur = node;
   while (cur != NULL) {
-  
-    switch (node->op) {
+
+    sum = 0;
+    
+    switch (cur->op) {
     
     case OP_NUMBER:
-      return_value = node->value;
+      sum = cur->value;
       break;
       
     case OP_DICE:
-      if (node->left != NULL) {
-        for (i = 0; i < roll_expression(node->left, FALSE); i++) {
-          return_value += roll_dice( roll_expression(node->right, FALSE) );
+      if (cur->left != NULL) {
+        for (i = 0; i < roll_expression(cur->left, FALSE); i++) {
+          sum += roll_dice( roll_expression(cur->right, FALSE) );
         }
       } else {
-        return_value = roll_dice( roll_expression(node->right, FALSE) );
+        sum = roll_dice( roll_expression(cur->right, FALSE) );
       }
       break;
       
     case OP_PLUS:
-      return_value =
-        roll_expression( node->left,  FALSE )
+      sum =
+        roll_expression( cur->left,  FALSE )
         +
-        roll_expression( node->right, FALSE );
+        roll_expression( cur->right, FALSE );
       break;
       
     case OP_MINUS:
-      return_value =
-        roll_expression( node->left,  FALSE )
+      sum =
+        roll_expression( cur->left,  FALSE )
         -
-        roll_expression( node->right, FALSE );
+        roll_expression( cur->right, FALSE );
       break;
       
     case OP_TIMES:
-      return_value =
-        roll_expression( node->left,  FALSE )
+      sum =
+        roll_expression( cur->left,  FALSE )
         *
-        roll_expression( node->right, FALSE );
+        roll_expression( cur->right, FALSE );
       break;
       
     case OP_DIV:
-      return_value = (int)
-        ceil( (float)roll_expression( node->left,  FALSE ) /
-              roll_expression( node->right, FALSE ) );
+      sum = (int)
+        ceil( (float)roll_expression( cur->left,  FALSE ) /
+              roll_expression( cur->right, FALSE ) );
       break;
       
     case OP_HIGH:
       
-      sides       = roll_expression(node->right->right, FALSE);
+      sides       = roll_expression(cur->right->right, FALSE);
       repetitions = 1;
-      high        = roll_expression(node->left, FALSE);
+      high        = roll_expression(cur->left, FALSE);      
       
-      if (node->right->left != NULL) {
-        repetitions = roll_expression(node->right->left, FALSE);
+      if (cur->right->left != NULL) {
+        repetitions = roll_expression(cur->right->left, FALSE);
       }
-      
+
       /* array to store the results to sort */
       if (!(results = malloc(sizeof(int)*repetitions))) {
         error("Out of memory");
@@ -351,8 +361,9 @@ int roll_expression ( struct ir_node * node, int print ) {
         results[i] = roll_dice(sides);
       }
       qsort(results, repetitions, sizeof(int), &compare);
-      for(i=(repetitions-high); i<high; i++) {
-        return_value += results[i];
+
+      for(i=(repetitions-high); i<repetitions; i++) {
+        sum += results[i];
       }
       
       free(results);
@@ -361,14 +372,16 @@ int roll_expression ( struct ir_node * node, int print ) {
       
     case OP_LOW:
       
-      sides       = roll_expression(node->right->right, FALSE);
+      sides       = roll_expression(cur->right->right, FALSE);
       repetitions = 1;
-      low         = roll_expression(node->left, FALSE);
+      low         = roll_expression(cur->left, FALSE);
       
-      if (node->right->left != NULL) {
-        repetitions = roll_expression(node->right->left, FALSE);
+      if (cur->right->left != NULL) {
+        repetitions = roll_expression(cur->right->left, FALSE);
       }
       
+      printf("low = %i, rep = %i\n", low, repetitions);
+            
       /* array to store the results to sort */
       if (!(results = malloc(sizeof(int)*repetitions))) {
         error("Out of memory");
@@ -378,8 +391,8 @@ int roll_expression ( struct ir_node * node, int print ) {
         results[i] = roll_dice(sides);
       }
       qsort(results, repetitions, sizeof(int), &compare);
-      for(i=0; i<(repetitions-high); i++) {
-        return_value += results[i];
+      for(i=0; i<low; i++) {
+        sum += results[i];
       }
       
       free(results);
@@ -387,12 +400,13 @@ int roll_expression ( struct ir_node * node, int print ) {
       break;
       
     default :
-      fprintf(stderr, "Implementation error: unkown IR node with code %i\n", node->op);
+      fprintf(stderr, "Implementation error: unkown IR node with code %i\n", cur->op);
       exit(EXIT_FAILURE);
     }
-    
+
+    return_value += sum;
     if (print == TRUE) {
-      printf("%i\n", return_value);
+      printf("%i\n", sum);
     }
 
     cur = cur->next;
