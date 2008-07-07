@@ -18,6 +18,7 @@
 #include <getopt.h>
 #include <errno.h>
 #include <time.h>
+#include <math.h>
 #include "config.h"
 
 /** @def TRUE
@@ -68,9 +69,41 @@
 
 #endif
 
+/* parse tree nodes */
+
+#define OP_NUMBER 1 /*!< Number node               */
+#define OP_TIMES  2 /*!< Multiplication node       */
+#define OP_DIV    3 /*!< Integer division node     */
+#define OP_DICE   4 /*!< N-sided dice node         */
+#define OP_PLUS   5 /*!< Addition node             */
+#define OP_MINUS  6 /*!< Subtraction node          */
+#define OP_HIGH   7 /*!< Keep highest results node */
+#define OP_LOW    8 /*!< Keep lowest resutls node  */
+
+/**
+ * @struct ir_node
+ * @brief  node of the intermediate representation parse tree
+ *
+ * Node of the intermediate representation parse tree
+ */
+struct ir_node {
+  struct ir_node * left;  /*!< Left branch        */
+  struct ir_node * right; /*!< Right branch       */
+  struct ir_node * next;  /*!< Next tree          */
+  unsigned short int op;  /*!< Node type          */
+  int value;              /*!< Optiona node value */
+};
+
 /* function prototypes */
 
 void usage();
 void error(char * message);
 
 extern int  roll(int dice);
+extern int roll_expression ( struct ir_node * node, int print );
+
+struct ir_node * allocate_node ( void  );
+struct ir_node * new_number    ( int number );
+struct ir_node * new_op        ( unsigned short int op, struct ir_node * left, struct ir_node * right);
+struct ir_node * new_dice      ( struct ir_node *  sides);
+

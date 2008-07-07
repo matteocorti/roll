@@ -39,6 +39,27 @@ void error(char * message) {
   exit(EXIT_FAILURE);
 }
 
+/** Wrapper for roll(int dice) translates special dices (e.g., d%)
+ * @param sides sides of the dice
+ */
+int roll_dice(int sides) {
+  if (sides != HUNDRED) {
+    return roll(sides);
+  } else {
+      /* d100 -> d10*10+d10 */
+    int  d1 = roll(10);
+    int d10 = roll(10) % 10;
+    if (d1 == 0 && d10 == 0) {
+      return 100;
+    } else if (d10 == 0) {
+      return d1;
+    } else {
+      return d10*10 + d1;
+    }
+  }
+}
+
+
 /** Rolls an n-sided dice
  * @param dice number of sides of the rolled dice
  * @return     result of the dice roll
@@ -147,7 +168,10 @@ int main(int argc, char **argv) {
   
   if (expression_size > 0) {
     yy_scan_string(expression);
+    
     yyparse();
+
+    
   } else {
     error("No expression provided!\nPlease use the \"-h\" option.\n");
     exit(EXIT_FAILURE);
@@ -155,4 +179,227 @@ int main(int argc, char **argv) {
 
   return 0;
 
+}
+
+/**
+ * Allocates a new IR node
+ * @return newly allocated node
+ */
+struct ir_node * allocate_node ( void  ) {
+
+  struct ir_node * node = malloc(sizeof(struct ir_node));
+  if (node == NULL) {
+    error("Out of memory\n");
+    exit(EXIT_FAILURE);
+  }
+
+  return node;
+  
+}
+
+/**
+ * Allocates a new NUMBER node
+ * @param number number value
+ * @return a NUMBER node
+ */
+struct ir_node * new_number ( int number ) {
+
+  struct ir_node * node = allocate_node();
+  node->op    = OP_NUMBER;
+  node->value = number;
+  node->left  = NULL;
+  node->right = NULL;
+
+  return node;
+
+}
+
+/**
+ * Comparison function for qsort
+ * @param p1 first integer
+ * @param p2 second integer
+ */
+int compare(const void * p1, const void * p2) {
+
+  const int i1 = *((const int *)p1);
+  const int i2 = *((const int *)p2);
+
+  if (i1 > i2) {
+    return 1;
+  } else if (i1 < i2) {
+    return -1;
+  } else {
+    return 0;
+  }
+  
+}
+
+/**
+ * Allocates a new OP node
+ * @param op operation
+ * @param left left operand
+ * @param right right operand
+ * @return an OP node
+ */
+struct ir_node * new_op ( unsigned short int op, struct ir_node * left, struct ir_node * right) {
+
+  struct ir_node * node = allocate_node();
+  node->op    = op;
+  node->value = 0;
+  node->left  = left;
+  node->right = right;
+  return node;
+  
+}
+
+/**
+ * Allocates a new DICE node
+ * @param sides a node representing the number of dice sides
+ * @return a DICE node
+ */
+struct ir_node * new_dice ( struct ir_node * sides) {
+  
+  struct ir_node * node = allocate_node();
+  node->op    = OP_DICE;
+  node->value = 0;
+  node->left  = NULL;
+  node->right = sides;
+  return node;
+  
+}
+
+/**
+ * Roll dices and compute expressions
+ * @param node the root of the expression tree to compute
+ * @param print set to true to print the result of the expression
+ * @return the expression value
+ */
+int roll_expression ( struct ir_node * node, int print ) {
+
+  int return_value = 0;
+  int i;
+  int sides;
+  int repetitions;
+  int high;
+  int low;
+  int * results;
+
+  struct ir_node * cur;
+
+  cur = node;
+  while (cur != NULL) {
+  
+    switch (node->op) {
+    
+    case OP_NUMBER:
+      return_value = node->value;
+      break;
+      
+    case OP_DICE:
+      if (node->left != NULL) {
+        for (i = 0; i < roll_expression(node->left, FALSE); i++) {
+          return_value += roll_dice( roll_expression(node->right, FALSE) );
+        }
+      } else {
+        return_value = roll_dice( roll_expression(node->right, FALSE) );
+      }
+      break;
+      
+    case OP_PLUS:
+      return_value =
+        roll_expression( node->left,  FALSE )
+        +
+        roll_expression( node->right, FALSE );
+      break;
+      
+    case OP_MINUS:
+      return_value =
+        roll_expression( node->left,  FALSE )
+        -
+        roll_expression( node->right, FALSE );
+      break;
+      
+    case OP_TIMES:
+      return_value =
+        roll_expression( node->left,  FALSE )
+        *
+        roll_expression( node->right, FALSE );
+      break;
+      
+    case OP_DIV:
+      return_value = (int)
+        ceil( (float)roll_expression( node->left,  FALSE ) /
+              roll_expression( node->right, FALSE ) );
+      break;
+      
+    case OP_HIGH:
+      
+      sides       = roll_expression(node->right->right, FALSE);
+      repetitions = 1;
+      high        = roll_expression(node->left, FALSE);
+      
+      if (node->right->left != NULL) {
+        repetitions = roll_expression(node->right->left, FALSE);
+      }
+      
+      /* array to store the results to sort */
+      if (!(results = malloc(sizeof(int)*repetitions))) {
+        error("Out of memory");
+      }
+      
+      for(i=0; i<repetitions; i++) {
+        results[i] = roll_dice(sides);
+      }
+      qsort(results, repetitions, sizeof(int), &compare);
+      for(i=(repetitions-high); i<high; i++) {
+        return_value += results[i];
+      }
+      
+      free(results);
+      
+      break;
+      
+    case OP_LOW:
+      
+      sides       = roll_expression(node->right->right, FALSE);
+      repetitions = 1;
+      low         = roll_expression(node->left, FALSE);
+      
+      if (node->right->left != NULL) {
+        repetitions = roll_expression(node->right->left, FALSE);
+      }
+      
+      /* array to store the results to sort */
+      if (!(results = malloc(sizeof(int)*repetitions))) {
+        error("Out of memory");
+      }
+      
+      for(i=0; i<repetitions; i++) {
+        results[i] = roll_dice(sides);
+      }
+      qsort(results, repetitions, sizeof(int), &compare);
+      for(i=0; i<(repetitions-high); i++) {
+        return_value += results[i];
+      }
+      
+      free(results);
+      
+      break;
+      
+    default :
+      fprintf(stderr, "Implementation error: unkown IR node with code %i\n", node->op);
+      exit(EXIT_FAILURE);
+    }
+    
+    if (print == TRUE) {
+      printf("%i\n", return_value);
+    }
+
+    cur = cur->next;
+
+  }
+
+  
+  return return_value;
+  
 }

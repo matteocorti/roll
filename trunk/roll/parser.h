@@ -39,37 +39,51 @@
    /* Put the tokens into the symbol table, so that GDB and other debuggers
       know about them.  */
    enum yytokentype {
-     NUMBER = 258,
+     COMMA = 258,
      DICE = 259,
-     PLUS = 260,
-     MINUS = 261,
-     RPAREN = 262,
-     LPAREN = 263,
-     PERCENT = 264,
-     TIMES = 265,
-     DIV = 266,
-     HIGH = 267,
-     LOW = 268
+     DIV = 260,
+     HIGH = 261,
+     LCURLY = 262,
+     LOW = 263,
+     LPAREN = 264,
+     MINUS = 265,
+     PERCENT = 266,
+     PLUS = 267,
+     RCURLY = 268,
+     RPAREN = 269,
+     TIMES = 270,
+     NUMBER = 271
    };
 #endif
 /* Tokens.  */
-#define NUMBER 258
+#define COMMA 258
 #define DICE 259
-#define PLUS 260
-#define MINUS 261
-#define RPAREN 262
-#define LPAREN 263
-#define PERCENT 264
-#define TIMES 265
-#define DIV 266
-#define HIGH 267
-#define LOW 268
+#define DIV 260
+#define HIGH 261
+#define LCURLY 262
+#define LOW 263
+#define LPAREN 264
+#define MINUS 265
+#define PERCENT 266
+#define PLUS 267
+#define RCURLY 268
+#define RPAREN 269
+#define TIMES 270
+#define NUMBER 271
 
 
 
 
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
-typedef int YYSTYPE;
+typedef union YYSTYPE
+#line 18 "parser.y"
+{
+  struct ir_node * node;
+  int              int_type;
+}
+/* Line 1489 of yacc.c.  */
+#line 86 "parser.h"
+	YYSTYPE;
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1
 # define YYSTYPE_IS_TRIVIAL 1
