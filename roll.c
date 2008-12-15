@@ -17,6 +17,8 @@ int sum_flag     = FALSE; /**< command line argument: sum series     */
 static int verbose_flag = FALSE; /**< command line argument: verbose output */
 static int version_flag = FALSE; /**< command line argument: version        */
 
+extern int positive_flag = FALSE; /**< command line argument: allow only positive results */
+
 /**
  * Prints the program's usage
  */
@@ -24,6 +26,7 @@ void usage() {
   
   printf("\nusage: %s [OPTION] expression\n\n", PACKAGE_NAME);
   printf("Options\n");
+  printf(" -p, --positive     allow only positive results\n");
   printf(" -h, --help         show this help screen\n");
   printf(" -s, --sum-series   show the sum of roll series\n");
   printf(" -v, --verbose      increase verbosity\n");
@@ -107,6 +110,7 @@ int main(int argc, char **argv) {
 
     static struct option long_options[] = {
       {"sum-series",  no_argument,       NULL, 's'},
+      {"positive",    no_argument,       NULL, 'p'},
       {"verbose",     no_argument,       NULL, 'v'},
       {"version",     no_argument,       &version_flag, TRUE},
       {"help",        no_argument,       NULL, 'h'},
@@ -116,7 +120,7 @@ int main(int argc, char **argv) {
     /* getopt_long stores the option index here. */
     int option_index = 0;
      
-    c = getopt_long (argc, argv, "hvs",
+    c = getopt_long (argc, argv, "hvsp",
 		     long_options, &option_index);
     
     /* Detect the end of the options. */
@@ -133,6 +137,10 @@ int main(int argc, char **argv) {
       sum_flag = TRUE;
       break;
       
+    case 'p':
+      positive_flag = TRUE;
+      break;
+
     case 'h':
       usage();
       exit(0);

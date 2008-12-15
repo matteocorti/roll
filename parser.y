@@ -10,6 +10,8 @@
 #include <roll.h>
 #include <stdio.h>
 
+  int positive_flag;
+  
   int  yylex (void);
   void yyerror (char const *);
 
@@ -57,7 +59,11 @@ roll : top_level_expression_list {
 ;
 
 top_level_expression_list : top_level_expression {
-  $$ = $1;
+  if (! positive_flag || $1 > 0) {
+    $$ = $1;
+  } else {
+    $$ = 0;
+  }
 }
 | top_level_expression COMMA top_level_expression_list {
   $$ = $1 + $3;
@@ -83,6 +89,7 @@ top_level_expression : expression {
       printf("sum: %i\n", res);
       sum += res;
     }
+
   }
 
   $$ = res;
