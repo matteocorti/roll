@@ -5,7 +5,7 @@
 .SH NAME
 @PACKAGE_NAME@ \- rolls a user-defined dice sequence
 .SH SYNOPSIS
-.BR "@PACKAGE_NAME@ " "[" "-vh"  "] [" "--version" "] expression"
+.BR "@PACKAGE_NAME@ " "[" "-vhp"  "] [" "--version" "] expression"
 .SH DESCRIPTION
 .B @PACKAGE_NAME@
 Rolls a user-defined dice sequence. The dices to roll are defined
@@ -14,10 +14,13 @@ times by prepending the number of repetitions (e.g., 3d6) and used in
 simple mathematical expressions (e.g., 2d8+4).
 .SH OPTIONS
 .TP
-.B \-h
+.B \-\-help, \-h
 help
 .TP
-.B \-v
+.B \-\-positive, \-p
+allow only positive results
+.TP
+.B \-\-verbose, \-v
 verbose (displays the result for each roll)
 .TP
 .B \--version

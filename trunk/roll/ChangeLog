@@ -1,3 +1,8 @@
+2008-12-15  Matteo Corti  <matteo.corti@id.ethz.ch>
+
+	* roll.c: allows negative results by default (added the --positive
+	          command line option to round up negative results to 0)
+
 2008-01-29  Matteo Corti  <matteo.corti@id.ethz.ch>
 
 	* parser.y: applyed patch from Erik Greenwald about a missing ;
