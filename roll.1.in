@@ -1,7 +1,7 @@
 .\" Process this file with
 .\" groff -man -Tascii foo.1
 .\"
-.TH "@PACKAGE_NAME@" 1 "March, 2007", "@PACKAGE_VERSION@" "USER COMMANDS"
+.TH "@PACKAGE_NAME@" 1 "August, 2008", "@PACKAGE_VERSION@" "USER COMMANDS"
 .SH NAME
 @PACKAGE_NAME@ \- rolls a user-defined dice sequence
 .SH SYNOPSIS
@@ -50,6 +50,11 @@ two zeroes means 100.
 
 If you want to roll a single 100-sided die use the "d100" notation.
 
+.SH Fudge dice (dF)
+
+The Fudge role-playing game system uses customized "Fudge dice" which
+have an equal number of plus, minus and blank sides.
+
 .SH Multipliers
 
 In some games, the above notation is expanded to allow for a
@@ -58,6 +63,15 @@ multiplication (can be replaced by "/" for division) and C is a
 natural number.
 
 Results are rounded up.
+
+.SH Reroll filters
+
+It is possible to specify restrictions on dice rolls telling which
+values to keep and which values to discard by putting a filter after
+the dice. If a value is to be discarded the dice is re-rolled until
+the result is valid value. You can specify to keep only values bigger
+(>), bigger or equal (>=), smaller (<), smaller or equal (<=) or
+different (!=) from a given number.
 
 .SH Selective results
 
@@ -99,6 +113,10 @@ d%         rolls 2 10-sided dices: one represents the tens and
 .TP
 6{3d6}     rolls 3d6 6 times
 .TP
+1d6>2      rolls 1d6 until the result is bigger than 2
+.TP
+4DF        rolls 4 Fudge dices
+.TP
 
 .PD 1
 
@@ -106,14 +124,16 @@ d%         rolls 2 10-sided dices: one represents the tens and
 
 .PD 0
 .TP
-expression := term { "+" term | "-" term } .
+expression   := term { "+" term | "-" term } .
 .TP
-term       := number | factor [ ("*"|"/") number |
-       number ("*"|"/") factor | "(" expression ")" .
+term         := number | factor [ ("*"|"/") number |
+         number ("*"|"/") factor | "(" expression ")" .
 .TP
-factor     := number dice [ ("h"|"H"|"l"|"L") number ] | dice .
+factor       := number FilteredDice [ ("h"|"H"|"l"|"L") number ] | FilteredDice .
 .TP
-dice       := "d" | "D" [ number | "%" ] .
+FilteredDice := dice | dice (">"|">="|"<"|"<="|"!=") number .
+.TP
+dice         := "d" | "D" [ number | "%" | "F" | "f" ] .
 .PD 1
 
 .SH "SEE ALSO"
@@ -122,7 +142,7 @@ dice       := "d" | "D" [ number | "%" ] .
 @PACKAGE_NAME@ returns a zero exist status if it finds no error in the
 supplied expresssion
 .SH BUGS
-Please report bugs to: Matteo Corti (matteo.corti (at) gmail.com )
+Please report bugs to: Matteo Corti (matteo (at) corti.li )
 
 .SH AUTHOR
-Matteo Corti (matteo.corti (at) gmail.com)
+Matteo Corti ( matteo (at) corti.li )

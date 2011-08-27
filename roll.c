@@ -1,14 +1,14 @@
-/* Copyright (c) 2005, 2006, 2007  Matteo Corti
+/* Copyright (c) 2005-2011  Matteo Corti
  * This file is part of roll
  *
  * You may distribute this file under the terms the GNU General Public
  * License.  See the file COPYING for more information.
  */
 
-/**
- * @file   roll.c
- * @author Matteo Corti
- * @brief  The main application file
+/*!
+ * \file   roll.c
+ * \author Matteo Corti
+ * \brief  The main application file
  */
 
 #include "roll.h"
@@ -19,8 +19,13 @@ static int version_flag = FALSE; /**< command line argument: version        */
 
 extern int positive_flag = FALSE; /**< command line argument: allow only positive results */
 
-/**
- * Prints the program's usage
+#ifdef DEBUG
+int debug_flag = 0; /**< command line argument: debug output */
+#endif
+
+
+/*!
+ * \brief Prints the program's usage
  */
 void usage() {
   
@@ -31,43 +36,90 @@ void usage() {
   printf(" -s, --sum-series   show the sum of roll series\n");
   printf(" -v, --verbose      increase verbosity\n");
   printf("     --version      prints the program version and exits\n");
+#ifdef DEBUG
+  printf(" -d, --debug        debugging output\n");
+#endif
   printf("\nPlease see the %s(1) man page for full documentation\n\n", PACKAGE_NAME);
 
 }
 
-/**
- * Prints the specified error message and exits with a failure status
- * @param message error message
+/*!
+ * \brief          Prints the specified error message and exits with a failure status
+ * \param[message] error message
  */
 void error(char * message) {
   fprintf(stderr, "\nError: %s\n", message);
   exit(EXIT_FAILURE);
 }
 
-/** Wrapper for roll(int dice) translates special dices (e.g., d%)
- * @param sides sides of the dice
+/*!
+ * \brief        Wrapper for roll(int dice) translates special dices (e.g., d%)
+ * \param[sides] Sides of the dice
  */
 int roll_dice(int sides) {
-  if (sides != HUNDRED) {
-    return roll(sides);
-  } else {
-      /* d100 -> d10*10+d10 */
-    int  d1 = roll(10);
-    int d10 = roll(10) % 10;
-    if (d1 == 0 && d10 == 0) {
-      return 100;
-    } else if (d10 == 0) {
-      return d1;
-    } else {
-      return d10*10 + d1;
+
+  int result = 0;
+  
+  if ( sides == HUNDRED ) {
+    
+    /* d100 -> d10*10+d10 */
+    
+    int d10 = roll(10);
+    if (verbose_flag) {
+      printf("d10 -> %i\n", d10);
     }
+    d10 = d10 % 10;
+    
+    int  d1 = roll(10);
+    if (verbose_flag) {
+      printf("d10 -> %i\n", d1);
+    }
+    
+    if (d1 == 0 && d10 == 0) {
+      result = 100;
+    } else if (d10 == 0) {
+      result = d1;
+    } else {
+      result = d10*10 + d1;
+    }
+
+  } else if ( sides == FUDGE ) {
+
+    result = roll(3) - 2;
+
+    if (verbose_flag) {
+
+      switch (result) {
+      case -1:
+        printf("dF -> -\n");
+        break;
+      case 0:
+        printf("dF -> o\n");
+        break;
+      case 1:
+        printf("dF -> +\n");
+        break;        
+      }
+    }
+    
+  } else {
+
+    result = roll(sides);
+    
+    if (verbose_flag) {
+      printf("d%i -> %i\n", sides, result);
+    }
+
   }
+
+  return result;
+  
 }
 
-
-/** Rolls an n-sided dice
- * @param dice number of sides of the rolled dice
- * @return     result of the dice roll
+/*!
+ * \brief       Rolls an n-sided dice
+ * \param[dice] Number of sides of the rolled dice
+ * \return      Result of the dice roll
  */
 int roll(int dice) {
 
@@ -77,25 +129,23 @@ int roll(int dice) {
    * 1992, 2nd ed., p. 277
    *
    * "If you want to generate a random integer between 1 
-   *  and 10, you should always do it by using high-order *
+   *  and 10, you should always do it by using high-order
    *  bits, as in
    *
    *  j=1+(int) (10.0*rand()/(RAND_MAX+1.0));
    */
 
   int res = 1+(int)(((double)dice)*random()/(RAND_MAX+1.0));
-  if (verbose_flag) {
-    printf("d%i -> %i\n", dice, res);
-  }
 
   return res;
 
 }
 
-/**
- * Main program
- * @param argc number of command line arguments
- * @param argv array of strings with the command line arguments
+/*!
+ * \brief       Main program
+ * \param[argc] Number of command line arguments
+ * \param[argv] Array of strings with the command line arguments
+ * \return      Exit status
  */
 int main(int argc, char **argv) {
 
@@ -114,13 +164,16 @@ int main(int argc, char **argv) {
       {"verbose",     no_argument,       NULL, 'v'},
       {"version",     no_argument,       &version_flag, TRUE},
       {"help",        no_argument,       NULL, 'h'},
+#ifdef DEBUG
+      {"debug",       no_argument,       NULL, 'd'},
+#endif
       {NULL, 0, NULL, 0}
     };
 
     /* getopt_long stores the option index here. */
     int option_index = 0;
      
-    c = getopt_long (argc, argv, "hvsp",
+    c = getopt_long (argc, argv, "hvspd",
 		     long_options, &option_index);
     
     /* Detect the end of the options. */
@@ -149,6 +202,12 @@ int main(int argc, char **argv) {
       usage();
       /* getopt_long already printed an error message. */
       exit(EXIT_SUCCESS);
+
+#ifdef DEBUG
+    case 'd':
+      debug_flag++;
+      break;
+#endif
       
     case 0:
       break;
@@ -196,9 +255,9 @@ int main(int argc, char **argv) {
 
 }
 
-/**
- * Allocates a new IR node
- * @return newly allocated node
+/*!
+ * \brief  Allocates a new IR node
+ * \return Newly allocated node
  */
 struct ir_node * allocate_node ( void  ) {
 
@@ -212,10 +271,10 @@ struct ir_node * allocate_node ( void  ) {
   
 }
 
-/**
- * Allocates a new NUMBER node
- * @param number number value
- * @return a NUMBER node
+/*!
+ * \brief         Allocates a new NUMBER node
+ * \param[number] Number value
+ * \return        A NUMBER node
  */
 struct ir_node * new_number ( int number ) {
 
@@ -229,10 +288,11 @@ struct ir_node * new_number ( int number ) {
 
 }
 
-/**
- * Comparison function for qsort
- * @param p1 first integer
- * @param p2 second integer
+/*!
+ * \brief     Comparison function for qsort
+ * \param[p1] First integer
+ * \param[p2] Second integer
+ * \return    1 if p1 > p2, -1 if p1 < p2 and 0 if p1 and p2 are equal
  */
 int compare(const void * p1, const void * p2) {
 
@@ -249,12 +309,12 @@ int compare(const void * p1, const void * p2) {
   
 }
 
-/**
- * Allocates a new OP node
- * @param op operation
- * @param left left operand
- * @param right right operand
- * @return an OP node
+/*!
+ * \brief        Allocates a new OP node
+ * \param[op]    Operation
+ * \param[left]  Left operand
+ * \param[right] Right operand
+ * \return       An OP node
  */
 struct ir_node * new_op ( unsigned short int op, struct ir_node * left, struct ir_node * right) {
 
@@ -267,10 +327,10 @@ struct ir_node * new_op ( unsigned short int op, struct ir_node * left, struct i
   
 }
 
-/**
- * Allocates a new DICE node
- * @param sides a node representing the number of dice sides
- * @return a DICE node
+/*!
+ * \brief        Allocates a new DICE node
+ * \param[sides] A node representing the number of dice sides
+ * \return       A DICE node
  */
 struct ir_node * new_dice ( struct ir_node * sides) {
   
@@ -283,44 +343,47 @@ struct ir_node * new_dice ( struct ir_node * sides) {
   
 }
 
-/**
- * Roll dices and compute expressions
- * @param node the root of the expression tree to compute
- * @param print set to true to print the result of the expression
- * @return the expression value
+/*!
+ * \brief        Roll dices and compute expressions
+ * \param[node]  The root of the expression tree to compute
+ * \param[print] Set to true to print the result of the expression
+ * \return       The expression value
  */
 int roll_expression ( struct ir_node * node, int print ) {
 
-  int return_value = 0;
-  int sum;
-  int i;
-  int sides;
-  int repetitions;
-  int high;
-  int low;
+  int   high;
+  int   i;
+  int   limit;
+  int   low;
+  int   repetitions;
+  int   return_value = 0;
+  int   sides;
+  int   sum;
+  int   tmp;
   int * results;
 
   struct ir_node * cur;
-
+  
   cur = node;
   while (cur != NULL) {
 
     sum = 0;
-    
+
     switch (cur->op) {
     
     case OP_NUMBER:
       sum = cur->value;
       break;
+
+    case OP_REP:
+
+      for (i = 0; i < roll_expression(cur->left, FALSE); i++) {
+        sum += roll_expression(cur->right, FALSE);
+      }
+      break;
       
     case OP_DICE:
-      if (cur->left != NULL) {
-        for (i = 0; i < roll_expression(cur->left, FALSE); i++) {
-          sum += roll_dice( roll_expression(cur->right, FALSE) );
-        }
-      } else {
-        sum = roll_dice( roll_expression(cur->right, FALSE) );
-      }
+      sum = roll_dice( roll_expression(cur->right, FALSE) );
       break;
       
     case OP_PLUS:
@@ -351,14 +414,10 @@ int roll_expression ( struct ir_node * node, int print ) {
       break;
       
     case OP_HIGH:
-      
-      sides       = roll_expression(cur->right->right, FALSE);
-      repetitions = 1;
+
+      sides       = roll_expression(cur->right->right->right, FALSE);
+      repetitions = roll_expression(cur->right->left,  FALSE);
       high        = roll_expression(cur->left, FALSE);      
-      
-      if (cur->right->left != NULL) {
-        repetitions = roll_expression(cur->right->left, FALSE);
-      }
 
       /* array to store the results to sort */
       if (!(results = malloc(sizeof(int)*repetitions))) {
@@ -380,16 +439,14 @@ int roll_expression ( struct ir_node * node, int print ) {
       
     case OP_LOW:
       
-      sides       = roll_expression(cur->right->right, FALSE);
-      repetitions = 1;
+      sides       = roll_expression(cur->right->right->right, FALSE);
+      repetitions = roll_expression(cur->right->left,  FALSE);
       low         = roll_expression(cur->left, FALSE);
       
       if (cur->right->left != NULL) {
         repetitions = roll_expression(cur->right->left, FALSE);
       }
-      
-      printf("low = %i, rep = %i\n", low, repetitions);
-            
+                  
       /* array to store the results to sort */
       if (!(results = malloc(sizeof(int)*repetitions))) {
         error("Out of memory");
@@ -406,10 +463,67 @@ int roll_expression ( struct ir_node * node, int print ) {
       free(results);
       
       break;
+
+    case OP_GT:
+      
+      limit = roll_expression(cur->right, FALSE);      
+      tmp   = roll_expression(cur->left,  FALSE);
+      while (tmp <= limit) {
+        tmp = roll_expression(cur->left, FALSE);
+      }
+      sum += tmp;
+      
+      break;
+      
+    case OP_GE:
+      
+      limit = roll_expression(cur->right, FALSE);      
+      tmp   = roll_expression(cur->left,  FALSE);
+      while (tmp < limit) {
+        tmp = roll_expression(cur->left, FALSE);
+      }
+      sum += tmp;
+      
+      break;
+      
+    case OP_LT:
+      
+      limit = roll_expression(cur->right, FALSE);      
+      tmp   = roll_expression(cur->left,  FALSE);
+      while (tmp >= limit) {
+        tmp = roll_expression(cur->left, FALSE);
+      }
+      sum += tmp;
+      
+      break;
+      
+    case OP_LE:
+      
+      limit = roll_expression(cur->right, FALSE);      
+      tmp   = roll_expression(cur->left,  FALSE);
+      while (tmp > limit) {
+        tmp = roll_expression(cur->left, FALSE);
+      }
+      sum += tmp;
+      
+      break;
+      
+    case OP_NE:
+      
+      limit = roll_expression(cur->right, FALSE);      
+      tmp   = roll_expression(cur->left,  FALSE);
+      while (tmp == limit) {
+        tmp = roll_expression(cur->left, FALSE);
+      }
+      sum += tmp;
+      
+      break;
       
     default :
+      
       fprintf(stderr, "Implementation error: unkown IR node with code %i\n", cur->op);
       exit(EXIT_FAILURE);
+      
     }
 
     return_value += sum;
@@ -425,3 +539,52 @@ int roll_expression ( struct ir_node * node, int print ) {
   return return_value;
   
 }
+
+#ifdef DEBUG
+
+void print_node( struct ir_node * node) {
+
+  switch (node->op) {
+  case OP_NUMBER: printf("number (%i)", node->value); break;      
+  case OP_DICE:   printf("dice"); break;
+  case OP_PLUS:   printf("+"); break;
+  case OP_MINUS:  printf("-"); break;
+  case OP_TIMES:  printf("*"); break;
+  case OP_DIV:    printf("/"); break;
+  case OP_HIGH:   printf("high"); break;
+  case OP_LOW:    printf("low"); break;
+  case OP_GT:     printf(">"); break;
+  case OP_GE:     printf(">="); break;
+  case OP_LT:     printf("<"); break;
+  case OP_LE:     printf("<="); break;
+  case OP_NE:     printf("!="); break;
+  case OP_REP:    printf("rep"); break;
+  default :       printf("unknown node"); break;
+  }
+  
+}
+
+void print_tree( char * prefix, struct ir_node * node, int indent) {
+
+  int i;
+  
+  printf("[%s] ", prefix);
+
+  for (i = 0; i < indent; i++) {
+    printf("  ");
+  }
+
+  print_node(node);
+
+  printf("\n");
+
+  if (node->left != NULL) {
+    print_tree(prefix, node->left, indent+1);
+  }
+
+  if (node->right != NULL) {
+    print_tree(prefix, node->right, indent+1);
+  }
+  
+}
+#endif

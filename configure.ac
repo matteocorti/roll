@@ -1,5 +1,5 @@
-AC_INIT(roll, 2.0.0b0, matteo.corti@gmail.com)
-AM_INIT_AUTOMAKE(roll, 2.0.0b0, matteo.corti@gmail.com)
+AC_INIT(roll, 2.0.0, matteo@corti.li)
+AM_INIT_AUTOMAKE(roll, 2.0.0, matteo@corti.li)
 AC_CONFIG_FILES(Makefile)
 AC_CONFIG_HEADERS(config.h)
 
@@ -7,6 +7,7 @@ AC_PROG_CC
 AM_PROG_LEX
 AC_PROG_YACC
 AC_ISC_POSIX
+AM_PROG_CC_C_O
 
 AC_STDC_HEADERS
 AC_HAVE_HEADERS(stdio.h getopt.h errno.h string.h strings.h sys/types.h unistd.h)

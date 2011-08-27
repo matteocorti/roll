@@ -1,3 +1,12 @@
+Minor
+=====
+
+* when using multipliers print the orginal result and the total when using
+  --verbose
+
+Major
+=====
+
 * true random generator
   http://random.irb.hr/
 

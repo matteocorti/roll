@@ -16,6 +16,7 @@
   void yyerror (char const *);
 
   extern int sum_flag;
+  extern int debug_flag;
   
 %}
 
@@ -27,6 +28,7 @@
 %token COMMA
 %token DICE
 %token DIV
+%token FUDGE
 %token HIGH
 %token LCURLY
 %token LOW
@@ -37,9 +39,15 @@
 %token RCURLY
 %token RPAREN
 %token TIMES
+%token LE
+%token LT
+%token GE
+%token GT
+%token NE
 %token <int_type> NUMBER
 
 %type <node> dice
+%type <node> filtered_dice
 %type <node> term
 %type <node> factor
 %type <node> expression
@@ -51,7 +59,7 @@
 
 %%
 
-roll : top_level_expression_list {
+roll : top_level_expression_list {      
     if (sum_flag == TRUE) {
       printf("sum: %i\n", $1);
     }  
@@ -71,9 +79,19 @@ top_level_expression_list : top_level_expression {
 ;
 
 top_level_expression : expression {
+#ifdef DEBUG
+  if (debug_flag > 0) {
+    print_tree("tree", $1, 0);
+  }
+#endif
   $$ = roll_expression($1, TRUE);
 }
 | LCURLY expression_list RCURLY {
+#ifdef DEBUG
+  if (debug_flag > 0) {
+    print_tree("tree", $2, 0);
+  }
+#endif
   $$ = roll_expression($2, TRUE);
 }
 | NUMBER LCURLY expression_list RCURLY {
@@ -82,6 +100,12 @@ top_level_expression : expression {
   int i;
   int res;
   int sum = 0;
+
+#ifdef DEBUG
+  if (debug_flag > 0) {
+    print_tree("tree", $3, 0);
+  }
+#endif
   
   for (i = 0; i < repetitions; i++) {
     res = roll_expression($3, TRUE);
@@ -92,7 +116,7 @@ top_level_expression : expression {
 
   }
 
-  $$ = res;
+  $$ = sum;
   
 }
 ;
@@ -117,31 +141,30 @@ expression : term {
 }
 ;
 
-factor   :   NUMBER dice {
-  $2->left = new_number($1);
-  $$ = $2;
+factor   :   NUMBER filtered_dice {
+
+  $$ = new_op(OP_REP, new_number($1), $2);
+  
 }
-| NUMBER dice HIGH NUMBER {
+| NUMBER filtered_dice HIGH NUMBER {
 
   if ($4 > $1) {
     error("the number of kept dices must be lower than the actual dices");
   }
 
-  $2->left = new_number($1);
-  $$ = new_op(OP_HIGH, new_number($4), $2);
+  $$ = new_op(OP_HIGH, new_number($4), new_op(OP_REP, new_number($1), $2));
 
 }
-| NUMBER dice LOW NUMBER {
+| NUMBER filtered_dice LOW NUMBER {
 
   if ($4 > $1) {
     error("the number of kept dices must be lower than the actual dices");
   }
 
-  $2->left = new_number($1);
-  $$ = new_op(OP_LOW, new_number($4), $2);
+  $$ = new_op(OP_LOW, new_number($4), new_op(OP_REP, new_number($1), $2));
 
 }
-| dice {
+| filtered_dice {
   $$ = $1;
 }
 ;
@@ -170,8 +193,28 @@ term     :   NUMBER {
 }
 ;
 
-dice       : DICE NUMBER {
+filtered_dice : dice {
+  $$ = $1;
+}
+| dice GT NUMBER {
+  $$ = new_op(OP_GT, $1, new_number($3));
+  
+}
+| dice GE NUMBER {
+  $$ = new_op(OP_GE, $1, new_number($3));
+}
+| dice LT NUMBER {
+  $$ = new_op(OP_LT, $1, new_number($3));
+}
+| dice LE NUMBER {
+  $$ = new_op(OP_LE, $1, new_number($3));
+}
+| dice NE NUMBER {
+  $$ = new_op(OP_NE, $1, new_number($3));
+}
+;
 
+dice       : DICE NUMBER {
   $$ = new_dice(new_number($2));
 }
 | DICE {
@@ -179,6 +222,9 @@ dice       : DICE NUMBER {
 }
 | DICE PERCENT {
   $$ = new_dice(new_number(HUNDRED));
+}
+| DICE FUDGE {
+  $$ = new_dice(new_number(FUDGE));
 }
 ;
 

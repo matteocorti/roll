@@ -43,6 +43,11 @@
  */
 #define HUNDRED         -1
 
+/** @def FUDGE
+ * Constant representing a Fudge dice (+1, -1, 0)
+ */
+#define FUDGE           -2
+
 
 #ifndef HAVE_SRANDOMDEV
 
@@ -71,14 +76,20 @@
 
 /* parse tree nodes */
 
-#define OP_NUMBER 1 /*!< Number node               */
-#define OP_TIMES  2 /*!< Multiplication node       */
-#define OP_DIV    3 /*!< Integer division node     */
-#define OP_DICE   4 /*!< N-sided dice node         */
-#define OP_PLUS   5 /*!< Addition node             */
-#define OP_MINUS  6 /*!< Subtraction node          */
-#define OP_HIGH   7 /*!< Keep highest results node */
-#define OP_LOW    8 /*!< Keep lowest resutls node  */
+#define OP_NUMBER  1 /*!< Number node                        */
+#define OP_TIMES   2 /*!< Multiplication node                */
+#define OP_DIV     3 /*!< Integer division node              */
+#define OP_DICE    4 /*!< N-sided dice node                  */
+#define OP_PLUS    5 /*!< Addition node                      */
+#define OP_MINUS   6 /*!< Subtraction node                   */
+#define OP_HIGH    7 /*!< Keep highest results node          */
+#define OP_LOW     8 /*!< Keep lowest resutls node           */
+#define OP_GT      9 /*!< Keep results greater than          */
+#define OP_GE     10 /*!< Keep results greater or equal than */
+#define OP_LT     11 /*!< Keep results less than             */
+#define OP_LE     12 /*!< Keep results less or equal than    */
+#define OP_NE     13 /*!< Keep results different from        */
+#define OP_REP    14 /*!< Number of rolls (repetitions)      */
 
 /**
  * @struct ir_node
@@ -106,3 +117,7 @@ struct ir_node * allocate_node ( void  );
 struct ir_node * new_number    ( int number );
 struct ir_node * new_op        ( unsigned short int op, struct ir_node * left, struct ir_node * right);
 struct ir_node * new_dice      ( struct ir_node *  sides);
+
+#ifdef DEBUG
+void print_tree( char * prefix, struct ir_node * node, int indent);
+#endif
