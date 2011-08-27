@@ -1,7 +1,14 @@
-2008-12-15  Matteo Corti  <matteo.corti@id.ethz.ch>
+2011-08-26  Matteo Corti  <matteo.corti@id.ethz.ch>
 
-	* roll.c: allows negative results by default (added the --positive
-	          command line option to round up negative results to 0)
+	* roll: added 'Fudge' dices
+	* roll: added a --debug option
+
+2008-07-17  Matteo Corti  <matteo.corti@id.ethz.ch>
+
+	* roll: implemented notation additions
+	  * series: expression, expression
+	  * repetitions: N{expression}
+	  * reroll filters: 1d6>2
 
 2008-01-29  Matteo Corti  <matteo.corti@id.ethz.ch>
 
