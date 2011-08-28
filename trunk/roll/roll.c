@@ -83,7 +83,7 @@ int roll_dice(int sides) {
       result = d10*10 + d1;
     }
 
-  } else if ( sides == FUDGE ) {
+  } else if ( sides == FUDGE_DICE ) {
 
     result = roll(3) - 2;
 
