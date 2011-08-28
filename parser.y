@@ -224,7 +224,7 @@ dice       : DICE NUMBER {
   $$ = new_dice(new_number(HUNDRED));
 }
 | DICE FUDGE {
-  $$ = new_dice(new_number(FUDGE));
+  $$ = new_dice(new_number(FUDGE_DICE));
 }
 ;
 

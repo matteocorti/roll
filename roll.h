@@ -46,7 +46,7 @@
 /** @def FUDGE
  * Constant representing a Fudge dice (+1, -1, 0)
  */
-#define FUDGE           -2
+#define FUDGE_DICE      -2
 
 
 #ifndef HAVE_SRANDOMDEV
