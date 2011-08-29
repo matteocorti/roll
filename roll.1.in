@@ -26,7 +26,8 @@ verbose (displays the result for each roll)
 .B \--version
 prints the version of the program
 .SH EXPRESSIONS
-Expressions are in dice notation (also known as dice algebra, common dice notation or RPG dice notation)
+Expressions are in dice notation (also known as dice algebra, common
+dice notation or RPG dice notation).
 
 Die rolls are expressed in the form NdX or NDX where N is the number of dices
 (1 if omitted) and X the number of dice faces.
@@ -35,8 +36,8 @@ If the final number is omitted, it is assumed to be a six.
 
 To this basic notation, an additive modifier can be appended, yielding
 expressions of the form, NdX+C. The plus can be replaced by a minus
-sign ("-") for subtraction. C is a number to be subtracted from the
-final total.
+sign ("-") for subtraction. C is a number to be added subtracted from
+the final total.
 
 See: http://en.wikipedia.org/wiki/Dice_notation
 
@@ -50,7 +51,7 @@ two zeroes means 100.
 
 If you want to roll a single 100-sided die use the "d100" notation.
 
-.SH Fudge dice (dF)
+.SH Fudge dice (dF or df)
 
 The Fudge role-playing game system uses customized "Fudge dice" which
 have an equal number of plus, minus and blank sides.
@@ -71,7 +72,8 @@ values to keep and which values to discard by putting a filter after
 the dice. If a value is to be discarded the dice is re-rolled until
 the result is valid value. You can specify to keep only values bigger
 (>), bigger or equal (>=), smaller (<), smaller or equal (<=) or
-different (!=) from a given number.
+different (!=) from a given number. The comparator is specified right
+after the the die specification (e.g., 1D6>2).
 
 .SH Selective results
 
