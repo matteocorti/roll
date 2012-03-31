@@ -1,6 +1,7 @@
 Minor
 =====
 
+* unit tests
 * when using multipliers print the orginal result and the total when using
   --verbose
 
