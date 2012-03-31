@@ -1,67 +1,75 @@
-2011-08-26  Matteo Corti  <matteo.corti@id.ethz.ch>
+2012-03-31  Matteo Corti  <matteo.corti@id.ethz.ch>
+
+	* roll: check for integer overflows
+
+2011-08-29  Matteo Corti  <matteo@corti.li>
+
+	* roll.1: minor fixes
+
+2011-08-26  Matteo Corti  <matteo@corti.li>
 
 	* roll: added 'Fudge' dices
 	* roll: added a --debug option
 
-2008-07-17  Matteo Corti  <matteo.corti@id.ethz.ch>
+2008-07-17  Matteo Corti  <matteo@corti.li>
 
 	* roll: implemented notation additions
 	  * series: expression, expression
 	  * repetitions: N{expression}
 	  * reroll filters: 1d6>2
 
-2008-01-29  Matteo Corti  <matteo.corti@id.ethz.ch>
+2008-01-29  Matteo Corti  <matteo@corti.li>
 
 	* parser.y: applyed patch from Erik Greenwald about a missing ;
 	* regen.sh: added --add-missing and --copy to automake
 	* parser.y: corrected an error in the parser which was not accepting
 	            expressions with more than two terms
 
-2007-08-22  Matteo Corti  <matteo.corti@id.ethz.ch>
+2007-08-22  Matteo Corti  <matteo@corti.li>
 
 	* parser.y: correct the behaviour of d% (on dice 0 corresponds to 10 while
 	            it corresponds to 0 on the other)
 
-2007-05-25  Matteo Corti  <matteo.corti@id.ethz.ch>
+2007-05-25  Matteo Corti  <matteo@corti.li>
 
 	* roll.1: some formatting and indentation and fixed the email
 	* Doxufile: included
 	* roll.c: added doxygen comments
 	* roll.h: added doxygen comments
 
-2007-03-28  Matteo Corti  <matteo.corti@id.ethz.ch>
+2007-03-28  Matteo Corti  <matteo@corti.li>
 
 	* included a patch from Joe Klemmer to improve the error messages
 
-2007-03-25  Matteo Corti  <matteo.corti@id.ethz.ch>
+2007-03-25  Matteo Corti  <matteo@corti.li>
 
 	* added a copyright comment to the source files
 
-2007-03-20  Matteo Corti  <matteo.corti@id.ethz.ch>
+2007-03-20  Matteo Corti  <matteo@corti.li>
 
 	* parser.y: dN (without the 1) now correctly rolls a dice
 
-2007-03-15  Matteo Corti  <matteo.corti@id.ethz.ch>
+2007-03-15  Matteo Corti  <matteo@corti.li>
 
 	* roll: implemented notation additions
 	  * multipliers
 	  * percentile dices
 	  * selective results
 
-2007-03-14  Matteo Corti  <matteo.corti@id.ethz.ch>
+2007-03-14  Matteo Corti  <matteo@corti.li>
 
 	* parser.y: allow Nd (assumes d6)b
 
-2007-03-12  Matteo Corti  <corti@id.ethz.ch>
+2007-03-12  Matteo Corti  <matteo@corti.li>
 
 	* parser.y, scanner.l: correct exit code
 	* parser.y: results are always positive
 
-2007-03-01  Matteo Corti  <matteo.corti@id.ethz.ch>
+2007-03-01  Matteo Corti  <matteo@corti.li>
 
 	* roll.spec: from Joe Klemmer (version is updated automatically by autoconf)
 
-2007-02-26  Matteo Corti  <matteo.corti@id.ethz.ch>
+2007-02-26  Matteo Corti  <matteo@corti.li>
 
 	* roll.h: if getpid is present the random generator is initialized with time & PID (it gives different results if called twice within a second)
 	* 1.0.2: new version

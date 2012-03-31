@@ -19,6 +19,7 @@
 #include <errno.h>
 #include <time.h>
 #include <math.h>
+#include <limits.h>
 #include "config.h"
 
 /** @def TRUE
@@ -110,7 +111,10 @@ struct ir_node {
 void usage();
 void error(char * message);
 
-extern int  roll(int dice);
+int checked_sum( int op1, int op2 );
+int checked_multiplication( int op1, int op2 );
+
+extern int roll( int dice );
 extern int roll_expression ( struct ir_node * node, int print );
 
 struct ir_node * allocate_node ( void  );

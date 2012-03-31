@@ -59,18 +59,20 @@ void error(char * message) {
 int roll_dice(int sides) {
 
   int result = 0;
+  int d10;
+  int d1;
   
   if ( sides == HUNDRED ) {
     
     /* d100 -> d10*10+d10 */
     
-    int d10 = roll(10);
+    d10 = roll(10);
     if (verbose_flag) {
       printf("d10 -> %i\n", d10);
     }
     d10 = d10 % 10;
     
-    int  d1 = roll(10);
+    d1 = roll(10);
     if (verbose_flag) {
       printf("d10 -> %i\n", d1);
     }
@@ -172,9 +174,14 @@ int main(int argc, char **argv) {
 
     /* getopt_long stores the option index here. */
     int option_index = 0;
-     
+
+#ifdef DEBUG
     c = getopt_long (argc, argv, "hvspd",
 		     long_options, &option_index);
+#else
+    c = getopt_long (argc, argv, "hvsp",
+		     long_options, &option_index);
+#endif
     
     /* Detect the end of the options. */
     if (c == -1)
@@ -206,7 +213,7 @@ int main(int argc, char **argv) {
 #ifdef DEBUG
     case 'd':
       debug_flag++;
-      break;
+      break;      
 #endif
       
     case 0:
@@ -343,6 +350,22 @@ struct ir_node * new_dice ( struct ir_node * sides) {
   
 }
 
+int checked_sum( int op1, int op2 ) {
+  if ( (op2 > 0 && op1 > INT_MAX - op2) ||
+       (op2 < 0 && op1 < INT_MIN - op2)) {
+    error("Overflow");
+  }
+  return op1+op2;
+}
+
+int checked_multiplication( int op1, int op2 ) {
+  int result = op1 * op2;
+  if (op1 != 0 && result / op1 != op2 ) {
+    error("Overflow");
+  }
+  return result;
+}
+
 /*!
  * \brief        Roll dices and compute expressions
  * \param[node]  The root of the expression tree to compute
@@ -351,15 +374,15 @@ struct ir_node * new_dice ( struct ir_node * sides) {
  */
 int roll_expression ( struct ir_node * node, int print ) {
 
-  int   high;
-  int   i;
-  int   limit;
-  int   low;
-  int   repetitions;
-  int   return_value = 0;
-  int   sides;
-  int   sum;
-  int   tmp;
+  int  high;
+  int  i;
+  int  limit;
+  int  low;
+  int  repetitions;
+  int  return_value = 0;
+  int  sides;
+  int  sum;
+  int  tmp;
   int * results;
 
   struct ir_node * cur;
@@ -378,7 +401,7 @@ int roll_expression ( struct ir_node * node, int print ) {
     case OP_REP:
 
       for (i = 0; i < roll_expression(cur->left, FALSE); i++) {
-        sum += roll_expression(cur->right, FALSE);
+        sum = checked_sum( sum, roll_expression(cur->right, FALSE) );
       }
       break;
       
@@ -387,24 +410,18 @@ int roll_expression ( struct ir_node * node, int print ) {
       break;
       
     case OP_PLUS:
-      sum =
-        roll_expression( cur->left,  FALSE )
-        +
-        roll_expression( cur->right, FALSE );
+      sum = checked_sum( roll_expression( cur->left,  FALSE ),
+                         roll_expression( cur->right, FALSE ) );
       break;
       
     case OP_MINUS:
-      sum =
-        roll_expression( cur->left,  FALSE )
-        -
-        roll_expression( cur->right, FALSE );
+      sum = checked_sum( roll_expression( cur->left,  FALSE ),
+                         -roll_expression( cur->right, FALSE ) );
       break;
       
     case OP_TIMES:
-      sum =
-        roll_expression( cur->left,  FALSE )
-        *
-        roll_expression( cur->right, FALSE );
+      sum = checked_multiplication( roll_expression( cur->left,  FALSE ),
+                                   roll_expression( cur->right, FALSE ) );
       break;
       
     case OP_DIV:
@@ -430,7 +447,7 @@ int roll_expression ( struct ir_node * node, int print ) {
       qsort(results, repetitions, sizeof(int), &compare);
 
       for(i=(repetitions-high); i<repetitions; i++) {
-        sum += results[i];
+        sum = checked_sum( sum, results[i] );
       }
       
       free(results);
@@ -457,7 +474,7 @@ int roll_expression ( struct ir_node * node, int print ) {
       }
       qsort(results, repetitions, sizeof(int), &compare);
       for(i=0; i<low; i++) {
-        sum += results[i];
+        sum = checked_sum( sum, results[i] );
       }
       
       free(results);
@@ -471,7 +488,7 @@ int roll_expression ( struct ir_node * node, int print ) {
       while (tmp <= limit) {
         tmp = roll_expression(cur->left, FALSE);
       }
-      sum += tmp;
+      sum = checked_sum( sum, tmp );
       
       break;
       
@@ -482,7 +499,7 @@ int roll_expression ( struct ir_node * node, int print ) {
       while (tmp < limit) {
         tmp = roll_expression(cur->left, FALSE);
       }
-      sum += tmp;
+      sum = checked_sum( sum, tmp );
       
       break;
       
@@ -493,7 +510,7 @@ int roll_expression ( struct ir_node * node, int print ) {
       while (tmp >= limit) {
         tmp = roll_expression(cur->left, FALSE);
       }
-      sum += tmp;
+      sum = checked_sum( sum, tmp );
       
       break;
       
@@ -504,7 +521,7 @@ int roll_expression ( struct ir_node * node, int print ) {
       while (tmp > limit) {
         tmp = roll_expression(cur->left, FALSE);
       }
-      sum += tmp;
+      sum = checked_sum( sum, tmp );
       
       break;
       
@@ -515,7 +532,7 @@ int roll_expression ( struct ir_node * node, int print ) {
       while (tmp == limit) {
         tmp = roll_expression(cur->left, FALSE);
       }
-      sum += tmp;
+      sum = checked_sum( sum, tmp );
       
       break;
       
@@ -526,7 +543,7 @@ int roll_expression ( struct ir_node * node, int print ) {
       
     }
 
-    return_value += sum;
+    return_value = checked_sum( return_value, sum);
     if (print == TRUE) {
       printf("%i\n", sum);
     }

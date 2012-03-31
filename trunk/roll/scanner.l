@@ -9,13 +9,28 @@
  * License.  See the file COPYING for more information.
  */
 
+#include <limits.h>
 #include "parser.h"
 
 %} 
 
 %%
 
-[0-9]+      { yylval.int_type = atoi(yytext); return NUMBER; }
+[0-9]+      {
+    errno = 0;
+    long number =  strtol( yytext, NULL, 10);
+    if ( errno != 0 && errno != ERANGE && number == 0 ) {
+        printf("Error: incorrect number %s\n", yytext);
+        exit(EXIT_FAILURE);
+    }
+    // we only accept integers
+    if ( number > INT_MAX ) {
+        printf("Error: %s is too large\n", yytext );
+        exit(EXIT_FAILURE);
+    }
+    yylval.int_type = (int)number;
+    return NUMBER;
+}
 \+          { return PLUS;    }
 \-          { return MINUS;   }
 ["*"x]      { return TIMES;   }
