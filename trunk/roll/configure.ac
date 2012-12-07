@@ -1,5 +1,5 @@
 AC_INIT(roll, 2.0.1, matteo@corti.li)
-AM_INIT_AUTOMAKE(roll, 2.0.1, matteo@corti.li)
+AM_INIT_AUTOMAKE([-Wall -Werror])
 AC_CONFIG_FILES(Makefile)
 AC_CONFIG_HEADERS(config.h)
 
