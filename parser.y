@@ -10,7 +10,7 @@
 #include <roll.h>
 #include <stdio.h>
 
-  int positive_flag;
+  int positive_flag = FALSE;
   
   int  yylex (void);
   void yyerror (char const *);

@@ -1,3 +1,7 @@
+2014-01-09  Matteo Corti  <matteo.corti@id.ethz.ch>
+
+	* roll.c: fixed an error with strncat (thanks to cppcheck)
+
 2012-03-31  Matteo Corti  <matteo.corti@id.ethz.ch>
 
 	* roll: check for integer overflows

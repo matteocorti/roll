@@ -17,7 +17,7 @@ int sum_flag     = FALSE; /**< command line argument: sum series     */
 static int verbose_flag = FALSE; /**< command line argument: verbose output */
 static int version_flag = FALSE; /**< command line argument: version        */
 
-extern int positive_flag = FALSE; /**< command line argument: allow only positive results */
+extern int positive_flag; /**< command line argument: allow only positive results */
 
 #ifdef DEBUG
 int debug_flag = 0; /**< command line argument: debug output */
@@ -59,20 +59,18 @@ void error(char * message) {
 int roll_dice(int sides) {
 
   int result = 0;
-  int d10;
-  int d1;
   
   if ( sides == HUNDRED ) {
     
     /* d100 -> d10*10+d10 */
     
-    d10 = roll(10);
+    int d10 = roll(10);
     if (verbose_flag) {
       printf("d10 -> %i\n", d10);
     }
     d10 = d10 % 10;
     
-    d1 = roll(10);
+    int d1 = roll(10);
     if (verbose_flag) {
       printf("d10 -> %i\n", d1);
     }
@@ -151,10 +149,8 @@ int roll(int dice) {
  */
 int main(int argc, char **argv) {
 
-  int    c;
   char   expression[EXPRESSION_SIZE];
   int    expression_size;
-  size_t argument_size;
 
   srandomdev();
      
@@ -175,6 +171,8 @@ int main(int argc, char **argv) {
     /* getopt_long stores the option index here. */
     int option_index = 0;
 
+    int c;
+    
 #ifdef DEBUG
     c = getopt_long (argc, argv, "hvspd",
 		     long_options, &option_index);
@@ -237,12 +235,11 @@ int main(int argc, char **argv) {
   expression[0] = '\0';
   expression_size = 0;
   while(argc>0) {
-    argument_size = strlen(*argv);
-    expression_size += argument_size;
+    expression_size += strlen(*argv);
     if (expression_size >= EXPRESSION_SIZE) {
       error("Expression too long!\n");
     }
-    strncat(expression, *argv, EXPRESSION_SIZE);
+    strncat(expression, *argv, EXPRESSION_SIZE-1);
     argc--;
     argv++;
   }
@@ -381,7 +378,6 @@ int roll_expression ( struct ir_node * node, int print ) {
   int  repetitions;
   int  return_value = 0;
   int  sides;
-  int  sum;
   int  tmp;
   int * results;
 
@@ -390,7 +386,7 @@ int roll_expression ( struct ir_node * node, int print ) {
   cur = node;
   while (cur != NULL) {
 
-    sum = 0;
+    int sum = 0;
 
     switch (cur->op) {
     
