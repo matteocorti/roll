@@ -1,4 +1,4 @@
-AC_INIT(roll, 2.0.1, matteo@corti.li)
+AC_INIT(roll, 2.0.2, matteo@corti.li)
 AM_INIT_AUTOMAKE([-Wall -Werror])
 AC_CONFIG_FILES(Makefile)
 AC_CONFIG_HEADERS(config.h)
@@ -23,7 +23,7 @@ dnl this macro is used to get the arguments supplied
 dnl to the configure script (./configure --enable-debug)
 AC_MSG_CHECKING(whether to enable debugging)
 debug_default="no"
-AC_ARG_ENABLE(debug, [  --enable-debug=[no/yes] turn on debugging [default=yes]],, enable_debug=$debug_default)
+AC_ARG_ENABLE(debug, [  --enable-debug=[no/yes] turn on debugging [default=no]],, enable_debug=$debug_default)
 case "${enable_debug}" in
   yes) CFLAGS="$CFLAGS -g -DDEBUG"; AC_MSG_RESULT(yes) ;;
   no)  AC_MSG_RESULT(no);;

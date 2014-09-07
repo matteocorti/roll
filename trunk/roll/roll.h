@@ -99,11 +99,11 @@
  * Node of the intermediate representation parse tree
  */
 struct ir_node {
-  struct ir_node * left;  /*!< Left branch        */
-  struct ir_node * right; /*!< Right branch       */
-  struct ir_node * next;  /*!< Next tree          */
-  unsigned short int op;  /*!< Node type          */
-  int value;              /*!< Optiona node value */
+  struct ir_node * left;  /*!< Left branch         */
+  struct ir_node * right; /*!< Right branch        */
+  struct ir_node * next;  /*!< Next tree           */
+  unsigned short int op;  /*!< Node type           */
+  int value;              /*!< Optional node value */
 };
 
 /* function prototypes */
