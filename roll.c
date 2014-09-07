@@ -1,4 +1,4 @@
-/* Copyright (c) 2005-2011  Matteo Corti
+/* Copyright (c) 2005-2014  Matteo Corti
  * This file is part of roll
  *
  * You may distribute this file under the terms the GNU General Public
@@ -151,7 +151,7 @@ int main(int argc, char **argv) {
 
   char   expression[EXPRESSION_SIZE];
   int    expression_size;
-
+  
   srandomdev();
      
   while (TRUE) {
@@ -245,11 +245,11 @@ int main(int argc, char **argv) {
   }
   
   if (expression_size > 0) {
-    yy_scan_string(expression);
     
+    yy_scan_string(expression);
+
     yyparse();
 
-    
   } else {
     error("No expression provided!\nPlease use the \"-h\" option.\n");
     exit(EXIT_FAILURE);
@@ -271,6 +271,13 @@ struct ir_node * allocate_node ( void  ) {
     exit(EXIT_FAILURE);
   }
 
+  /* initialize default values */
+  node->left  = NULL;
+  node->right = NULL;
+  node->next  = NULL;
+  node->op    = 0;
+  node->value = 0;
+  
   return node;
   
 }
@@ -285,8 +292,6 @@ struct ir_node * new_number ( int number ) {
   struct ir_node * node = allocate_node();
   node->op    = OP_NUMBER;
   node->value = number;
-  node->left  = NULL;
-  node->right = NULL;
 
   return node;
 
@@ -341,7 +346,6 @@ struct ir_node * new_dice ( struct ir_node * sides) {
   struct ir_node * node = allocate_node();
   node->op    = OP_DICE;
   node->value = 0;
-  node->left  = NULL;
   node->right = sides;
   return node;
   
@@ -382,7 +386,7 @@ int roll_expression ( struct ir_node * node, int print ) {
   int * results;
 
   struct ir_node * cur;
-  
+
   cur = node;
   while (cur != NULL) {
 
@@ -543,12 +547,11 @@ int roll_expression ( struct ir_node * node, int print ) {
     if (print == TRUE) {
       printf("%i\n", sum);
     }
-
+    
     cur = cur->next;
-
+    
   }
 
-  
   return return_value;
   
 }
