@@ -1,7 +1,7 @@
 .\" Process this file with
 .\" groff -man -Tascii foo.1
 .\"
-.TH "@PACKAGE_NAME@" 1 "August, 2008", "@PACKAGE_VERSION@" "USER COMMANDS"
+.TH "@PACKAGE_NAME@" 1 "September, 2014", "@PACKAGE_VERSION@" "USER COMMANDS"
 .SH NAME
 @PACKAGE_NAME@ \- rolls a user-defined dice sequence
 .SH SYNOPSIS
