@@ -1,3 +1,8 @@
+2014-09-19  Matteo Corti  <matteo@corti.li>
+
+	* configure.ac: automatic build date
+	* roll.1: header and footer fix
+
 2014-09-07  Matteo Corti  <matteo@corti.li>
 
 	* roll.c: fixed node initialization (defaul field values)

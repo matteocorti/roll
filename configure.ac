@@ -30,4 +30,6 @@ case "${enable_debug}" in
   *) AC_MSG_ERROR(bad value ${enable_debug} for --enable-debug) ;;
 esac
 
+AC_SUBST(PACKAGE_DATE, `date "+%Y-%m-%d"`)
+
 AC_OUTPUT(roll.1 VERSION roll.spec)
