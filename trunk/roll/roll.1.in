@@ -5,7 +5,7 @@
 .SH NAME
 @PACKAGE_NAME@ \- rolls a user-defined dice sequence
 .SH SYNOPSIS
-.BR "@PACKAGE_NAME@ " "[" "-vhp"  "] [" "--version" "] expression"
+.BR "@PACKAGE_NAME@ " "[" "-hpsv"  "] [" "--version" "] expression"
 .SH DESCRIPTION
 .B @PACKAGE_NAME@
 Rolls a user-defined dice sequence. The dices to roll are defined
@@ -19,6 +19,9 @@ help
 .TP
 .B \-\-positive, \-p
 allow only positive results
+.TP
+.B \-\-sum-series, \-s
+show the sum of roll series
 .TP
 .B \-\-verbose, \-v
 verbose (displays the result for each roll)
