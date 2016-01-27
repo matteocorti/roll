@@ -14,7 +14,6 @@
       <h1 class="project-name">Roll</h1>
       <h2 class="project-tagline">roll is a program to roll dices specified in a simple and intuitive way.</h2>
       <a href="https://github.com/matteocorti/roll" class="btn">View on GitHub</a>
-      <a href="https://github.com/matteocorti/roll" class="btn">View on GitHub</a>
       <a href="https://github.com/matteocorti/roll/releases/latest" class="btn">Latest release</a>
     </section>
 
@@ -31,7 +30,14 @@
 	(adsbygoogle = window.adsbygoogle || []).push({});
       </script>
 
-      <p>roll is a program to roll dices specified in a simple and intuitive way.</p>
+      <p>
+	This command-line based program rolls a user-defined dice
+	sequence and displays the result. The dices to roll are
+	defined using dN where N is the number of sides. Dices can be
+	rolled multiple times by prepending the number of repetitions
+	(e.g., 3d6) and used in simple mathematical expressions (e.g.,
+	2d8+4).
+      </p>
 
       <p>
 	If you find roll
@@ -45,7 +51,258 @@
       </p>     
 
       
+      <h1>
+	<a id="up2date" class="anchor" href="#up2date" aria-hidden="true">
+	  <span class="octicon octicon-link"></span>
+	</a>
+	Documentation
+      </h1>
 
+      <h2>Usage</h2>
+
+      <pre>roll [OPTION] expression</pre>
+
+      <h2>Options</h2>
+
+      <pre>
+ -p, --positive     allow only positive results
+ -h, --help         show this help screen
+ -s, --sum-series   show the sum of roll series
+ -v, --verbose      increase verbosity
+     --version      prints the program version and exits
+</pre>
+
+            <h2>Expressions</h2>
+
+            <p>
+              Expressions are in <a
+              href="http://en.wikipedia.org/wiki/Dice_notation">dice
+              notation</a> (also known as dice algebra, common dice
+              notation or RPG dice notation).
+            </p>
+
+            <p>
+              Die rolls are expressed in the form <code>NdX</code> or
+              <code>NDX</code> where <code>N</code> is the number of
+              dices (1 if omitted) and <code>X</code> the number of
+              dice faces.
+            </p>
+
+            <p>
+              If the final number is omitted, it is assumed to be a six.
+            </p>
+
+            <p>
+              To this basic notation, an additive modifier can be
+              appended, yielding expressions of the form,
+              <code>NdX+C</code>. The plus can be replaced by a minus
+              sign (<code>-</code>) for subtraction. <code>C</code> is
+              a number to be added or subtracted from the final total.
+            </p>
+
+            <h3>Percentile dice (<code>d%</code>)</h3>
+            
+            <p>
+              Often, the variable <code>X</code> in the above notation
+              will be <code>%</code>. Although a 100-sided die does
+              exist, it is both more common and more uniformly random
+              to use a combination of two ten-sided dice known as per-
+              centile dice, where one die represents tens and the
+              other units.  A roll of two zeroes means 100.
+            </p>
+
+            <p>
+              If you want to roll a single 100-sided die use the
+              <code>d100</code> notation.
+            </p>
+
+            <h3>Fudge dice (<code>dF</code> or <code>df</code>)</h3>
+
+            <p>
+              The
+              <a href="http://en.wikipedia.org/wiki/Fudge_(role-playing_game_system)">
+                Fudge role-playing game system
+              </a> uses customized <em>Fudge
+              dice</em> which have an equal number of plus, minus and
+              blank sides.
+            </p>
+
+            <h3>Multipliers</h3>
+
+            <p>
+              In some games, the above notation is expanded to allow
+              for a multiplier, as in <code>NdXxC</code> or
+              <code>CxNdX</code>, where <code>x</code> or
+              <code>*</code> denotes multiplication (can be replaced
+              by <code>/</code> for division) and <code>C</code> is a
+              natural number.
+            </p>
+
+            <p>
+              Results are rounded up.
+            </p>
+
+            <h3>Reroll filters</h3>
+
+            <p>
+              It is possible to specify restrictions on dice rolls
+              telling which values to keep and which values to discard
+              by putting a filter after the dice. If a value is to be
+              discarded the dice is re-rolled until the result is
+              valid value. You can specify to keep only values bigger
+              (<code>></code>), bigger or equal (<code>>=</code>),
+              smaller (<code><</code>), smaller or equal
+              (<code><=</code>) or different (<code>!=</code>) from a
+              given number.
+            </p>
+
+            <p>
+              The comparator is specified right after the the die
+              specification (e.g., <code>1D6>2</code>).
+            </p>
+
+            <h3>Selective results</h3>
+
+            <p>
+              It is possible to keep only the M highest or lowest
+              dices with the following notation:
+            </p>
+            <ul>
+              <li>
+                <code>NdXhM</code>: roll <code>N</code> dices with
+                <code>X</code> sides and keep the highest <code>M</code>
+                results (<code>M</code> must be less or equal
+                <code>N</code>)
+              </li>
+              <li>
+                <code>NdXlM</code>: roll <code>N</code> dices with
+                <code>X</code> sides and keep the lowest <code>M</code>
+                results (<code>M</code> must be less or equal
+                <code>N</code>)
+              </li>
+            </ul>
+
+            <h3>Series and repetitions</h3>
+            
+            <p>
+              It is possible to concatenate top-level expressions with
+              a comma (<code>expression, expression</code>) and to
+              repeat the execution of an expression or a set of
+              expressions by using a counter and curly brackets (<code>N{
+              expression}</code>)
+            </p>
+
+            <h2>Examples</h2>
+
+            <table>
+              <tbody>
+                <tr>
+                  <td>
+                    <code>3d6</code>
+                  </td>
+                  <td>
+                    rolls 3 6-sided dices and sums the results
+                    (can be abbreviated with <code>3d</code>)
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <code>1d8 + 3</code>
+                  </td>
+                  <td>
+                    rolls 1 8-sided die and adds 3
+                    (can be abbreviated by <code>d8+3</code>)
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <code>d%</code>
+                  </td>
+                  <td>
+                    rolls 2 10-sided dices: one represents the tens
+                    and the other units
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <code>1d6x5</code>
+                  </td>
+                  <td>
+                    rolls 1 6-sided dice and multiplies the result by
+                    5
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <code>1d6 / 2</code>
+                  </td>
+                  <td>
+                    rolls 1 6-sided dice and divides the result by 2
+                    (<code>1d3</code>)
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <code>4d6h3</code>
+                  </td>
+                  <td>
+                    rolls 4 6-sided dices and keeps the 3 highest results
+                    (discarding the lowest)
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <code>6{3d6}</code>
+                  </td>
+                  <td>
+                    rolls <code>3d6</code> 6 times
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <code>1d6>2</code>
+                  </td>
+                  <td>
+                    rolls <code>1d6</code> until the result is bigger than 2
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <code>4dF</code>
+                  </td>
+                  <td>
+                    rolls 4 Fudge dices
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+            <h2>Dice algebra grammar</h2>
+
+            Grammar in <a
+            href="http://en.wikipedia.org/wiki/EBNF">EBNF</a> form:
+            
+            <pre>
+expression   := term { "+" term | "-" term } .
+term         := number | factor [ ("*"|"/") number |
+                number ("*"|"/") factor | "(" expression ")" .
+factor       := number FilteredDice [ ("h"|"H"|"l"|"L") number ] | FilteredDice .
+FilteredDice := dice | dice (">"|">="|"<"|"<="|"!=") number .
+dice         := "d" | "D" [ number | "%" | "F" | "f" ] .            </pre>
+            
+	    <h2>See also</h2>
+
+	    <ul>
+              <li>
+                <a href="http://en.wikipedia.org/wiki/Dice_notation">
+                  Dice notation
+                </a> on Wikipedia.
+	    </ul>
+
+	  </td>
+	</tr>
+      </tbody>
+    </table>
       
       <footer class="site-footer">
         <span class="site-footer-owner"><a href="https://github.com/matteocorti/roll">Roll</a> is maintained by <a href="https://github.com/matteocorti">matteocorti</a>.</span>
