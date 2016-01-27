@@ -4,3 +4,11 @@ os:
   - linux
   - osx
   
+script:
+  - aclocal
+  - autoconf
+  - autoheader
+  - automake --add-missing --copy
+  - ./configure
+  - make
+  
