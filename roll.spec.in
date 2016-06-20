@@ -2,15 +2,16 @@
 %define release 0
 %define name    roll
 
-Summary:   roll is a program to roll dices specified in a simple and intuitive way.
+Summary:   A program to roll dices specified in a simple and intuitive way
 Name:      %{name}
 Version:   %{version}
 Release:   %{release}
-License:   GPL
+License:   GPLv2+
 Packager:  Joe Klemmer <klemmerj@webtrek.com>
 Group:     Amusements/Games
 BuildRoot: %{_tmppath}/%{name}-%{version}-root
-Source:    http://matteocorti.ch/software/roll/%{name}-%{version}.tar.gz
+Source:    https://github.com/matteocorti/%name}/releases/download/v%{version}/%{name}-%{version}.tar.gz
+URL:       http://matteocorti.github.io/roll/
 BuildRequires: bison, flex
 
 %description
@@ -36,12 +37,14 @@ repetitions (e.g., 3d6) and used in simple mathematical expressions
 %{__rm} -rf %{buildroot}
 
 %files
-%defattr(-, root, root, 0644)
 %{_mandir}/man1/roll.1.gz
-%doc AUTHORS ChangeLog NEWS README INSTALL TODO COPYING VERSION
+%doc AUTHORS ChangeLog NEWS README TODO COPYING VERSION
 %attr(0755, root, root) %{_prefix}/bin/roll
 
 %changelog
+* Sat Jun 18 2016 Matteo Corti <matteo@corti.li> - 2.1.0-0
+- Version 2.1.0
+
 * Sat Aug 27 2011 Matteo Corti <matteo.corti@id.ethz.ch> - 2.0.0-0
 - Version 2
 

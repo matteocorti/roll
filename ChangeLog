@@ -1,3 +1,7 @@
+2016-06-18  Matteo Corti  <matteo@corti.li>
+
+	* scanner.l: added 'W' and 'T' as dice for German and Swedish notation
+
 2014-09-19  Matteo Corti  <matteo@corti.li>
 
 	* configure.ac: automatic build date

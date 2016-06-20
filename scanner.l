@@ -35,7 +35,11 @@
 \-          { return MINUS;   }
 ["*"x]      { return TIMES;   }
 \/          { return DIV;     }
+
 d|D         { return DICE;    }
+w|W         { return DICE; /* German */ }
+t|T         { return DICE; /* Swedish */ }
+
 f|F         { return FUDGE;   }
 h|H         { return HIGH;    }
 l|L         { return LOW;     }

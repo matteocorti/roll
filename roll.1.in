@@ -35,6 +35,8 @@ dice notation or RPG dice notation).
 Die rolls are expressed in the form NdX or NDX where N is the number of dices
 (1 if omitted) and X the number of dice faces.
 
+roll also accepts W (German) or T (Swedish) to specify a dice (D in English)
+
 If the final number is omitted, it is assumed to be a six.
 
 To this basic notation, an additive modifier can be appended, yielding
