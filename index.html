@@ -288,7 +288,7 @@ term         := number | factor [ ("*"|"/") number |
                 number ("*"|"/") factor | "(" expression ")" .
 factor       := number FilteredDice [ ("h"|"H"|"l"|"L") number ] | FilteredDice .
 FilteredDice := dice | dice (">"|">="|"<"|"<="|"!=") number .
-dice         := "d" | "D" [ number | "%" | "F" | "f" ] .            </pre>
+dice         := "d" | "D" | "w" | "W" | "t" | "T" [ number | "%" | "F" | "f" ] .            </pre>
             
 	    <h2>See also</h2>
 
