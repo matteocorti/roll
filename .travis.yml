@@ -11,4 +11,4 @@ script:
   - automake --add-missing --copy
   - ./configure
   - make
-  
+  - make test
