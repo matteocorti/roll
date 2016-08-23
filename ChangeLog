@@ -1,3 +1,7 @@
+2016-08-23  Matteo Corti  <matteo@corti.li>
+
+	* roll.c: using srand() and rand() if srandomdev() is not available
+
 2016-06-18  Matteo Corti  <matteo@corti.li>
 
 	* scanner.l: added 'W' and 'T' as dice for German and Swedish notation
