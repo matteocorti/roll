@@ -135,7 +135,11 @@ int roll(int dice) {
    *  j=1+(int) (10.0*rand()/(RAND_MAX+1.0));
    */
 
+#ifdef HAVE_SRANDOMDEV
   int res = 1+(int)(((double)dice)*random()/(RAND_MAX+1.0));
+#else
+  int res = 1+(int)(((double)dice)*rand()/(RAND_MAX+1.0));
+#endif
 
   return res;
 
@@ -151,8 +155,12 @@ int main(int argc, char **argv) {
 
   char   expression[EXPRESSION_SIZE];
   int    expression_size;
-  
+
+#ifdef HAVE_SRANDOMDEV
   srandomdev();
+#else
+  srand(time(NULL));
+#endif
      
   while (TRUE) {
 
