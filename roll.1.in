@@ -88,6 +88,8 @@ It is possible to keep only the M highest or lowest dices with the following not
 .TP
 NdXhM: roll N dices with X sides and keep the highest M results (M must be less or equal N)
 .TP
+NdXkM: K for keep is equivalent to H for highest
+.TP
 NdXlM: roll N dices with X sides and keep the lowest M results (M must be less or equal N)
 .PD 0
 
@@ -145,7 +147,7 @@ expression   := term { "+" term | "-" term } .
 term         := number | factor [ ("*"|"/") number |
          number ("*"|"/") factor | "(" expression ")" .
 .TP
-factor       := number FilteredDice [ ("h"|"H"|"l"|"L") number ] | number FilteredDice "-" [ ("h"|"H"|"l"|"L") | FilteredDice .
+factor       := number FilteredDice [ ("h"|"H"|"l"|"L"|"k"|"K") number ] | number FilteredDice "-" [ ("h"|"H"|"l"|"L") | FilteredDice .
 .TP
 FilteredDice := dice | dice (">"|">="|"<"|"<="|"!=") number .
 .TP

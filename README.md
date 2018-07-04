@@ -73,6 +73,7 @@ It  is possible to specify restrictions on dice rolls telling which values to ke
 It is possible to keep only the `M` highest or lowest dices with the following notation:
 
  * `NdXhM`: roll `N` dices with `X` sides and keep the highest `M` results (`M` must be less or equal `N`)
+ * `NdXkM`: `K` for keep is equivalent to `H` for highest
  * `NdXlM`: roll `N` dices with `X` sides and keep the lowest `M` results (`M` must be less or equal `N`)
 
 Or using the abbreviated notation `NdX-L` to drop the lowest and `NdX-H` to drop the highest result.
@@ -112,7 +113,7 @@ d%         rolls 2 10-sided dices: one represents the tens and
 expression   := term { "+" term | "-" term } .
 term         := number | factor [ ("*"|"/") number |
                 number ("*"|"/") factor | "(" expression ")" .
-factor       := number FilteredDice [ ("h"|"H"|"l"|"L") number ] | number FilteredDice "-" [ ("h"|"H"|"l"|"L") | FilteredDice .
+factor       := number FilteredDice [ ("h"|"H"|"l"|"L"|"k"|"K") number ] | number FilteredDice "-" [ ("h"|"H"|"l"|"L") | FilteredDice .
 FilteredDice := dice | dice (">"|">="|"<"|"<="|"!=") number .
 dice         := "d" | "D" | "w" | "W" | "t" | "T" [ number | "%" | "F" | "f" ] .
 ```

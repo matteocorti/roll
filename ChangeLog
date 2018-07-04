@@ -1,5 +1,7 @@
 2018-07-04  Matteo Corti  <matteo@corti.li>
 
+	* scanner.l: adding the K (keep) syntax (equivalent to H)
+
 	* parser.y: added "drop the lowes (-L) and drop the highest (-H) notation"
 
 2016-08-23  Matteo Corti  <matteo@corti.li>

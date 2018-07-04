@@ -98,6 +98,7 @@ following notation:
 
 -   NdXhM: roll N dices with X sides and keep the highest M results (M
     must be less or equal N)
+-   NdXkM: K for keep is equivalent to H for highest
 -   NdXlM: roll N dices with X sides and keep the lowest M results (M
     must be less or equal N)
 
@@ -137,6 +138,6 @@ Grammar (EBNF)
     expression   := term { "+" term | "-" term } .
     term         := number | factor [ ("*"|"/") number |
                     number ("*"|"/") factor | "(" expression ")" .
-    factor       := number FilteredDice [ ("h"|"H"|"l"|"L") number ] | number FilteredDice "-" [ ("h"|"H"|"l"|"L") | FilteredDice .
+    factor       := number FilteredDice [ ("h"|"H"|"l"|"L"|"k"|"K") number ] | number FilteredDice "-" [ ("h"|"H"|"l"|"L") | FilteredDice .
     FilteredDice := dice | dice (">"|">="|"<"|"<="|"!=") number .
     dice         := "d" | "D" | "w" | "W" | "t" | "T" [ number | "%" | "F" | "f" ] .

@@ -41,8 +41,9 @@ w|W         { return DICE; /* German */ }
 t|T         { return DICE; /* Swedish */ }
 
 f|F         { return FUDGE;   }
-h|H         { return HIGH;    }
+h|H|k|K     { return HIGH;    }
 l|L         { return LOW;     }
+
 "("         { return LPAREN;  }
 ")"         { return RPAREN;  }
 "{"         { return LCURLY;  }
