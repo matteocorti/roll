@@ -42,6 +42,9 @@ repetitions (e.g., 3d6) and used in simple mathematical expressions
 %attr(0755, root, root) %{_prefix}/bin/roll
 
 %changelog
+* Wed Jul  4 2018 Matteo Corti <matteo@corti.li> - 2.2.0-0
+- Version 2.2.0
+
 * Tue Aug 23 2016 Matteo Corti <matteo@corti.li> - 2.1.1-0
 - Version 2.1.1
 

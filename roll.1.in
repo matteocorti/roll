@@ -89,7 +89,10 @@ It is possible to keep only the M highest or lowest dices with the following not
 NdXhM: roll N dices with X sides and keep the highest M results (M must be less or equal N)
 .TP
 NdXlM: roll N dices with X sides and keep the lowest M results (M must be less or equal N)
-.PD 1
+.PD 0
+
+.TP
+Or using the abbreviated notation NdX-L to drop the lowest and NdX-H to drop the highest result.
 
 .SH Series and repetitions
 
@@ -117,6 +120,8 @@ d%         rolls 2 10-sided dices: one represents the tens and
 .TP
 4d6h3      rolls 4 6-sided dices and keeps the 3 highest results
     (discarding the lowest)
+.TP
+4d6-L      rolls 4 6-sided dices and discards the lowest
 .TP
 "6{3d6}"   rolls 3d6 6 times (expression
     is quoted to avoid the > being interpreted as

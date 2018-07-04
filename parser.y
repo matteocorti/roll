@@ -1,6 +1,6 @@
 %{
 
-  /* Copyright (c) 2005, 2006, 2007  Matteo Corti
+  /* Copyright (c) 2005-2018  Matteo Corti <matteo@corti.li>
    * This file is part of roll
    *
    * You may distribute this file under the terms the GNU General Public
@@ -162,6 +162,24 @@ factor   :   NUMBER filtered_dice {
   }
 
   $$ = new_op(OP_LOW, new_number($4), new_op(OP_REP, new_number($1), $2));
+
+}
+| NUMBER filtered_dice MINUS LOW {
+
+  if ($1 <= 1) {
+    error("the number of dices must be greatet than 1");
+  }
+
+  $$ = new_op(OP_HIGH, new_number($1-1), new_op(OP_REP, new_number($1), $2));
+  
+}
+| NUMBER filtered_dice MINUS HIGH {
+
+  if ($1 <= 1) {
+    error("the number of dices must be greatet than 1");
+  }
+
+  $$ = new_op(OP_LOW, new_number($1-1), new_op(OP_REP, new_number($1), $2));
 
 }
 | filtered_dice {

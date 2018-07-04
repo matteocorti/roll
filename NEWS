@@ -1,3 +1,4 @@
+2018-07-04      2.2.0: Added -L and -H notation (drop the lowest or highes dice)
 2016-08-23	2.1.1: support for MinGW on Windows
 2016-06-18	2.1.0: added 'W' and 'T' as dice for German and Swedish notation
 2014-09-08      2.0.2: fixed an error in the initalization of parse tree
