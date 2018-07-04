@@ -182,6 +182,11 @@
               </li>
             </ul>
 
+      <p>
+	Or using the abbreviated notation <code>NdX-L</code> to drop the lowest and <code>NdX-H</code> to
+	drop the highest result.
+      </p>
+
             <h3>Series and repetitions</h3>
             
             <p>
@@ -250,6 +255,14 @@
                     (discarding the lowest)
                   </td>
                 </tr>
+		<tr>
+		  <td>
+		    <code>4d6-L</code>
+		  </td>
+		  <td>
+		    rolls 4 6-sided dices and discards the lowest
+		  </td>
+		</tr>
                 <tr>
                   <td>
                     <code>6{3d6}</code>
@@ -286,9 +299,10 @@
 expression   := term { "+" term | "-" term } .
 term         := number | factor [ ("*"|"/") number |
                 number ("*"|"/") factor | "(" expression ")" .
-factor       := number FilteredDice [ ("h"|"H"|"l"|"L") number ] | FilteredDice .
+factor       := number FilteredDice [ ("h"|"H"|"l"|"L") number ] | number FilteredDice "-" [ ("h"|"H"|"l"|"L") | FilteredDice .
 FilteredDice := dice | dice (">"|">="|"<"|"<="|"!=") number .
-dice         := "d" | "D" | "w" | "W" | "t" | "T" [ number | "%" | "F" | "f" ] .            </pre>
+dice         := "d" | "D" | "w" | "W" | "t" | "T" [ number | "%" | "F" | "f" ] .
+															       </pre>
             
 	    <h2>See also</h2>
 
