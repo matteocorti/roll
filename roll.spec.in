@@ -38,7 +38,7 @@ repetitions (e.g., 3d6) and used in simple mathematical expressions
 
 %files
 %{_mandir}/man1/roll.1.gz
-%doc AUTHORS ChangeLog NEWS README.md TODO COPYING VERSION
+%doc AUTHORS ChangeLog NEWS README TODO COPYING VERSION
 %attr(0755, root, root) %{_prefix}/bin/roll
 
 %changelog

@@ -14,7 +14,7 @@ Basic Installation
 
    Briefly, the shell command `./configure && make && make install'
 should configure, build, and install this package.  The following
-more-detailed instructions are generic; see the `README,md' file for
+more-detailed instructions are generic; see the `README' file for
 instructions specific to this package.  Some packages provide this
 `INSTALL' file but do not implement all of the features documented
 below.  The lack of an optional feature in a given package is not
