@@ -145,7 +145,7 @@ expression   := term { "+" term | "-" term } .
 term         := number | factor [ ("*"|"/") number |
          number ("*"|"/") factor | "(" expression ")" .
 .TP
-factor       := number FilteredDice [ ("h"|"H"|"l"|"L") number ] | FilteredDice .
+factor       := number FilteredDice [ ("h"|"H"|"l"|"L") number ] | number FilteredDice "-" [ ("h"|"H"|"l"|"L") | FilteredDice .
 .TP
 FilteredDice := dice | dice (">"|">="|"<"|"<="|"!=") number .
 .TP
