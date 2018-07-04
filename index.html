@@ -175,6 +175,9 @@
                 <code>N</code>)
               </li>
               <li>
+                <code>NdXkM</code>: <code>K</code> for keep is equivalent to <code>H</code> for highest
+              </li>
+              <li>
                 <code>NdXlM</code>: roll <code>N</code> dices with
                 <code>X</code> sides and keep the lowest <code>M</code>
                 results (<code>M</code> must be less or equal
@@ -299,7 +302,7 @@
 expression   := term { "+" term | "-" term } .
 term         := number | factor [ ("*"|"/") number |
                 number ("*"|"/") factor | "(" expression ")" .
-factor       := number FilteredDice [ ("h"|"H"|"l"|"L") number ] | number FilteredDice "-" [ ("h"|"H"|"l"|"L") | FilteredDice .
+factor       := number FilteredDice [ ("h"|"H"|"l"|"L"|"k"|"K") number ] | number FilteredDice "-" [ ("h"|"H"|"l"|"L") | FilteredDice .
 FilteredDice := dice | dice (">"|">="|"<"|"<="|"!=") number .
 dice         := "d" | "D" | "w" | "W" | "t" | "T" [ number | "%" | "F" | "f" ] .
 															       </pre>
