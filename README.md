@@ -116,3 +116,4 @@ factor       := number FilteredDice [ ("h"|"H"|"l"|"L") number ] | number Filter
 FilteredDice := dice | dice (">"|">="|"<"|"<="|"!=") number .
 dice         := "d" | "D" | "w" | "W" | "t" | "T" [ number | "%" | "F" | "f" ] .
 ```
+
