@@ -116,6 +116,12 @@
               <code>d100</code> notation.
             </p>
 
+	    <h3><code>d10x</code></h3>
+
+	    <p>
+	      <code>d10x</code> is equivalent to <code>d10 x d10</code> and gives a non-linear distribution.
+	    </p>
+	    
             <h3>Fudge dice (<code>dF</code> or <code>df</code>)</h3>
 
             <p>
@@ -304,7 +310,7 @@ term         := number | factor [ ("*"|"/") number |
                 number ("*"|"/") factor | "(" expression ")" .
 factor       := number FilteredDice [ ("h"|"H"|"l"|"L"|"k"|"K") number ] | number FilteredDice "-" [ ("h"|"H"|"l"|"L") | FilteredDice .
 FilteredDice := dice | dice (">"|">="|"<"|"<="|"!=") number .
-dice         := "d" | "D" | "w" | "W" | "t" | "T" [ number | "%" | "F" | "f" ] .
+dice         := "d" | "D" | "w" | "W" | "t" | "T" [ number | "%" | "F" | "f" | "x" | "X" ] .
 															       </pre>
             
 	    <h2>See also</h2>
