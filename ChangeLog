@@ -1,3 +1,7 @@
+2018-07-15  Matteo Corti  <matteo@corti.li>
+
+	* parser.y: adding d10x notation
+
 2018-07-04  Matteo Corti  <matteo@corti.li>
 
 	* scanner.l: adding the K (keep) syntax (equivalent to H)

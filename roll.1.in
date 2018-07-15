@@ -56,6 +56,10 @@ two zeroes means 100.
 
 If you want to roll a single 100-sided die use the "d100" notation.
 
+.SH d10x
+
+d10x is equivalent to d10 x d10 and gives a non-linear distribution.
+
 .SH Fudge dice (dF or df)
 
 The Fudge role-playing game system uses customized "Fudge dice" which
@@ -151,7 +155,7 @@ factor       := number FilteredDice [ ("h"|"H"|"l"|"L"|"k"|"K") number ] | numbe
 .TP
 FilteredDice := dice | dice (">"|">="|"<"|"<="|"!=") number .
 .TP
-dice         := "d" | "D" | "w" | "W" | "t" | "T" [ number | "%" | "F" | "f" ] .
+dice         := "d" | "D" | "w" | "W" | "t" | "T" [ number | "%" | "F" | "f" | "x" | "X" ] .
 .PD 1
 
 .SH "SEE ALSO"

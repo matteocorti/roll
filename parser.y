@@ -234,16 +234,19 @@ filtered_dice : dice {
 
 dice       : DICE NUMBER {
   $$ = new_dice(new_number($2));
-}
+ }
 | DICE {
   $$ = new_dice(new_number(6));
-}
+  }
 | DICE PERCENT {
   $$ = new_dice(new_number(HUNDRED));
-}
+ }
 | DICE FUDGE {
   $$ = new_dice(new_number(FUDGE_DICE));
-}
+ }
+| DICE NUMBER TIMES {
+  $$ = new_op( OP_TIMES, new_dice(new_number($2)), new_dice(new_number($2)) );
+ }
 ;
 
 %%

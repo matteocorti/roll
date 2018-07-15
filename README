@@ -68,6 +68,10 @@ zeroes means 100.
 
 If you want to roll a single 100-sided die use the "d100" notation.
 
+d10x
+
+d10x is equivalent to d10 x d10 and gives a non-linear distribution.
+
 Fudge dice (dF or df)
 
 The Fudge role-playing game system uses customized "Fudge dice" which
@@ -132,6 +136,7 @@ Examples
                is quoted to avoid the > being interpreted as
                redirection by the shell)
     4DF        rolls 4 Fudge dices
+    10dx       rolls 2 ten-sided dices and multiply the results
 
 Grammar (EBNF)
 
@@ -140,4 +145,4 @@ Grammar (EBNF)
                     number ("*"|"/") factor | "(" expression ")" .
     factor       := number FilteredDice [ ("h"|"H"|"l"|"L"|"k"|"K") number ] | number FilteredDice "-" [ ("h"|"H"|"l"|"L") | FilteredDice .
     FilteredDice := dice | dice (">"|">="|"<"|"<="|"!=") number .
-    dice         := "d" | "D" | "w" | "W" | "t" | "T" [ number | "%" | "F" | "f" ] .
+    dice         := "d" | "D" | "w" | "W" | "t" | "T" [ number | "%" | "F" | "f" | "x" | "X" ]

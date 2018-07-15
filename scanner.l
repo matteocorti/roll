@@ -33,7 +33,7 @@
 }
 \+          { return PLUS;    }
 \-          { return MINUS;   }
-["*"x]      { return TIMES;   }
+["*"xX]     { return TIMES;   }
 \/          { return DIV;     }
 
 d|D         { return DICE;    }

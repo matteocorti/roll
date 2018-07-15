@@ -53,6 +53,9 @@ Often, the variable `X` in the above notation will be "`%`". Although a 100-side
 
 If you want to roll a single 100-sided die use the "`d100`" notation.
 
+### d10x
+
+d10x is equivalent to d10 x d10 and gives a non-linear distribution.
 
 ### Fudge dice (`dF` or `df`)
 
@@ -103,6 +106,7 @@ d%         rolls 2 10-sided dices: one represents the tens and
            is quoted to avoid the > being interpreted as
            redirection by the shell)
 4DF        rolls 4 Fudge dices
+10dx       rolls 2 ten-sided dices and multiply the results
 ```
 
 
@@ -115,6 +119,6 @@ term         := number | factor [ ("*"|"/") number |
                 number ("*"|"/") factor | "(" expression ")" .
 factor       := number FilteredDice [ ("h"|"H"|"l"|"L"|"k"|"K") number ] | number FilteredDice "-" [ ("h"|"H"|"l"|"L") | FilteredDice .
 FilteredDice := dice | dice (">"|">="|"<"|"<="|"!=") number .
-dice         := "d" | "D" | "w" | "W" | "t" | "T" [ number | "%" | "F" | "f" ] .
+dice         := "d" | "D" | "w" | "W" | "t" | "T" [ number | "%" | "F" | "f" | "x" | "X" ]
 ```
 
