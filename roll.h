@@ -1,4 +1,4 @@
-/* Copyright (c) 2005, 2006, 2007  Matteo Corti
+/* Copyright (c) 2005-2019  Matteo Corti
  * This file is part of roll
  *
  * You may distribute this file under the terms the GNU General Public

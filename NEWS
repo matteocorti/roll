@@ -1,3 +1,4 @@
+2019-04-18      2.5.0: uses urandom if possible
 2018-07-15      2.4.0: Added the d10x notation
 2018-07-04	2.3.0: Added the K keyword (keep)
 2018-07-04      2.2.0: Added -L and -H notation (drop the lowest or highes dice)
