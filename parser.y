@@ -10,6 +10,8 @@
 #include <roll.h>
 #include <stdio.h>
 
+#define YYDEBUG 1
+  
   int positive_flag = FALSE;
   
   int  yylex (void);
@@ -17,6 +19,10 @@
 
   extern int sum_flag;
   extern int debug_flag;
+
+#ifdef DEBUG
+   yydebug=1;
+#endif
   
 %}
 
@@ -67,11 +73,17 @@ roll : top_level_expression_list {
 ;
 
 top_level_expression_list : top_level_expression {
+
+#ifdef DEBUG
+  printf("[DBG] top_level_expression_list : top_level_expression\n");
+#endif
+  
   if (! positive_flag || $1 > 0) {
     $$ = $1;
   } else {
     $$ = 0;
   }
+  
 }
 | top_level_expression COMMA top_level_expression_list {
   $$ = $1 + $3;
@@ -79,21 +91,26 @@ top_level_expression_list : top_level_expression {
 ;
 
 top_level_expression : expression {
+
 #ifdef DEBUG
   if (debug_flag > 0) {
     print_tree("tree", $1, 0);
   }
 #endif
+
   $$ = roll_expression($1, TRUE);
 }
 | LCURLY expression_list RCURLY {
+
 #ifdef DEBUG
   if (debug_flag > 0) {
     print_tree("tree", $2, 0);
   }
 #endif
+
   $$ = roll_expression($2, TRUE);
-}
+
+ }
 | NUMBER LCURLY expression_list RCURLY {
   
   int repetitions = $1;
@@ -131,22 +148,48 @@ expression_list : expression {
 ;
 
 expression : term {
+
+#ifdef DEBUG
+  printf("[DBG] [PARSE] expression : term\n");
+#endif
+
   $$ = $1;
-}
+
+ }
 | expression PLUS term {
+
+#ifdef DEBUG
+  printf("[DBG] [PARSE] expression : expression PLUS term\n");
+#endif
+
   $$ = new_op(OP_PLUS, $1, $3);
-}
+
+ }
 | expression MINUS term {
+
+#ifdef DEBUG
+  printf("[DBG] [PARSE] expression : expression MINUS term\n");
+#endif
+  
   $$ = new_op(OP_MINUS, $1, $3);
+  
 }
 ;
 
 factor   :   NUMBER filtered_dice {
 
+#ifdef DEBUG
+  printf("[DBG] [PARSE] factor: %i filtered_dice\n", $1);
+#endif
+  
   $$ = new_op(OP_REP, new_number($1), $2);
   
 }
 | NUMBER filtered_dice HIGH NUMBER {
+
+#ifdef DEBUG
+  printf("[DBG] [PARSE] factor: %i filtered_dice HIGH NUMBER\n", $1);
+#endif
 
   if ($4 > $1) {
     error("the number of kept dices must be lower than the actual dices");
@@ -157,6 +200,10 @@ factor   :   NUMBER filtered_dice {
 }
 | NUMBER filtered_dice LOW NUMBER {
 
+#ifdef DEBUG
+  printf("[DBG] [PARSE] factor: %i filtered_dice LOW NUMBER\n", $1);
+#endif
+
   if ($4 > $1) {
     error("the number of kept dices must be lower than the actual dices");
   }
@@ -165,6 +212,10 @@ factor   :   NUMBER filtered_dice {
 
 }
 | NUMBER filtered_dice MINUS LOW {
+
+#ifdef DEBUG
+  printf("[DBG] factor: %i filtered_dice MINUS LOW\n", $1);
+#endif
 
   if ($1 <= 1) {
     error("the number of dices must be greatet than 1");
@@ -175,6 +226,10 @@ factor   :   NUMBER filtered_dice {
 }
 | NUMBER filtered_dice MINUS HIGH {
 
+#ifdef DEBUG
+  printf("[DBG] [PARSE] factor: %i filtered_dice MINUS HIGH\n", $1);
+#endif
+
   if ($1 <= 1) {
     error("the number of dices must be greatet than 1");
   }
@@ -183,13 +238,25 @@ factor   :   NUMBER filtered_dice {
 
 }
 | filtered_dice {
+
+#ifdef DEBUG
+  printf("[DBG] factor: filtered_dice\n");
+#endif
+
   $$ = $1;
+  
 }
 ;
 
 
 term     :   NUMBER {
+
+#ifdef DEBUG
+  printf("[DBG] [PARSE] term %i\n", $1);
+#endif
+  
   $$ = new_number($1);
+  
 }
 | factor {
   $$ = $1;

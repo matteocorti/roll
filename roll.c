@@ -156,6 +156,11 @@ int main(int argc, char **argv) {
   char   expression[EXPRESSION_SIZE];
   int    expression_size;
 
+#ifdef DEBUG
+  printf("[DBG] Debug mode enabled\n");
+#endif
+
+  
 #ifdef HAVE_SRANDOMDEV
   srandomdev();
 #else
@@ -253,10 +258,22 @@ int main(int argc, char **argv) {
   }
   
   if (expression_size > 0) {
+
+#ifdef DEBUG
+    printf("[DBG] expression '%s'\n", expression);
+#endif
     
     yy_scan_string(expression);
 
+#ifdef DEBUG
+    printf("[DBG] expression scanned\n");
+#endif
+    
     yyparse();
+
+#ifdef DEBUG
+    printf("[DBG] expression parsed\n");
+#endif
 
   } else {
     error("No expression provided!\nPlease use the \"-h\" option.\n");

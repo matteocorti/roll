@@ -17,6 +17,7 @@
 %%
 
 [0-9]+      {
+
     errno = 0;
     long number =  strtol( yytext, NULL, 10);
     if ( errno != 0 && errno != ERANGE && number == 0 ) {
@@ -29,16 +30,31 @@
         exit(EXIT_FAILURE);
     }
     yylval.int_type = (int)number;
+
+#ifdef DEBUG
+    printf("[DBG] [SCAN] NUMBER = %i\n", yylval.int_type);
+#endif
+
     return NUMBER;
 }
 \+          { return PLUS;    }
-\-          { return MINUS;   }
+
+\-          {
+#ifdef DEBUG
+printf("[DBG] [SCAN] MINUS\n");
+#endif
+return MINUS;
+}
+
 ["*"xX]     { return TIMES;   }
 \/          { return DIV;     }
 
-d|D         { return DICE;    }
-w|W         { return DICE; /* German */ }
-t|T         { return DICE; /* Swedish */ }
+d|D|w|W|t|T {
+#ifdef DEBUG
+printf("[DBG] [SCAN] DICE\n");
+#endif
+return DICE;
+}
 
 f|F         { return FUDGE;   }
 h|H|k|K     { return HIGH;    }
