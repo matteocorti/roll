@@ -27,6 +27,9 @@
 /* Define to 1 if you have the `qsort' function. */
 #undef HAVE_QSORT
 
+/* Define to 1 if you have the `srandom' function. */
+#undef HAVE_SRANDOM
+
 /* Define to 1 if you have the `srandomdev' function. */
 #undef HAVE_SRANDOMDEV
 

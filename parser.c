@@ -70,7 +70,7 @@
 #line 1 "parser.y"
 
 
-  /* Copyright (c) 2005-2018  Matteo Corti <matteo@corti.li>
+  /* Copyright (c) 2005-2019  Matteo Corti <matteo@corti.li>
    * This file is part of roll
    *
    * You may distribute this file under the terms the GNU General Public
@@ -563,7 +563,7 @@ union yyalloc
 /* YYNNTS -- Number of nonterminals.  */
 #define YYNNTS  10
 /* YYNRULES -- Number of rules.  */
-#define YYNRULES  36
+#define YYNRULES  37
 /* YYNSTATES -- Number of states.  */
 #define YYNSTATES  62
 
@@ -617,9 +617,9 @@ static const yytype_int8 yytranslate[] =
 static const yytype_int16 yyrline[] =
 {
        0,    68,    68,    75,    88,    93,   103,   114,   141,   144,
-     150,   159,   168,   179,   188,   201,   214,   227,   240,   252,
-     261,   264,   267,   270,   273,   276,   281,   284,   288,   291,
-     294,   297,   302,   305,   308,   311,   314
+     150,   159,   168,   179,   188,   201,   214,   227,   240,   249,
+     255,   264,   267,   270,   273,   276,   279,   284,   287,   291,
+     294,   297,   300,   305,   308,   311,   314,   317
 };
 #endif
 
@@ -689,12 +689,12 @@ static const yytype_int8 yypact[] =
      means the default is an error.  */
 static const yytype_int8 yydefact[] =
 {
-       0,    33,     0,     0,    19,     0,     2,     3,     5,    20,
-      10,    18,    26,    35,    34,    32,    19,     0,     8,     0,
+       0,    34,     0,     0,    19,     0,     2,     3,     5,    21,
+      10,    18,    27,    36,    35,    33,    19,     0,     8,     0,
        0,     0,     0,    13,     1,     0,     0,     0,     0,     0,
-       0,     0,     0,     0,     0,    36,     6,     0,    25,     0,
-      24,     0,    23,     0,     0,     0,     4,    12,    11,    22,
-      21,    30,    29,    28,    27,    31,     9,     7,    14,    15,
+       0,     0,     0,     0,     0,    37,     6,     0,    26,    19,
+      25,     0,    24,     0,     0,     0,     4,    12,    11,    23,
+      22,    31,    30,    29,    28,    32,     9,     7,    14,    15,
       17,    16
 };
 
@@ -754,9 +754,9 @@ static const yytype_int8 yystos[] =
 static const yytype_int8 yyr1[] =
 {
        0,    23,    24,    25,    25,    26,    26,    26,    27,    27,
-      28,    28,    28,    29,    29,    29,    29,    29,    29,    30,
-      30,    30,    30,    30,    30,    30,    31,    31,    31,    31,
-      31,    31,    32,    32,    32,    32,    32
+      28,    28,    28,    29,    29,    29,    29,    29,    29,    29,
+      30,    30,    30,    30,    30,    30,    30,    31,    31,    31,
+      31,    31,    31,    32,    32,    32,    32,    32
 };
 
   /* YYR2[YYN] -- Number of symbols on the right hand side of rule YYN.  */
@@ -764,8 +764,8 @@ static const yytype_int8 yyr2[] =
 {
        0,     2,     1,     1,     3,     1,     3,     4,     1,     3,
        1,     3,     3,     2,     4,     4,     4,     4,     1,     1,
-       1,     3,     3,     3,     3,     3,     1,     3,     3,     3,
-       3,     3,     2,     1,     2,     2,     3
+       1,     1,     3,     3,     3,     3,     3,     1,     3,     3,
+       3,     3,     3,     2,     1,     2,     2,     3
 };
 
 
@@ -1488,8 +1488,16 @@ yyreduce:
 #line 1489 "parser.c"
     break;
 
-  case 19: /* term: NUMBER  */
-#line 252 "parser.y"
+  case 19: /* factor: NUMBER  */
+#line 249 "parser.y"
+         {
+ (yyval.node) = new_number((yyvsp[0].int_type));
+}
+#line 1497 "parser.c"
+    break;
+
+  case 20: /* term: NUMBER  */
+#line 255 "parser.y"
                     {
 
 #ifdef DEBUG
@@ -1499,148 +1507,148 @@ yyreduce:
   (yyval.node) = new_number((yyvsp[0].int_type));
   
 }
-#line 1503 "parser.c"
-    break;
-
-  case 20: /* term: factor  */
-#line 261 "parser.y"
-         {
-  (yyval.node) = (yyvsp[0].node);
-}
 #line 1511 "parser.c"
     break;
 
-  case 21: /* term: factor TIMES NUMBER  */
+  case 21: /* term: factor  */
 #line 264 "parser.y"
-                      {
-  (yyval.node) = new_op(OP_TIMES, (yyvsp[-2].node), new_number((yyvsp[0].int_type)));
+         {
+  (yyval.node) = (yyvsp[0].node);
 }
 #line 1519 "parser.c"
     break;
 
-  case 22: /* term: factor DIV NUMBER  */
+  case 22: /* term: factor TIMES NUMBER  */
 #line 267 "parser.y"
-                    {
-  (yyval.node) = new_op(OP_DIV, (yyvsp[-2].node), new_number((yyvsp[0].int_type)));
+                      {
+  (yyval.node) = new_op(OP_TIMES, (yyvsp[-2].node), new_number((yyvsp[0].int_type)));
 }
 #line 1527 "parser.c"
     break;
 
-  case 23: /* term: NUMBER TIMES factor  */
+  case 23: /* term: factor DIV NUMBER  */
 #line 270 "parser.y"
-                      {
-  (yyval.node) = new_op(OP_TIMES, new_number((yyvsp[-2].int_type)), (yyvsp[0].node));
+                    {
+  (yyval.node) = new_op(OP_DIV, (yyvsp[-2].node), new_number((yyvsp[0].int_type)));
 }
 #line 1535 "parser.c"
     break;
 
-  case 24: /* term: NUMBER DIV factor  */
+  case 24: /* term: NUMBER TIMES factor  */
 #line 273 "parser.y"
-                    {
-  (yyval.node) = new_op(OP_DIV, new_number((yyvsp[-2].int_type)), (yyvsp[0].node));
+                      {
+  (yyval.node) = new_op(OP_TIMES, new_number((yyvsp[-2].int_type)), (yyvsp[0].node));
 }
 #line 1543 "parser.c"
     break;
 
-  case 25: /* term: LPAREN expression RPAREN  */
+  case 25: /* term: NUMBER DIV factor  */
 #line 276 "parser.y"
-                           {
-  (yyval.node) = (yyvsp[-1].node);
+                    {
+  (yyval.node) = new_op(OP_DIV, new_number((yyvsp[-2].int_type)), (yyvsp[0].node));
 }
 #line 1551 "parser.c"
     break;
 
-  case 26: /* filtered_dice: dice  */
-#line 281 "parser.y"
-                     {
-  (yyval.node) = (yyvsp[0].node);
+  case 26: /* term: LPAREN expression RPAREN  */
+#line 279 "parser.y"
+                           {
+  (yyval.node) = (yyvsp[-1].node);
 }
 #line 1559 "parser.c"
     break;
 
-  case 27: /* filtered_dice: dice GT NUMBER  */
+  case 27: /* filtered_dice: dice  */
 #line 284 "parser.y"
+                     {
+  (yyval.node) = (yyvsp[0].node);
+}
+#line 1567 "parser.c"
+    break;
+
+  case 28: /* filtered_dice: dice GT NUMBER  */
+#line 287 "parser.y"
                  {
   (yyval.node) = new_op(OP_GT, (yyvsp[-2].node), new_number((yyvsp[0].int_type)));
   
 }
-#line 1568 "parser.c"
-    break;
-
-  case 28: /* filtered_dice: dice GE NUMBER  */
-#line 288 "parser.y"
-                 {
-  (yyval.node) = new_op(OP_GE, (yyvsp[-2].node), new_number((yyvsp[0].int_type)));
-}
 #line 1576 "parser.c"
     break;
 
-  case 29: /* filtered_dice: dice LT NUMBER  */
+  case 29: /* filtered_dice: dice GE NUMBER  */
 #line 291 "parser.y"
                  {
-  (yyval.node) = new_op(OP_LT, (yyvsp[-2].node), new_number((yyvsp[0].int_type)));
+  (yyval.node) = new_op(OP_GE, (yyvsp[-2].node), new_number((yyvsp[0].int_type)));
 }
 #line 1584 "parser.c"
     break;
 
-  case 30: /* filtered_dice: dice LE NUMBER  */
+  case 30: /* filtered_dice: dice LT NUMBER  */
 #line 294 "parser.y"
                  {
-  (yyval.node) = new_op(OP_LE, (yyvsp[-2].node), new_number((yyvsp[0].int_type)));
+  (yyval.node) = new_op(OP_LT, (yyvsp[-2].node), new_number((yyvsp[0].int_type)));
 }
 #line 1592 "parser.c"
     break;
 
-  case 31: /* filtered_dice: dice NE NUMBER  */
+  case 31: /* filtered_dice: dice LE NUMBER  */
 #line 297 "parser.y"
                  {
-  (yyval.node) = new_op(OP_NE, (yyvsp[-2].node), new_number((yyvsp[0].int_type)));
+  (yyval.node) = new_op(OP_LE, (yyvsp[-2].node), new_number((yyvsp[0].int_type)));
 }
 #line 1600 "parser.c"
     break;
 
-  case 32: /* dice: DICE NUMBER  */
-#line 302 "parser.y"
-                         {
-  (yyval.node) = new_dice(new_number((yyvsp[0].int_type)));
- }
+  case 32: /* filtered_dice: dice NE NUMBER  */
+#line 300 "parser.y"
+                 {
+  (yyval.node) = new_op(OP_NE, (yyvsp[-2].node), new_number((yyvsp[0].int_type)));
+}
 #line 1608 "parser.c"
     break;
 
-  case 33: /* dice: DICE  */
+  case 33: /* dice: DICE NUMBER  */
 #line 305 "parser.y"
-       {
-  (yyval.node) = new_dice(new_number(6));
-  }
+                         {
+  (yyval.node) = new_dice(new_number((yyvsp[0].int_type)));
+ }
 #line 1616 "parser.c"
     break;
 
-  case 34: /* dice: DICE PERCENT  */
+  case 34: /* dice: DICE  */
 #line 308 "parser.y"
-               {
-  (yyval.node) = new_dice(new_number(HUNDRED));
- }
+       {
+  (yyval.node) = new_dice(new_number(6));
+  }
 #line 1624 "parser.c"
     break;
 
-  case 35: /* dice: DICE FUDGE  */
+  case 35: /* dice: DICE PERCENT  */
 #line 311 "parser.y"
-             {
-  (yyval.node) = new_dice(new_number(FUDGE_DICE));
+               {
+  (yyval.node) = new_dice(new_number(HUNDRED));
  }
 #line 1632 "parser.c"
     break;
 
-  case 36: /* dice: DICE NUMBER TIMES  */
+  case 36: /* dice: DICE FUDGE  */
 #line 314 "parser.y"
-                    {
-  (yyval.node) = new_op( OP_TIMES, new_dice(new_number((yyvsp[-1].int_type))), new_dice(new_number((yyvsp[-1].int_type))) );
+             {
+  (yyval.node) = new_dice(new_number(FUDGE_DICE));
  }
 #line 1640 "parser.c"
     break;
 
+  case 37: /* dice: DICE NUMBER TIMES  */
+#line 317 "parser.y"
+                    {
+  (yyval.node) = new_op( OP_TIMES, new_dice(new_number((yyvsp[-1].int_type))), new_dice(new_number((yyvsp[-1].int_type))) );
+ }
+#line 1648 "parser.c"
+    break;
 
-#line 1644 "parser.c"
+
+#line 1652 "parser.c"
 
       default: break;
     }
@@ -1834,7 +1842,7 @@ yyreturn:
   return yyresult;
 }
 
-#line 319 "parser.y"
+#line 322 "parser.y"
 
 
 void yyerror (char const * message) {
