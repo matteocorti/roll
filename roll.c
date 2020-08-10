@@ -1,4 +1,4 @@
-/* Copyright (c) 2005-2016  Matteo Corti
+/* Copyright (c) 2005-2019  Matteo Corti
  * This file is part of roll
  *
  * You may distribute this file under the terms the GNU General Public
@@ -135,7 +135,7 @@ int roll(int dice) {
    *  j=1+(int) (10.0*rand()/(RAND_MAX+1.0));
    */
 
-#ifdef HAVE_SRANDOMDEV
+#if defined HAVE_SRANDOMDEV || defined HAVE_SRANDOM
   int res = 1+(int)(((double)dice)*random()/(RAND_MAX+1.0));
 #else
   int res = 1+(int)(((double)dice)*rand()/(RAND_MAX+1.0));
@@ -144,6 +144,23 @@ int roll(int dice) {
   return res;
 
 }
+
+#if defined HAVE_SRANDOM
+/*!
+ * \brief       Try to initialize random from /dev/urandom, otherwise fallback on srandom(time(0))
+ */
+static void urandom_init() {
+  FILE* urandom = fopen("/dev/urandom", "rb");
+  if (urandom) {
+    unsigned int seed = 0;
+    fread(&seed, sizeof(seed), 1, urandom);
+    fclose(urandom);
+    srandom(seed ^ time(NULL));
+  }
+  else
+    srandom(time(NULL));
+}
+#endif
 
 /*!
  * \brief       Main program
@@ -163,6 +180,8 @@ int main(int argc, char **argv) {
   
 #ifdef HAVE_SRANDOMDEV
   srandomdev();
+#elif defined HAVE_SRANDOM
+  urandom_init();
 #else
   srand(time(NULL));
 #endif

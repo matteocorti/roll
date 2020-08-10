@@ -1,0 +1,73 @@
+.TH "ir_node" 3 "Mon Jun 20 2016" "roll" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+ir_node \- node of the intermediate representation parse tree  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <roll\&.h>\fP
+.SS "Data Fields"
+
+.in +1c
+.ti -1c
+.RI "struct \fBir_node\fP * \fBleft\fP"
+.br
+.ti -1c
+.RI "struct \fBir_node\fP * \fBnext\fP"
+.br
+.ti -1c
+.RI "unsigned short int \fBop\fP"
+.br
+.ti -1c
+.RI "struct \fBir_node\fP * \fBright\fP"
+.br
+.ti -1c
+.RI "int \fBvalue\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+node of the intermediate representation parse tree 
+
+Node of the intermediate representation parse tree 
+.PP
+Definition at line 101 of file roll\&.h\&.
+.SH "Field Documentation"
+.PP 
+.SS "struct \fBir_node\fP* ir_node::left"
+Left branch 
+.PP
+Definition at line 102 of file roll\&.h\&.
+.PP
+Referenced by allocate_node(), new_op(), and roll_expression()\&.
+.SS "struct \fBir_node\fP* ir_node::next"
+Next tree 
+.PP
+Definition at line 104 of file roll\&.h\&.
+.PP
+Referenced by allocate_node(), and roll_expression()\&.
+.SS "unsigned short int ir_node::op"
+Node type 
+.PP
+Definition at line 105 of file roll\&.h\&.
+.PP
+Referenced by allocate_node(), new_dice(), new_number(), new_op(), and roll_expression()\&.
+.SS "struct \fBir_node\fP* ir_node::right"
+Right branch 
+.PP
+Definition at line 103 of file roll\&.h\&.
+.PP
+Referenced by allocate_node(), new_dice(), new_op(), and roll_expression()\&.
+.SS "int ir_node::value"
+Optional node value 
+.PP
+Definition at line 106 of file roll\&.h\&.
+.PP
+Referenced by allocate_node(), new_dice(), new_number(), new_op(), and roll_expression()\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for roll from the source code\&.

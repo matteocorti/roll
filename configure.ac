@@ -1,4 +1,4 @@
-AC_INIT(roll, 2.4.0, matteo@corti.li)
+AC_INIT(roll, 2.5.0, matteo@corti.li)
 AM_INIT_AUTOMAKE([-Wall -Werror])
 AC_CONFIG_FILES(Makefile)
 AC_CONFIG_HEADERS(config.h)
@@ -14,6 +14,7 @@ AC_HAVE_HEADERS(stdio.h getopt.h errno.h string.h strings.h sys/types.h unistd.h
 
 AC_CHECK_FUNCS(atol)
 AC_CHECK_FUNCS(srandomdev)
+AC_CHECK_FUNCS(srandom)
 AC_CHECK_FUNCS(getpid)
 AC_CHECK_FUNCS(qsort)
 

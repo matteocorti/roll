@@ -1,0 +1,106 @@
+\hypertarget{structir__node}{}\section{ir\+\_\+node Struct Reference}
+\label{structir__node}\index{ir\+\_\+node@{ir\+\_\+node}}
+
+
+node of the intermediate representation parse tree  
+
+
+
+
+{\ttfamily \#include $<$roll.\+h$>$}
+
+
+
+Collaboration diagram for ir\+\_\+node\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=170pt]{structir__node__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Data Fields}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structir__node}{ir\+\_\+node} $\ast$ \hyperlink{structir__node_ab6ecf53bf92c825b620435fc93a6b6ee}{left}
+\item 
+struct \hyperlink{structir__node}{ir\+\_\+node} $\ast$ \hyperlink{structir__node_ab1d37e8ddfafb50b2633b66af37fb064}{next}
+\item 
+unsigned short int \hyperlink{structir__node_a4d977601c157f732bd7655d7a47e8545}{op}
+\item 
+struct \hyperlink{structir__node}{ir\+\_\+node} $\ast$ \hyperlink{structir__node_ab72283b06a90004232c315bc52b0e9b5}{right}
+\item 
+int \hyperlink{structir__node_a4cd43e9ea9717dc8bda34aa8ca5f8d35}{value}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+node of the intermediate representation parse tree 
+
+Node of the intermediate representation parse tree 
+
+Definition at line 101 of file roll.\+h.
+
+
+
+\subsection{Field Documentation}
+\hypertarget{structir__node_ab6ecf53bf92c825b620435fc93a6b6ee}{}\index{ir\+\_\+node@{ir\+\_\+node}!left@{left}}
+\index{left@{left}!ir\+\_\+node@{ir\+\_\+node}}
+\subsubsection[{left}]{\setlength{\rightskip}{0pt plus 5cm}struct {\bf ir\+\_\+node}$\ast$ ir\+\_\+node\+::left}\label{structir__node_ab6ecf53bf92c825b620435fc93a6b6ee}
+Left branch 
+
+Definition at line 102 of file roll.\+h.
+
+
+
+Referenced by allocate\+\_\+node(), new\+\_\+op(), and roll\+\_\+expression().
+
+\hypertarget{structir__node_ab1d37e8ddfafb50b2633b66af37fb064}{}\index{ir\+\_\+node@{ir\+\_\+node}!next@{next}}
+\index{next@{next}!ir\+\_\+node@{ir\+\_\+node}}
+\subsubsection[{next}]{\setlength{\rightskip}{0pt plus 5cm}struct {\bf ir\+\_\+node}$\ast$ ir\+\_\+node\+::next}\label{structir__node_ab1d37e8ddfafb50b2633b66af37fb064}
+Next tree 
+
+Definition at line 104 of file roll.\+h.
+
+
+
+Referenced by allocate\+\_\+node(), and roll\+\_\+expression().
+
+\hypertarget{structir__node_a4d977601c157f732bd7655d7a47e8545}{}\index{ir\+\_\+node@{ir\+\_\+node}!op@{op}}
+\index{op@{op}!ir\+\_\+node@{ir\+\_\+node}}
+\subsubsection[{op}]{\setlength{\rightskip}{0pt plus 5cm}unsigned short int ir\+\_\+node\+::op}\label{structir__node_a4d977601c157f732bd7655d7a47e8545}
+Node type 
+
+Definition at line 105 of file roll.\+h.
+
+
+
+Referenced by allocate\+\_\+node(), new\+\_\+dice(), new\+\_\+number(), new\+\_\+op(), and roll\+\_\+expression().
+
+\hypertarget{structir__node_ab72283b06a90004232c315bc52b0e9b5}{}\index{ir\+\_\+node@{ir\+\_\+node}!right@{right}}
+\index{right@{right}!ir\+\_\+node@{ir\+\_\+node}}
+\subsubsection[{right}]{\setlength{\rightskip}{0pt plus 5cm}struct {\bf ir\+\_\+node}$\ast$ ir\+\_\+node\+::right}\label{structir__node_ab72283b06a90004232c315bc52b0e9b5}
+Right branch 
+
+Definition at line 103 of file roll.\+h.
+
+
+
+Referenced by allocate\+\_\+node(), new\+\_\+dice(), new\+\_\+op(), and roll\+\_\+expression().
+
+\hypertarget{structir__node_a4cd43e9ea9717dc8bda34aa8ca5f8d35}{}\index{ir\+\_\+node@{ir\+\_\+node}!value@{value}}
+\index{value@{value}!ir\+\_\+node@{ir\+\_\+node}}
+\subsubsection[{value}]{\setlength{\rightskip}{0pt plus 5cm}int ir\+\_\+node\+::value}\label{structir__node_a4cd43e9ea9717dc8bda34aa8ca5f8d35}
+Optional node value 
+
+Definition at line 106 of file roll.\+h.
+
+
+
+Referenced by allocate\+\_\+node(), new\+\_\+dice(), new\+\_\+number(), new\+\_\+op(), and roll\+\_\+expression().
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{roll_8h}{roll.\+h}\end{DoxyCompactItemize}

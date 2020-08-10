@@ -7,3 +7,4 @@ Special thanks to:
   * his prompt and valuable bug reports
 * Erik Greenwald for the patch which fixes an error in parser.y
   preventing a correct compilation on FreeBSD
+* Bastien Durel for the randomizer initialization with urandom

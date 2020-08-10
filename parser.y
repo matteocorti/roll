@@ -1,6 +1,6 @@
 %{
 
-  /* Copyright (c) 2005-2018  Matteo Corti <matteo@corti.li>
+  /* Copyright (c) 2005-2019  Matteo Corti <matteo@corti.li>
    * This file is part of roll
    *
    * You may distribute this file under the terms the GNU General Public
@@ -245,6 +245,9 @@ factor   :   NUMBER filtered_dice {
 
   $$ = $1;
   
+}
+| NUMBER {
+ $$ = new_number($1);
 }
 ;
 

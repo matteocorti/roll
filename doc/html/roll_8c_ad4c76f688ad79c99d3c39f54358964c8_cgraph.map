@@ -1,0 +1,6 @@
+<map id="roll_expression" name="roll_expression">
+<area shape="rect" id="node2" href="$roll_8c.html#aa9f19e181fbf7ceeb8e9cad996d29ef9" title="Comparison function for qsort. " alt="" coords="165,5,239,32"/>
+<area shape="rect" id="node3" href="$roll_8c.html#a8e1bf3d5ea0a885f81e71d2023a55777" title="Prints the specified error message and exits with a failure status. " alt="" coords="177,56,227,83"/>
+<area shape="rect" id="node4" href="$roll_8c.html#a2526cf02acc7939c8a3c21264dddac50" title="Wrapper for roll(int dice) translates special dices (e.g., d%) " alt="" coords="166,107,238,133"/>
+<area shape="rect" id="node5" href="$roll_8c.html#a25887d1873a9df6c717c4daae7d4efc2" title="Rolls an n&#45;sided dice. " alt="" coords="287,107,327,133"/>
+</map>
