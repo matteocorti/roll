@@ -32,7 +32,7 @@
 #define HAVE_SRANDOM 1
 
 /* Define to 1 if you have the `srandomdev' function. */
-#define HAVE_SRANDOMDEV 1
+/* #undef HAVE_SRANDOMDEV */
 
 /* Define to 1 if you have the <stdint.h> header file. */
 #define HAVE_STDINT_H 1
@@ -87,4 +87,4 @@
 
 /* Define to 1 if `lex' declares `yytext' as a `char *' by default, not a
    `char[]'. */
-#define YYTEXT_POINTER 1
+/* #undef YYTEXT_POINTER */
