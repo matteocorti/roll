@@ -7,7 +7,7 @@
 Summary:   A program to roll dices specified in a simple and intuitive way
 Name:      %{name}
 Version:   %{version}
-Release:   %{release}
+Release:   %{release}%{?dist}
 License:   GPLv2+
 Packager:  Joe Klemmer <klemmerj@webtrek.com>
 Group:     Amusements/Games
