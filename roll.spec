@@ -1,13 +1,13 @@
-%define version 2.5.0
-%define release 0
-%define name    roll
-%define sourcename roll
+%define version     2.5.0
+%define release     0
+%define name        roll
+%define sourcename  roll
 %define packagename roll
 
 Summary:   A program to roll dices specified in a simple and intuitive way
 Name:      %{name}
 Version:   %{version}
-Release:   %{release}%{?dist}
+Release:   %{release}
 License:   GPLv2+
 Packager:  Joe Klemmer <klemmerj@webtrek.com>
 Group:     Amusements/Games
