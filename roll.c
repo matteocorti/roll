@@ -12,12 +12,20 @@
  */
 
 #include "roll.h"
+#include "parser.h"
 
 int sum_flag     = FALSE; /**< command line argument: sum series     */
 static int verbose_flag = FALSE; /**< command line argument: verbose output */
 static int version_flag = FALSE; /**< command line argument: version        */
 
 extern int positive_flag; /**< command line argument: allow only positive results */
+
+/** Not defined in the automatically generated header files */
+#ifndef YY_TYPEDEF_YY_BUFFER_STATE
+#define YY_TYPEDEF_YY_BUFFER_STATE
+typedef struct yy_buffer_state *YY_BUFFER_STATE;
+#endif
+YY_BUFFER_STATE yy_scan_string ( const char *yy_str  );
 
 #ifdef DEBUG
 int debug_flag = 0; /**< command line argument: debug output */
