@@ -1,4 +1,4 @@
 digraph grammar {
       roll -> top_level_expression_list;
-      top_level_expression_list -> expression;
+      top_level_expression_list -> top_level_expression expression;
 }

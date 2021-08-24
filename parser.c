@@ -1,8 +1,8 @@
-/* A Bison parser, made by GNU Bison 3.7.1.  */
+/* A Bison parser, made by GNU Bison 3.7.6.  */
 
 /* Bison implementation for Yacc-like parsers in C
 
-   Copyright (C) 1984, 1989-1990, 2000-2015, 2018-2020 Free Software Foundation,
+   Copyright (C) 1984, 1989-1990, 2000-2015, 2018-2021 Free Software Foundation,
    Inc.
 
    This program is free software: you can redistribute it and/or modify
@@ -16,7 +16,7 @@
    GNU General Public License for more details.
 
    You should have received a copy of the GNU General Public License
-   along with this program.  If not, see <http://www.gnu.org/licenses/>.  */
+   along with this program.  If not, see <https://www.gnu.org/licenses/>.  */
 
 /* As a special exception, you may create a larger work that contains
    part or all of the Bison parser skeleton and distribute that work
@@ -45,11 +45,11 @@
    define necessary library symbols; they are noted "INFRINGES ON
    USER NAME SPACE" below.  */
 
-/* Identify Bison output.  */
-#define YYBISON 1
+/* Identify Bison output, and Bison version.  */
+#define YYBISON 30706
 
-/* Bison version.  */
-#define YYBISON_VERSION "3.7.1"
+/* Bison version string.  */
+#define YYBISON_VERSION "3.7.6"
 
 /* Skeleton name.  */
 #define YYSKELETON_NAME "yacc.c"
@@ -141,51 +141,54 @@ extern int yydebug;
     YYUNDEF = 257,                 /* "invalid token"  */
     COMMA = 258,                   /* COMMA  */
     DICE = 259,                    /* DICE  */
-    DIV = 260,                     /* DIV  */
-    FUDGE = 261,                   /* FUDGE  */
-    HIGH = 262,                    /* HIGH  */
-    LCURLY = 263,                  /* LCURLY  */
-    LOW = 264,                     /* LOW  */
-    LPAREN = 265,                  /* LPAREN  */
-    MINUS = 266,                   /* MINUS  */
-    PERCENT = 267,                 /* PERCENT  */
-    PLUS = 268,                    /* PLUS  */
-    RCURLY = 269,                  /* RCURLY  */
-    RPAREN = 270,                  /* RPAREN  */
-    TIMES = 271,                   /* TIMES  */
-    LE = 272,                      /* LE  */
-    LT = 273,                      /* LT  */
-    GE = 274,                      /* GE  */
-    GT = 275,                      /* GT  */
-    NE = 276,                      /* NE  */
-    NUMBER = 277                   /* NUMBER  */
+    DISCARD = 260,                 /* DISCARD  */
+    DIV = 261,                     /* DIV  */
+    FUDGE = 262,                   /* FUDGE  */
+    HIGH = 263,                    /* HIGH  */
+    LCURLY = 264,                  /* LCURLY  */
+    LOW = 265,                     /* LOW  */
+    LPAREN = 266,                  /* LPAREN  */
+    MINUS = 267,                   /* MINUS  */
+    PERCENT = 268,                 /* PERCENT  */
+    PLUS = 269,                    /* PLUS  */
+    RCURLY = 270,                  /* RCURLY  */
+    RPAREN = 271,                  /* RPAREN  */
+    TIMES = 272,                   /* TIMES  */
+    LE = 273,                      /* LE  */
+    LT = 274,                      /* LT  */
+    GE = 275,                      /* GE  */
+    GT = 276,                      /* GT  */
+    NE = 277,                      /* NE  */
+    NUMBER = 278                   /* NUMBER  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
 /* Token kinds.  */
+#define YYEMPTY -2
 #define YYEOF 0
 #define YYerror 256
 #define YYUNDEF 257
 #define COMMA 258
 #define DICE 259
-#define DIV 260
-#define FUDGE 261
-#define HIGH 262
-#define LCURLY 263
-#define LOW 264
-#define LPAREN 265
-#define MINUS 266
-#define PERCENT 267
-#define PLUS 268
-#define RCURLY 269
-#define RPAREN 270
-#define TIMES 271
-#define LE 272
-#define LT 273
-#define GE 274
-#define GT 275
-#define NE 276
-#define NUMBER 277
+#define DISCARD 260
+#define DIV 261
+#define FUDGE 262
+#define HIGH 263
+#define LCURLY 264
+#define LOW 265
+#define LPAREN 266
+#define MINUS 267
+#define PERCENT 268
+#define PLUS 269
+#define RCURLY 270
+#define RPAREN 271
+#define TIMES 272
+#define LE 273
+#define LT 274
+#define GE 275
+#define GT 276
+#define NE 277
+#define NUMBER 278
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
@@ -196,7 +199,7 @@ union YYSTYPE
   struct ir_node * node;
   int              int_type;
 
-#line 200 "parser.c"
+#line 203 "parser.c"
 
 };
 typedef union YYSTYPE YYSTYPE;
@@ -219,34 +222,35 @@ enum yysymbol_kind_t
   YYSYMBOL_YYUNDEF = 2,                    /* "invalid token"  */
   YYSYMBOL_COMMA = 3,                      /* COMMA  */
   YYSYMBOL_DICE = 4,                       /* DICE  */
-  YYSYMBOL_DIV = 5,                        /* DIV  */
-  YYSYMBOL_FUDGE = 6,                      /* FUDGE  */
-  YYSYMBOL_HIGH = 7,                       /* HIGH  */
-  YYSYMBOL_LCURLY = 8,                     /* LCURLY  */
-  YYSYMBOL_LOW = 9,                        /* LOW  */
-  YYSYMBOL_LPAREN = 10,                    /* LPAREN  */
-  YYSYMBOL_MINUS = 11,                     /* MINUS  */
-  YYSYMBOL_PERCENT = 12,                   /* PERCENT  */
-  YYSYMBOL_PLUS = 13,                      /* PLUS  */
-  YYSYMBOL_RCURLY = 14,                    /* RCURLY  */
-  YYSYMBOL_RPAREN = 15,                    /* RPAREN  */
-  YYSYMBOL_TIMES = 16,                     /* TIMES  */
-  YYSYMBOL_LE = 17,                        /* LE  */
-  YYSYMBOL_LT = 18,                        /* LT  */
-  YYSYMBOL_GE = 19,                        /* GE  */
-  YYSYMBOL_GT = 20,                        /* GT  */
-  YYSYMBOL_NE = 21,                        /* NE  */
-  YYSYMBOL_NUMBER = 22,                    /* NUMBER  */
-  YYSYMBOL_YYACCEPT = 23,                  /* $accept  */
-  YYSYMBOL_roll = 24,                      /* roll  */
-  YYSYMBOL_top_level_expression_list = 25, /* top_level_expression_list  */
-  YYSYMBOL_top_level_expression = 26,      /* top_level_expression  */
-  YYSYMBOL_expression_list = 27,           /* expression_list  */
-  YYSYMBOL_expression = 28,                /* expression  */
-  YYSYMBOL_factor = 29,                    /* factor  */
-  YYSYMBOL_term = 30,                      /* term  */
-  YYSYMBOL_filtered_dice = 31,             /* filtered_dice  */
-  YYSYMBOL_dice = 32                       /* dice  */
+  YYSYMBOL_DISCARD = 5,                    /* DISCARD  */
+  YYSYMBOL_DIV = 6,                        /* DIV  */
+  YYSYMBOL_FUDGE = 7,                      /* FUDGE  */
+  YYSYMBOL_HIGH = 8,                       /* HIGH  */
+  YYSYMBOL_LCURLY = 9,                     /* LCURLY  */
+  YYSYMBOL_LOW = 10,                       /* LOW  */
+  YYSYMBOL_LPAREN = 11,                    /* LPAREN  */
+  YYSYMBOL_MINUS = 12,                     /* MINUS  */
+  YYSYMBOL_PERCENT = 13,                   /* PERCENT  */
+  YYSYMBOL_PLUS = 14,                      /* PLUS  */
+  YYSYMBOL_RCURLY = 15,                    /* RCURLY  */
+  YYSYMBOL_RPAREN = 16,                    /* RPAREN  */
+  YYSYMBOL_TIMES = 17,                     /* TIMES  */
+  YYSYMBOL_LE = 18,                        /* LE  */
+  YYSYMBOL_LT = 19,                        /* LT  */
+  YYSYMBOL_GE = 20,                        /* GE  */
+  YYSYMBOL_GT = 21,                        /* GT  */
+  YYSYMBOL_NE = 22,                        /* NE  */
+  YYSYMBOL_NUMBER = 23,                    /* NUMBER  */
+  YYSYMBOL_YYACCEPT = 24,                  /* $accept  */
+  YYSYMBOL_roll = 25,                      /* roll  */
+  YYSYMBOL_top_level_expression_list = 26, /* top_level_expression_list  */
+  YYSYMBOL_top_level_expression = 27,      /* top_level_expression  */
+  YYSYMBOL_expression_list = 28,           /* expression_list  */
+  YYSYMBOL_expression = 29,                /* expression  */
+  YYSYMBOL_factor = 30,                    /* factor  */
+  YYSYMBOL_term = 31,                      /* term  */
+  YYSYMBOL_filtered_dice = 32,             /* filtered_dice  */
+  YYSYMBOL_dice = 33                       /* dice  */
 };
 typedef enum yysymbol_kind_t yysymbol_kind_t;
 
@@ -288,6 +292,18 @@ typedef __INT_LEAST16_TYPE__ yytype_int16;
 typedef int_least16_t yytype_int16;
 #else
 typedef short yytype_int16;
+#endif
+
+/* Work around bug in HP-UX 11.23, which defines these macros
+   incorrectly for preprocessor constants.  This workaround can likely
+   be removed in 2023, as HPE has promised support for HP-UX 11.23
+   (aka HP-UX 11i v2) only through the end of 2022; see Table 2 of
+   <https://h20195.www2.hpe.com/V2/getpdf.aspx/4AA4-7673ENW.pdf>.  */
+#ifdef __hpux
+# undef UINT_LEAST8_MAX
+# undef UINT_LEAST16_MAX
+# define UINT_LEAST8_MAX 255
+# define UINT_LEAST16_MAX 65535
 #endif
 
 #if defined __UINT_LEAST8_MAX__ && __UINT_LEAST8_MAX__ <= __INT_MAX__
@@ -387,9 +403,9 @@ typedef int yy_state_fast_t;
 
 /* Suppress unused-variable warnings by "using" E.  */
 #if ! defined lint || defined __GNUC__
-# define YYUSE(E) ((void) (E))
+# define YY_USE(E) ((void) (E))
 #else
-# define YYUSE(E) /* empty */
+# define YY_USE(E) /* empty */
 #endif
 
 #if defined __GNUC__ && ! defined __ICC && 407 <= __GNUC__ * 100 + __GNUC_MINOR__
@@ -556,19 +572,19 @@ union yyalloc
 /* YYFINAL -- State number of the termination state.  */
 #define YYFINAL  24
 /* YYLAST -- Last index in YYTABLE.  */
-#define YYLAST   70
+#define YYLAST   69
 
 /* YYNTOKENS -- Number of terminals.  */
-#define YYNTOKENS  23
+#define YYNTOKENS  24
 /* YYNNTS -- Number of nonterminals.  */
 #define YYNNTS  10
 /* YYNRULES -- Number of rules.  */
-#define YYNRULES  37
+#define YYNRULES  35
 /* YYNSTATES -- Number of states.  */
-#define YYNSTATES  62
+#define YYNSTATES  61
 
 /* YYMAXUTOK -- Last valid token kind.  */
-#define YYMAXUTOK   277
+#define YYMAXUTOK   278
 
 
 /* YYTRANSLATE(TOKEN-NUM) -- Symbol number corresponding to TOKEN-NUM
@@ -609,17 +625,17 @@ static const yytype_int8 yytranslate[] =
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     1,     2,     3,     4,
        5,     6,     7,     8,     9,    10,    11,    12,    13,    14,
-      15,    16,    17,    18,    19,    20,    21,    22
+      15,    16,    17,    18,    19,    20,    21,    22,    23
 };
 
 #if YYDEBUG
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int16 yyrline[] =
 {
-       0,    68,    68,    75,    88,    93,   103,   114,   141,   144,
-     150,   159,   168,   179,   188,   201,   214,   227,   240,   249,
-     255,   264,   267,   270,   273,   276,   279,   284,   287,   291,
-     294,   297,   300,   305,   308,   311,   314,   317
+       0,    69,    69,    76,    89,    94,   104,   115,   142,   145,
+     151,   160,   169,   180,   189,   202,   215,   228,   241,   250,
+     255,   258,   261,   264,   267,   270,   275,   278,   282,   285,
+     288,   291,   296,   299,   302,   305
 };
 #endif
 
@@ -635,12 +651,12 @@ static const char *yysymbol_name (yysymbol_kind_t yysymbol) YY_ATTRIBUTE_UNUSED;
    First, the terminals, then, starting at YYNTOKENS, nonterminals.  */
 static const char *const yytname[] =
 {
-  "\"end of file\"", "error", "\"invalid token\"", "COMMA", "DICE", "DIV",
-  "FUDGE", "HIGH", "LCURLY", "LOW", "LPAREN", "MINUS", "PERCENT", "PLUS",
-  "RCURLY", "RPAREN", "TIMES", "LE", "LT", "GE", "GT", "NE", "NUMBER",
-  "$accept", "roll", "top_level_expression_list", "top_level_expression",
-  "expression_list", "expression", "factor", "term", "filtered_dice",
-  "dice", YY_NULLPTR
+  "\"end of file\"", "error", "\"invalid token\"", "COMMA", "DICE",
+  "DISCARD", "DIV", "FUDGE", "HIGH", "LCURLY", "LOW", "LPAREN", "MINUS",
+  "PERCENT", "PLUS", "RCURLY", "RPAREN", "TIMES", "LE", "LT", "GE", "GT",
+  "NE", "NUMBER", "$accept", "roll", "top_level_expression_list",
+  "top_level_expression", "expression_list", "expression", "factor",
+  "term", "filtered_dice", "dice", YY_NULLPTR
 };
 
 static const char *
@@ -657,11 +673,11 @@ static const yytype_int16 yytoknum[] =
 {
        0,   256,   257,   258,   259,   260,   261,   262,   263,   264,
      265,   266,   267,   268,   269,   270,   271,   272,   273,   274,
-     275,   276,   277
+     275,   276,   277,   278
 };
 #endif
 
-#define YYPACT_NINF (-13)
+#define YYPACT_NINF (-17)
 
 #define yypact_value_is_default(Yyn) \
   ((Yyn) == YYPACT_NINF)
@@ -675,13 +691,13 @@ static const yytype_int16 yytoknum[] =
      STATE-NUM.  */
 static const yytype_int8 yypact[] =
 {
-      -2,     5,    -1,    -1,    14,    10,   -13,    20,    39,     0,
-     -13,   -13,    28,   -13,   -13,     8,    27,    19,    25,    26,
-       3,    -1,     3,    33,   -13,    -2,    -1,    -1,    12,    35,
-      36,    37,    38,    40,    41,   -13,   -13,    -1,   -13,    51,
-     -13,    47,   -13,    42,    43,    44,   -13,   -13,   -13,   -13,
-     -13,   -13,   -13,   -13,   -13,   -13,   -13,   -13,   -13,   -13,
-     -13,   -13
+      -2,     4,    -1,    -1,    24,     8,   -17,    20,    37,     7,
+     -17,   -17,    25,   -17,   -17,   -17,    12,    39,    28,    36,
+       2,    -1,     2,    27,   -17,    -2,    -1,    -1,    33,    34,
+      35,    38,    40,    41,    42,   -17,    -1,   -17,    15,   -17,
+      44,   -17,    45,    43,    46,   -17,   -17,   -17,   -17,   -17,
+     -17,   -17,   -17,   -17,   -17,   -17,   -17,   -17,   -17,   -17,
+     -17
 };
 
   /* YYDEFACT[STATE-NUM] -- Default reduction number in state STATE-NUM.
@@ -689,25 +705,25 @@ static const yytype_int8 yypact[] =
      means the default is an error.  */
 static const yytype_int8 yydefact[] =
 {
-       0,    34,     0,     0,    19,     0,     2,     3,     5,    21,
-      10,    18,    27,    36,    35,    33,    19,     0,     8,     0,
+       0,    33,     0,     0,    19,     0,     2,     3,     5,    20,
+      10,    18,    26,    35,    34,    32,    19,     0,     8,     0,
        0,     0,     0,    13,     1,     0,     0,     0,     0,     0,
-       0,     0,     0,     0,     0,    37,     6,     0,    26,    19,
-      25,     0,    24,     0,     0,     0,     4,    12,    11,    23,
-      22,    31,    30,    29,    28,    32,     9,     7,    14,    15,
-      17,    16
+       0,     0,     0,     0,     0,     6,     0,    25,    19,    24,
+       0,    23,     0,     0,     0,     4,    12,    11,    22,    21,
+      30,    29,    28,    27,    31,     9,     7,    17,    16,    14,
+      15
 };
 
   /* YYPGOTO[NTERM-NUM].  */
 static const yytype_int8 yypgoto[] =
 {
-     -13,   -13,    45,   -13,    -8,     1,    34,   -12,    -4,   -13
+     -17,   -17,    14,   -17,   -16,     1,    16,   -12,    -4,   -17
 };
 
   /* YYDEFGOTO[NTERM-NUM].  */
 static const yytype_int8 yydefgoto[] =
 {
-      -1,     5,     6,     7,    17,    18,     9,    10,    11,    12
+       0,     5,     6,     7,    17,    18,     9,    10,    11,    12
 };
 
   /* YYTABLE[YYPACT[STATE-NUM]] -- What to do in state STATE-NUM.  If
@@ -715,48 +731,46 @@ static const yytype_int8 yydefgoto[] =
      number is the opposite.  If YYTABLE_NINF, syntax error.  */
 static const yytype_int8 yytable[] =
 {
-      23,     8,     1,     1,    19,    28,     2,     1,     3,     3,
-      24,    13,    23,    41,    47,    48,    29,    14,     1,    20,
-       4,    16,    21,    25,    35,    39,     8,    15,    37,    56,
-      22,     1,    20,    36,    49,    23,    26,    26,    27,    27,
-      43,    38,    44,    22,    45,    30,    31,    32,    33,    34,
-      26,    60,    27,    61,    40,     1,    42,    50,    51,    52,
-      53,    57,    54,    55,    58,    59,     0,     0,     0,     0,
-      46
+      23,     8,     1,     1,    19,    40,     1,     2,    24,     3,
+       3,    13,    23,    28,    46,    47,     1,    14,    20,     1,
+      55,     4,    16,    25,    29,    38,     8,    15,     1,    22,
+      20,    36,    42,    21,    23,    43,    39,    44,    41,    45,
+      26,    22,    27,    30,    31,    32,    33,    34,    26,    26,
+      27,    27,    37,    57,    35,    58,    48,    49,    50,    56,
+       0,    51,     0,    52,    53,    54,    59,     0,     0,    60
 };
 
 static const yytype_int8 yycheck[] =
 {
-       4,     0,     4,     4,     3,     5,     8,     4,    10,    10,
-       0,     6,    16,    21,    26,    27,    16,    12,     4,     5,
-      22,    22,     8,     3,    16,    22,    25,    22,     3,    37,
-      16,     4,     5,    14,    22,    39,    11,    11,    13,    13,
-       7,    15,     9,    16,    11,    17,    18,    19,    20,    21,
-      11,     7,    13,     9,    20,     4,    22,    22,    22,    22,
-      22,    14,    22,    22,    22,    22,    -1,    -1,    -1,    -1,
-      25
+       4,     0,     4,     4,     3,    21,     4,     9,     0,    11,
+      11,     7,    16,     6,    26,    27,     4,    13,     6,     4,
+      36,    23,    23,     3,    17,    23,    25,    23,     4,    17,
+       6,     3,     5,     9,    38,     8,    20,    10,    22,    25,
+      12,    17,    14,    18,    19,    20,    21,    22,    12,    12,
+      14,    14,    16,     8,    15,    10,    23,    23,    23,    15,
+      -1,    23,    -1,    23,    23,    23,    23,    -1,    -1,    23
 };
 
   /* YYSTOS[STATE-NUM] -- The (internal number of the) accessing
      symbol of state STATE-NUM.  */
 static const yytype_int8 yystos[] =
 {
-       0,     4,     8,    10,    22,    24,    25,    26,    28,    29,
-      30,    31,    32,     6,    12,    22,    22,    27,    28,    28,
-       5,     8,    16,    31,     0,     3,    11,    13,     5,    16,
-      17,    18,    19,    20,    21,    16,    14,     3,    15,    22,
-      29,    27,    29,     7,     9,    11,    25,    30,    30,    22,
-      22,    22,    22,    22,    22,    22,    27,    14,    22,    22,
-       7,     9
+       0,     4,     9,    11,    23,    25,    26,    27,    29,    30,
+      31,    32,    33,     7,    13,    23,    23,    28,    29,    29,
+       6,     9,    17,    32,     0,     3,    12,    14,     6,    17,
+      18,    19,    20,    21,    22,    15,     3,    16,    23,    30,
+      28,    30,     5,     8,    10,    26,    31,    31,    23,    23,
+      23,    23,    23,    23,    23,    28,    15,     8,    10,    23,
+      23
 };
 
   /* YYR1[YYN] -- Symbol number of symbol that rule YYN derives.  */
 static const yytype_int8 yyr1[] =
 {
-       0,    23,    24,    25,    25,    26,    26,    26,    27,    27,
-      28,    28,    28,    29,    29,    29,    29,    29,    29,    29,
-      30,    30,    30,    30,    30,    30,    30,    31,    31,    31,
-      31,    31,    31,    32,    32,    32,    32,    32
+       0,    24,    25,    26,    26,    27,    27,    27,    28,    28,
+      29,    29,    29,    30,    30,    30,    30,    30,    30,    30,
+      31,    31,    31,    31,    31,    31,    32,    32,    32,    32,
+      32,    32,    33,    33,    33,    33
 };
 
   /* YYR2[YYN] -- Number of symbols on the right hand side of rule YYN.  */
@@ -764,8 +778,8 @@ static const yytype_int8 yyr2[] =
 {
        0,     2,     1,     1,     3,     1,     3,     4,     1,     3,
        1,     3,     3,     2,     4,     4,     4,     4,     1,     1,
-       1,     1,     3,     3,     3,     3,     3,     1,     3,     3,
-       3,     3,     3,     2,     1,     2,     2,     3
+       1,     3,     3,     3,     3,     3,     1,     3,     3,     3,
+       3,     3,     2,     1,     2,     2
 };
 
 
@@ -844,7 +858,7 @@ yy_symbol_value_print (FILE *yyo,
                        yysymbol_kind_t yykind, YYSTYPE const * const yyvaluep)
 {
   FILE *yyoutput = yyo;
-  YYUSE (yyoutput);
+  YY_USE (yyoutput);
   if (!yyvaluep)
     return;
 # ifdef YYPRINT
@@ -852,7 +866,7 @@ yy_symbol_value_print (FILE *yyo,
     YYPRINT (yyo, yytoknum[yykind], *yyvaluep);
 # endif
   YY_IGNORE_MAYBE_UNINITIALIZED_BEGIN
-  YYUSE (yykind);
+  YY_USE (yykind);
   YY_IGNORE_MAYBE_UNINITIALIZED_END
 }
 
@@ -966,13 +980,13 @@ static void
 yydestruct (const char *yymsg,
             yysymbol_kind_t yykind, YYSTYPE *yyvaluep)
 {
-  YYUSE (yyvaluep);
+  YY_USE (yyvaluep);
   if (!yymsg)
     yymsg = "Deleting";
   YY_SYMBOL_PRINT (yymsg, yykind, yyvaluep, yylocationp);
 
   YY_IGNORE_MAYBE_UNINITIALIZED_BEGIN
-  YYUSE (yykind);
+  YY_USE (yykind);
   YY_IGNORE_MAYBE_UNINITIALIZED_END
 }
 
@@ -1233,17 +1247,17 @@ yyreduce:
   switch (yyn)
     {
   case 2: /* roll: top_level_expression_list  */
-#line 68 "parser.y"
+#line 69 "parser.y"
                                  {      
     if (sum_flag == TRUE) {
       printf("sum: %i\n", (yyvsp[0].int_type));
     }  
 }
-#line 1243 "parser.c"
+#line 1257 "parser.c"
     break;
 
   case 3: /* top_level_expression_list: top_level_expression  */
-#line 75 "parser.y"
+#line 76 "parser.y"
                                                  {
 
 #ifdef DEBUG
@@ -1257,19 +1271,19 @@ yyreduce:
   }
   
 }
-#line 1261 "parser.c"
+#line 1275 "parser.c"
     break;
 
   case 4: /* top_level_expression_list: top_level_expression COMMA top_level_expression_list  */
-#line 88 "parser.y"
+#line 89 "parser.y"
                                                        {
   (yyval.int_type) = (yyvsp[-2].int_type) + (yyvsp[0].int_type);
 }
-#line 1269 "parser.c"
+#line 1283 "parser.c"
     break;
 
   case 5: /* top_level_expression: expression  */
-#line 93 "parser.y"
+#line 94 "parser.y"
                                   {
 
 #ifdef DEBUG
@@ -1280,11 +1294,11 @@ yyreduce:
 
   (yyval.int_type) = roll_expression((yyvsp[0].node), TRUE);
 }
-#line 1284 "parser.c"
+#line 1298 "parser.c"
     break;
 
   case 6: /* top_level_expression: LCURLY expression_list RCURLY  */
-#line 103 "parser.y"
+#line 104 "parser.y"
                                 {
 
 #ifdef DEBUG
@@ -1296,11 +1310,11 @@ yyreduce:
   (yyval.int_type) = roll_expression((yyvsp[-1].node), TRUE);
 
  }
-#line 1300 "parser.c"
+#line 1314 "parser.c"
     break;
 
   case 7: /* top_level_expression: NUMBER LCURLY expression_list RCURLY  */
-#line 114 "parser.y"
+#line 115 "parser.y"
                                        {
   
   int repetitions = (yyvsp[-3].int_type);
@@ -1326,28 +1340,28 @@ yyreduce:
   (yyval.int_type) = sum;
   
 }
-#line 1330 "parser.c"
+#line 1344 "parser.c"
     break;
 
   case 8: /* expression_list: expression  */
-#line 141 "parser.y"
+#line 142 "parser.y"
                              {
   (yyval.node) = (yyvsp[0].node);
 }
-#line 1338 "parser.c"
+#line 1352 "parser.c"
     break;
 
   case 9: /* expression_list: expression COMMA expression_list  */
-#line 144 "parser.y"
+#line 145 "parser.y"
                                    {
   (yyvsp[-2].node)->next = (yyvsp[0].node);
   (yyval.node) = (yyvsp[-2].node);
 }
-#line 1347 "parser.c"
+#line 1361 "parser.c"
     break;
 
   case 10: /* expression: term  */
-#line 150 "parser.y"
+#line 151 "parser.y"
                   {
 
 #ifdef DEBUG
@@ -1357,11 +1371,11 @@ yyreduce:
   (yyval.node) = (yyvsp[0].node);
 
  }
-#line 1361 "parser.c"
+#line 1375 "parser.c"
     break;
 
   case 11: /* expression: expression PLUS term  */
-#line 159 "parser.y"
+#line 160 "parser.y"
                        {
 
 #ifdef DEBUG
@@ -1371,11 +1385,11 @@ yyreduce:
   (yyval.node) = new_op(OP_PLUS, (yyvsp[-2].node), (yyvsp[0].node));
 
  }
-#line 1375 "parser.c"
+#line 1389 "parser.c"
     break;
 
   case 12: /* expression: expression MINUS term  */
-#line 168 "parser.y"
+#line 169 "parser.y"
                         {
 
 #ifdef DEBUG
@@ -1385,11 +1399,11 @@ yyreduce:
   (yyval.node) = new_op(OP_MINUS, (yyvsp[-2].node), (yyvsp[0].node));
   
 }
-#line 1389 "parser.c"
+#line 1403 "parser.c"
     break;
 
   case 13: /* factor: NUMBER filtered_dice  */
-#line 179 "parser.y"
+#line 180 "parser.y"
                                   {
 
 #ifdef DEBUG
@@ -1399,11 +1413,11 @@ yyreduce:
   (yyval.node) = new_op(OP_REP, new_number((yyvsp[-1].int_type)), (yyvsp[0].node));
   
 }
-#line 1403 "parser.c"
+#line 1417 "parser.c"
     break;
 
   case 14: /* factor: NUMBER filtered_dice HIGH NUMBER  */
-#line 188 "parser.y"
+#line 189 "parser.y"
                                    {
 
 #ifdef DEBUG
@@ -1417,11 +1431,11 @@ yyreduce:
   (yyval.node) = new_op(OP_HIGH, new_number((yyvsp[0].int_type)), new_op(OP_REP, new_number((yyvsp[-3].int_type)), (yyvsp[-2].node)));
 
 }
-#line 1421 "parser.c"
+#line 1435 "parser.c"
     break;
 
   case 15: /* factor: NUMBER filtered_dice LOW NUMBER  */
-#line 201 "parser.y"
+#line 202 "parser.y"
                                   {
 
 #ifdef DEBUG
@@ -1435,12 +1449,12 @@ yyreduce:
   (yyval.node) = new_op(OP_LOW, new_number((yyvsp[0].int_type)), new_op(OP_REP, new_number((yyvsp[-3].int_type)), (yyvsp[-2].node)));
 
 }
-#line 1439 "parser.c"
+#line 1453 "parser.c"
     break;
 
-  case 16: /* factor: NUMBER filtered_dice MINUS LOW  */
-#line 214 "parser.y"
-                                 {
+  case 16: /* factor: NUMBER filtered_dice DISCARD LOW  */
+#line 215 "parser.y"
+                                   {
 
 #ifdef DEBUG
   printf("[DBG] factor: %i filtered_dice MINUS LOW\n", (yyvsp[-3].int_type));
@@ -1453,12 +1467,12 @@ yyreduce:
   (yyval.node) = new_op(OP_HIGH, new_number((yyvsp[-3].int_type)-1), new_op(OP_REP, new_number((yyvsp[-3].int_type)), (yyvsp[-2].node)));
   
 }
-#line 1457 "parser.c"
+#line 1471 "parser.c"
     break;
 
-  case 17: /* factor: NUMBER filtered_dice MINUS HIGH  */
-#line 227 "parser.y"
-                                  {
+  case 17: /* factor: NUMBER filtered_dice DISCARD HIGH  */
+#line 228 "parser.y"
+                                    {
 
 #ifdef DEBUG
   printf("[DBG] [PARSE] factor: %i filtered_dice MINUS HIGH\n", (yyvsp[-3].int_type));
@@ -1471,11 +1485,11 @@ yyreduce:
   (yyval.node) = new_op(OP_LOW, new_number((yyvsp[-3].int_type)-1), new_op(OP_REP, new_number((yyvsp[-3].int_type)), (yyvsp[-2].node)));
 
 }
-#line 1475 "parser.c"
+#line 1489 "parser.c"
     break;
 
   case 18: /* factor: filtered_dice  */
-#line 240 "parser.y"
+#line 241 "parser.y"
                 {
 
 #ifdef DEBUG
@@ -1485,89 +1499,75 @@ yyreduce:
   (yyval.node) = (yyvsp[0].node);
   
 }
-#line 1489 "parser.c"
+#line 1503 "parser.c"
     break;
 
   case 19: /* factor: NUMBER  */
-#line 249 "parser.y"
+#line 250 "parser.y"
          {
  (yyval.node) = new_number((yyvsp[0].int_type));
-}
-#line 1497 "parser.c"
-    break;
-
-  case 20: /* term: NUMBER  */
-#line 255 "parser.y"
-                    {
-
-#ifdef DEBUG
-  printf("[DBG] [PARSE] term %i\n", (yyvsp[0].int_type));
-#endif
-  
-  (yyval.node) = new_number((yyvsp[0].int_type));
-  
 }
 #line 1511 "parser.c"
     break;
 
-  case 21: /* term: factor  */
-#line 264 "parser.y"
-         {
+  case 20: /* term: factor  */
+#line 255 "parser.y"
+                  {
   (yyval.node) = (yyvsp[0].node);
 }
 #line 1519 "parser.c"
     break;
 
-  case 22: /* term: factor TIMES NUMBER  */
-#line 267 "parser.y"
+  case 21: /* term: factor TIMES NUMBER  */
+#line 258 "parser.y"
                       {
   (yyval.node) = new_op(OP_TIMES, (yyvsp[-2].node), new_number((yyvsp[0].int_type)));
 }
 #line 1527 "parser.c"
     break;
 
-  case 23: /* term: factor DIV NUMBER  */
-#line 270 "parser.y"
+  case 22: /* term: factor DIV NUMBER  */
+#line 261 "parser.y"
                     {
   (yyval.node) = new_op(OP_DIV, (yyvsp[-2].node), new_number((yyvsp[0].int_type)));
 }
 #line 1535 "parser.c"
     break;
 
-  case 24: /* term: NUMBER TIMES factor  */
-#line 273 "parser.y"
+  case 23: /* term: NUMBER TIMES factor  */
+#line 264 "parser.y"
                       {
   (yyval.node) = new_op(OP_TIMES, new_number((yyvsp[-2].int_type)), (yyvsp[0].node));
 }
 #line 1543 "parser.c"
     break;
 
-  case 25: /* term: NUMBER DIV factor  */
-#line 276 "parser.y"
+  case 24: /* term: NUMBER DIV factor  */
+#line 267 "parser.y"
                     {
   (yyval.node) = new_op(OP_DIV, new_number((yyvsp[-2].int_type)), (yyvsp[0].node));
 }
 #line 1551 "parser.c"
     break;
 
-  case 26: /* term: LPAREN expression RPAREN  */
-#line 279 "parser.y"
+  case 25: /* term: LPAREN expression RPAREN  */
+#line 270 "parser.y"
                            {
   (yyval.node) = (yyvsp[-1].node);
 }
 #line 1559 "parser.c"
     break;
 
-  case 27: /* filtered_dice: dice  */
-#line 284 "parser.y"
+  case 26: /* filtered_dice: dice  */
+#line 275 "parser.y"
                      {
   (yyval.node) = (yyvsp[0].node);
 }
 #line 1567 "parser.c"
     break;
 
-  case 28: /* filtered_dice: dice GT NUMBER  */
-#line 287 "parser.y"
+  case 27: /* filtered_dice: dice GT NUMBER  */
+#line 278 "parser.y"
                  {
   (yyval.node) = new_op(OP_GT, (yyvsp[-2].node), new_number((yyvsp[0].int_type)));
   
@@ -1575,80 +1575,72 @@ yyreduce:
 #line 1576 "parser.c"
     break;
 
-  case 29: /* filtered_dice: dice GE NUMBER  */
-#line 291 "parser.y"
+  case 28: /* filtered_dice: dice GE NUMBER  */
+#line 282 "parser.y"
                  {
   (yyval.node) = new_op(OP_GE, (yyvsp[-2].node), new_number((yyvsp[0].int_type)));
 }
 #line 1584 "parser.c"
     break;
 
-  case 30: /* filtered_dice: dice LT NUMBER  */
-#line 294 "parser.y"
+  case 29: /* filtered_dice: dice LT NUMBER  */
+#line 285 "parser.y"
                  {
   (yyval.node) = new_op(OP_LT, (yyvsp[-2].node), new_number((yyvsp[0].int_type)));
 }
 #line 1592 "parser.c"
     break;
 
-  case 31: /* filtered_dice: dice LE NUMBER  */
-#line 297 "parser.y"
+  case 30: /* filtered_dice: dice LE NUMBER  */
+#line 288 "parser.y"
                  {
   (yyval.node) = new_op(OP_LE, (yyvsp[-2].node), new_number((yyvsp[0].int_type)));
 }
 #line 1600 "parser.c"
     break;
 
-  case 32: /* filtered_dice: dice NE NUMBER  */
-#line 300 "parser.y"
+  case 31: /* filtered_dice: dice NE NUMBER  */
+#line 291 "parser.y"
                  {
   (yyval.node) = new_op(OP_NE, (yyvsp[-2].node), new_number((yyvsp[0].int_type)));
 }
 #line 1608 "parser.c"
     break;
 
-  case 33: /* dice: DICE NUMBER  */
-#line 305 "parser.y"
+  case 32: /* dice: DICE NUMBER  */
+#line 296 "parser.y"
                          {
   (yyval.node) = new_dice(new_number((yyvsp[0].int_type)));
  }
 #line 1616 "parser.c"
     break;
 
-  case 34: /* dice: DICE  */
-#line 308 "parser.y"
+  case 33: /* dice: DICE  */
+#line 299 "parser.y"
        {
   (yyval.node) = new_dice(new_number(6));
   }
 #line 1624 "parser.c"
     break;
 
-  case 35: /* dice: DICE PERCENT  */
-#line 311 "parser.y"
+  case 34: /* dice: DICE PERCENT  */
+#line 302 "parser.y"
                {
   (yyval.node) = new_dice(new_number(HUNDRED));
  }
 #line 1632 "parser.c"
     break;
 
-  case 36: /* dice: DICE FUDGE  */
-#line 314 "parser.y"
+  case 35: /* dice: DICE FUDGE  */
+#line 305 "parser.y"
              {
   (yyval.node) = new_dice(new_number(FUDGE_DICE));
  }
 #line 1640 "parser.c"
     break;
 
-  case 37: /* dice: DICE NUMBER TIMES  */
-#line 317 "parser.y"
-                    {
-  (yyval.node) = new_op( OP_TIMES, new_dice(new_number((yyvsp[-1].int_type))), new_dice(new_number((yyvsp[-1].int_type))) );
- }
-#line 1648 "parser.c"
-    break;
 
-
-#line 1652 "parser.c"
+#line 1644 "parser.c"
 
       default: break;
     }
@@ -1842,7 +1834,7 @@ yyreturn:
   return yyresult;
 }
 
-#line 322 "parser.y"
+#line 310 "parser.y"
 
 
 void yyerror (char const * message) {

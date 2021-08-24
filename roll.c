@@ -15,6 +15,7 @@
 #include "parser.h"
 
 int sum_flag     = FALSE; /**< command line argument: sum series     */
+static int test         = 0; /**< command line argument: test run (no random results) */
 static int verbose_flag = FALSE; /**< command line argument: verbose output */
 static int version_flag = FALSE; /**< command line argument: version        */
 
@@ -42,6 +43,7 @@ void usage() {
   printf(" -p, --positive     allow only positive results\n");
   printf(" -h, --help         show this help screen\n");
   printf(" -s, --sum-series   show the sum of roll series\n");
+  printf(" -t, --test         the result of the dice is always 3 (for testing purposes)\n");
   printf(" -v, --verbose      increase verbosity\n");
   printf("     --version      prints the program version and exits\n");
 #ifdef DEBUG
@@ -199,6 +201,7 @@ int main(int argc, char **argv) {
     static struct option long_options[] = {
       {"sum-series",  no_argument,       NULL, 's'},
       {"positive",    no_argument,       NULL, 'p'},
+      {"test",        no_argument,       NULL, 't'},
       {"verbose",     no_argument,       NULL, 'v'},
       {"version",     no_argument,       &version_flag, TRUE},
       {"help",        no_argument,       NULL, 'h'},

@@ -98,15 +98,14 @@ d%         rolls 2 10-sided dices: one represents the tens and
 1d6 / 2    rolls 1 6-sided dice and divides the result by 2 (1d3)
 4d6h3      rolls 4 6-sided dices and keeps the 3 highest results
            (discarding the lowest)
-4d6-L      rolls 4 6-sided dices and discards the lowest
+4d6 x L      rolls 4 6-sided dices and discards the lowest
 "6{3d6}"   rolls 3d6 6 times (expression
-           is quoted to avoid the > being interpreted as
-           redirection by the shell)
+           is quoted to avoid the { and { being interpreted
+           by the shell)
 "1d6>2"    rolls 1d6 until the result is bigger than 2 (expression
            is quoted to avoid the > being interpreted as
            redirection by the shell)
 4DF        rolls 4 Fudge dices
-10dx       rolls 2 ten-sided dices and multiply the results
 ```
 
 
@@ -117,7 +116,7 @@ d%         rolls 2 10-sided dices: one represents the tens and
 expression   := term { "+" term | "-" term } .
 term         := number | factor [ ("*"|"/") number |
                 number ("*"|"/") factor | "(" expression ")" .
-factor       := number FilteredDice [ ("h"|"H"|"l"|"L"|"k"|"K") number ] | number FilteredDice "-" [ ("h"|"H"|"l"|"L") | FilteredDice .
+factor       := number FilteredDice [ ("h"|"H"|"l"|"L"|"k"|"K") number ] | number FiltreredDice ("x"|"X") ("h"|"H"|"l"|"L") | FilteredDice .
 FilteredDice := dice | dice (">"|">="|"<"|"<="|"!=") number .
 dice         := "d" | "D" | "w" | "W" | "t" | "T" [ number | "%" | "F" | "f" | "x" | "X" ]
 ```

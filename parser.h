@@ -1,8 +1,8 @@
-/* A Bison parser, made by GNU Bison 3.7.1.  */
+/* A Bison parser, made by GNU Bison 3.7.6.  */
 
 /* Bison interface for Yacc-like parsers in C
 
-   Copyright (C) 1984, 1989-1990, 2000-2015, 2018-2020 Free Software Foundation,
+   Copyright (C) 1984, 1989-1990, 2000-2015, 2018-2021 Free Software Foundation,
    Inc.
 
    This program is free software: you can redistribute it and/or modify
@@ -16,7 +16,7 @@
    GNU General Public License for more details.
 
    You should have received a copy of the GNU General Public License
-   along with this program.  If not, see <http://www.gnu.org/licenses/>.  */
+   along with this program.  If not, see <https://www.gnu.org/licenses/>.  */
 
 /* As a special exception, you may create a larger work that contains
    part or all of the Bison parser skeleton and distribute that work
@@ -56,51 +56,54 @@ extern int yydebug;
     YYUNDEF = 257,                 /* "invalid token"  */
     COMMA = 258,                   /* COMMA  */
     DICE = 259,                    /* DICE  */
-    DIV = 260,                     /* DIV  */
-    FUDGE = 261,                   /* FUDGE  */
-    HIGH = 262,                    /* HIGH  */
-    LCURLY = 263,                  /* LCURLY  */
-    LOW = 264,                     /* LOW  */
-    LPAREN = 265,                  /* LPAREN  */
-    MINUS = 266,                   /* MINUS  */
-    PERCENT = 267,                 /* PERCENT  */
-    PLUS = 268,                    /* PLUS  */
-    RCURLY = 269,                  /* RCURLY  */
-    RPAREN = 270,                  /* RPAREN  */
-    TIMES = 271,                   /* TIMES  */
-    LE = 272,                      /* LE  */
-    LT = 273,                      /* LT  */
-    GE = 274,                      /* GE  */
-    GT = 275,                      /* GT  */
-    NE = 276,                      /* NE  */
-    NUMBER = 277                   /* NUMBER  */
+    DISCARD = 260,                 /* DISCARD  */
+    DIV = 261,                     /* DIV  */
+    FUDGE = 262,                   /* FUDGE  */
+    HIGH = 263,                    /* HIGH  */
+    LCURLY = 264,                  /* LCURLY  */
+    LOW = 265,                     /* LOW  */
+    LPAREN = 266,                  /* LPAREN  */
+    MINUS = 267,                   /* MINUS  */
+    PERCENT = 268,                 /* PERCENT  */
+    PLUS = 269,                    /* PLUS  */
+    RCURLY = 270,                  /* RCURLY  */
+    RPAREN = 271,                  /* RPAREN  */
+    TIMES = 272,                   /* TIMES  */
+    LE = 273,                      /* LE  */
+    LT = 274,                      /* LT  */
+    GE = 275,                      /* GE  */
+    GT = 276,                      /* GT  */
+    NE = 277,                      /* NE  */
+    NUMBER = 278                   /* NUMBER  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
 /* Token kinds.  */
+#define YYEMPTY -2
 #define YYEOF 0
 #define YYerror 256
 #define YYUNDEF 257
 #define COMMA 258
 #define DICE 259
-#define DIV 260
-#define FUDGE 261
-#define HIGH 262
-#define LCURLY 263
-#define LOW 264
-#define LPAREN 265
-#define MINUS 266
-#define PERCENT 267
-#define PLUS 268
-#define RCURLY 269
-#define RPAREN 270
-#define TIMES 271
-#define LE 272
-#define LT 273
-#define GE 274
-#define GT 275
-#define NE 276
-#define NUMBER 277
+#define DISCARD 260
+#define DIV 261
+#define FUDGE 262
+#define HIGH 263
+#define LCURLY 264
+#define LOW 265
+#define LPAREN 266
+#define MINUS 267
+#define PERCENT 268
+#define PLUS 269
+#define RCURLY 270
+#define RPAREN 271
+#define TIMES 272
+#define LE 273
+#define LT 274
+#define GE 275
+#define GT 276
+#define NE 277
+#define NUMBER 278
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
@@ -111,7 +114,7 @@ union YYSTYPE
   struct ir_node * node;
   int              int_type;
 
-#line 115 "parser.h"
+#line 118 "parser.h"
 
 };
 typedef union YYSTYPE YYSTYPE;

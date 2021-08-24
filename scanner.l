@@ -59,6 +59,7 @@ return DICE;
 f|F         { return FUDGE;   }
 h|H|k|K     { return HIGH;    }
 l|L         { return LOW;     }
+x|X         { return DISCARD; }
 
 "("         { return LPAREN;  }
 ")"         { return RPAREN;  }

@@ -33,6 +33,7 @@
 
 %token COMMA
 %token DICE
+%token DISCARD
 %token DIV
 %token FUDGE
 %token HIGH
@@ -211,7 +212,7 @@ factor   :   NUMBER filtered_dice {
   $$ = new_op(OP_LOW, new_number($4), new_op(OP_REP, new_number($1), $2));
 
 }
-| NUMBER filtered_dice MINUS LOW {
+| NUMBER filtered_dice DISCARD LOW {
 
 #ifdef DEBUG
   printf("[DBG] factor: %i filtered_dice MINUS LOW\n", $1);
@@ -224,7 +225,7 @@ factor   :   NUMBER filtered_dice {
   $$ = new_op(OP_HIGH, new_number($1-1), new_op(OP_REP, new_number($1), $2));
   
 }
-| NUMBER filtered_dice MINUS HIGH {
+| NUMBER filtered_dice DISCARD HIGH {
 
 #ifdef DEBUG
   printf("[DBG] [PARSE] factor: %i filtered_dice MINUS HIGH\n", $1);
@@ -251,17 +252,7 @@ factor   :   NUMBER filtered_dice {
 }
 ;
 
-
-term     :   NUMBER {
-
-#ifdef DEBUG
-  printf("[DBG] [PARSE] term %i\n", $1);
-#endif
-  
-  $$ = new_number($1);
-  
-}
-| factor {
+term     : factor {
   $$ = $1;
 }
 | factor TIMES NUMBER {
@@ -313,9 +304,6 @@ dice       : DICE NUMBER {
  }
 | DICE FUDGE {
   $$ = new_dice(new_number(FUDGE_DICE));
- }
-| DICE NUMBER TIMES {
-  $$ = new_op( OP_TIMES, new_dice(new_number($2)), new_dice(new_number($2)) );
  }
 ;
 
