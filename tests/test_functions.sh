@@ -7,7 +7,7 @@ test_expression() {
     
     echo "Testing '${EXPRESSION}' = ${EXPECTED}"
 
-    RES=$( ./roll --test ${EXPRESSION} )
+    RES=$( ./roll --test ${EXPRESSION} 2>&1 )
 
     if [ $? -ne 0 ] ; then
         echo "  Error: ${RES}"

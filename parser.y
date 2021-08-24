@@ -305,6 +305,9 @@ dice       : DICE NUMBER {
 | DICE FUDGE {
   $$ = new_dice(new_number(FUDGE_DICE));
  }
+| DICE NUMBER DISCARD {
+   $$ = new_op(OP_TIMES, new_dice(new_number($2)), new_dice(new_number($2)) );
+ }
 ;
 
 %%
