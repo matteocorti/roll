@@ -32,10 +32,10 @@ jobs:
 
       - name: Run the tests
         run:  |
-          uname -a \
-          && ./regen.sh
-          && ./configure
-          && make check
+          uname -a &&
+          ./regen.sh &&
+          ./configure &&
+          make check
 
   linux:
     # The host should always be linux
