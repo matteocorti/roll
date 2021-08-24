@@ -63,31 +63,31 @@ jobs:
           - distro: 'debian:testing'
             pre: >-
               apt-get update &&
-              DEBIAN_FRONTEND=noninteractive apt-get -y install autoconf automake
+              DEBIAN_FRONTEND=noninteractive apt-get -y install autoconf automake gcc
           - distro: 'debian:10'
             pre: >-
               apt-get update &&
-              DEBIAN_FRONTEND=noninteractive apt-get -y install autoconf automake
+              DEBIAN_FRONTEND=noninteractive apt-get -y install autoconf automake gcc
           - distro: 'debian:9'
             pre: >-
               apt-get update &&
-              DEBIAN_FRONTEND=noninteractive apt-get -y install autoconf automake
+              DEBIAN_FRONTEND=noninteractive apt-get -y install autoconf automake gcc
           - distro: 'ubuntu:20.10'
             pre: >-
               apt-get update &&
-              DEBIAN_FRONTEND=noninteractive apt-get -y install autoconf automake
+              DEBIAN_FRONTEND=noninteractive apt-get -y install autoconf automake gcc
           - distro: 'ubuntu:16.04'
             pre: >-
               apt-get update &&
-              DEBIAN_FRONTEND=noninteractive apt-get -y install autoconf automake
+              DEBIAN_FRONTEND=noninteractive apt-get -y install autoconf automake gcc
           - distro: 'ubuntu:18.04'
             pre: >-
               apt-get update &&
-              DEBIAN_FRONTEND=noninteractive apt-get -y install autoconf automake
+              DEBIAN_FRONTEND=noninteractive apt-get -y install autoconf automake gcc
           - distro: 'ubuntu:20.04'
             pre: >-
               apt-get update &&
-              DEBIAN_FRONTEND=noninteractive apt-get -y install autoconf automake
+              DEBIAN_FRONTEND=noninteractive apt-get -y install autoconf automake gcc
           - distro: 'alpine:edge'
             pre: >-
               apk update &&
