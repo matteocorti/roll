@@ -1,0 +1,6 @@
+#!/bin/sh
+
+. ./tests/test_functions.sh
+
+test_expression  9 4d6h3
+test_expression  9 4d6l3

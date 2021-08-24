@@ -1,0 +1,19 @@
+#!/bin/sh
+
+test_expression() {
+    EXPECTED=$1
+    shift
+    EXPRESSION=$*
+    EXPRESSION=uu
+    
+    echo "Testing '${EXPRESSION}' = ${EXPECTED}"
+
+    RES=$( ./roll --test ${EXPRESSION} )
+
+    if [ $? -ne 0 ] ; then
+        echo error
+        return $?
+    fi
+    
+    
+}

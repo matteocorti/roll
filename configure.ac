@@ -1,7 +1,8 @@
-AC_INIT(roll, 2.5.0, matteo@corti.li)
+AC_INIT(roll, 2.6.0, matteo@corti.li)
 AM_INIT_AUTOMAKE([-Wall -Werror])
 AC_CONFIG_FILES(Makefile)
 AC_CONFIG_HEADERS(config.h)
+AC_REQUIRE_AUX_FILE([tap-driver.sh])
 
 AC_PROG_CC
 AM_PROG_LEX
