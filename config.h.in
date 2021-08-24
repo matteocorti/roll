@@ -21,6 +21,9 @@
 /* Define to 1 if you have the <limits.h> header file. */
 #undef HAVE_LIMITS_H
 
+/* Define to 1 if you have the <memory.h> header file. */
+#undef HAVE_MEMORY_H
+
 /* Define to 1 if you have the `qsort' function. */
 #undef HAVE_QSORT
 
@@ -75,9 +78,7 @@
 /* Define to the version of this package. */
 #undef PACKAGE_VERSION
 
-/* Define to 1 if all of the C90 standard headers exist (not just the ones
-   required in a freestanding environment). This macro is provided for
-   backward compatibility; new code need not use it. */
+/* Define to 1 if you have the ANSI C header files. */
 #undef STDC_HEADERS
 
 /* Version number of package */

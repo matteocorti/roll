@@ -1,4 +1,5 @@
 BUILT_SOURCES= parser.h
+VERSION=2.6.0
 AM_YFLAGS = -d
 
 bin_PROGRAMS = roll
@@ -17,3 +18,8 @@ EXTRA_DIST = $(man_MANS) roll.spec COPYRIGHT $(TESTS) tests/test_functions.sh
 
 README: README.md
 	pandoc -f markdown -t plain $< -o $@
+
+rpm: dist
+	mkdir -p rpmroot/SOURCES rpmroot/BUILD
+	cp roll-$(VERSION).tar.gz rpmroot/SOURCES
+	rpmbuild --define "_topdir `pwd`/rpmroot" -ba roll.spec
