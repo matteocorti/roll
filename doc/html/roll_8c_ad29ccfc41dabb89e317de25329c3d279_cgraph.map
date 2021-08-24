@@ -1,4 +1,0 @@
-<map id="new_op" name="new_op">
-<area shape="rect" id="node2" href="$roll_8c.html#ab19c6534375437b3fa360f51198028f5" title="Allocates a new IR node. " alt="" coords="123,5,228,32"/>
-<area shape="rect" id="node3" href="$roll_8c.html#a8e1bf3d5ea0a885f81e71d2023a55777" title="Prints the specified error message and exits with a failure status. " alt="" coords="276,5,327,32"/>
-</map>
