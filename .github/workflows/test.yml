@@ -103,13 +103,13 @@ jobs:
               apk update &&
               apk upgrade &&
               apk add -U bash &&
-              apk add autoconf automake gcc binutils build-base bison
+              apk add autoconf automake gcc binutils build-base bison flex
           - distro: 'alpine:3.13'
             pre: >-
               apk update &&
               apk upgrade &&
               apk add -U bash &&
-              apk add autoconf automake gcc binutils build-base bison
+              apk add autoconf automake gcc binutils build-base bison flex
 
 
           - distro: 'fedora:34'
