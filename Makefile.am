@@ -13,7 +13,7 @@ TESTS=tests/*test
 AUTOMAKE_OPTIONS = serial-tests
 
 
-EXTRA_DIST = $(man_MANS) roll.spec COPYRIGHT $(TESTS)
+EXTRA_DIST = $(man_MANS) roll.spec COPYRIGHT $(TESTS) tests/test_functions.sh
 
 README: README.md
 	pandoc -f markdown -t plain $< -o $@
