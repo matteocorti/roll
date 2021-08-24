@@ -21,7 +21,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
 
-      - name: Install autoconf
+      - name: Install dependencies
         run: |
           brew install autoconf automake libtool
 
@@ -104,25 +104,25 @@ jobs:
             pre: >-
               dnf upgrade -y &&
               dnf install -y hostname &&
-              dnf install -y autoconf automake
+              dnf install -y autoconf automake gcc
           - distro: 'fedora:33'
             pre: >-
               dnf upgrade -y &&
               dnf install -y hostname &&
-              dnf install -y autoconf automake
+              dnf install -y autoconf automake gcc
           - distro: 'fedora:32'
             pre: >-
               dnf upgrade -y &&
               dnf install -y hostname &&
-              dnf install -y autoconf automake
+              dnf install -y autoconf automake gcc
           - distro: 'centos:7'
             pre: >-
               yum upgrade -y &&
-              yum install -y autoconf automake
+              yum install -y autoconf automake gcc
           - distro: 'centos:8'
             pre: >-
               dnf upgrade -y &&
-              dnf install -y autoconf automake
+              dnf install -y autoconf automake gcc
     steps:
       - name: Git clone repository
         uses: actions/checkout@v2
