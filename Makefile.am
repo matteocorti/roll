@@ -17,7 +17,7 @@ AUTOMAKE_OPTIONS = serial-tests
 EXTRA_DIST = $(man_MANS) roll.spec COPYRIGHT $(TESTS) tests/test_functions.sh
 
 README: README.md
-	pandoc -f markdown -t plain $< -o $@
+	if uname -a | grep -qi alpine ; then  pandoc -f markdown -t plain $< -o $@ ; else cp README.md README; fi
 
 rpm: dist
 	mkdir -p rpmroot/SOURCES rpmroot/BUILD
