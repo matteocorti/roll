@@ -103,14 +103,13 @@ jobs:
               apk update &&
               apk upgrade &&
               apk add -U bash &&
-              apk add autoconf automake gcc binutils
+              apk add autoconf automake gcc binutils build-base
           - distro: 'alpine:3.13'
             pre: >-
               apk update &&
               apk upgrade &&
               apk add -U bash &&
-              apk add autoconf automake gcc binutils
-
+              apk add autoconf automake gcc binutils build-base
 
 
           - distro: 'fedora:34'
