@@ -104,25 +104,25 @@ jobs:
             pre: >-
               dnf upgrade -y &&
               dnf install -y hostname &&
-              dnf install -y autoconf automake gcc byacc
+              dnf install -y autoconf automake gcc byacc make
           - distro: 'fedora:33'
             pre: >-
               dnf upgrade -y &&
               dnf install -y hostname &&
-              dnf install -y autoconf automake gcc byacc
+              dnf install -y autoconf automake gcc byacc make
           - distro: 'fedora:32'
             pre: >-
               dnf upgrade -y &&
               dnf install -y hostname &&
-              dnf install -y autoconf automake gcc byacc
+              dnf install -y autoconf automake gcc byacc make
           - distro: 'centos:7'
             pre: >-
               yum upgrade -y &&
-              yum install -y autoconf automake gcc byacc
+              yum install -y autoconf automake gcc byacc make
           - distro: 'centos:8'
             pre: >-
               dnf upgrade -y &&
-              dnf install -y autoconf automake gcc byacc
+              dnf install -y autoconf automake gcc byacc make
     steps:
       - name: Git clone repository
         uses: actions/checkout@v2
