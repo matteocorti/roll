@@ -14,7 +14,7 @@
 #include "roll.h"
 #include "parser.h"
 
-void yyparse();
+int yyparse(void);
 
 int sum_flag     = FALSE; /**< command line argument: sum series     */
 static int test         = 0; /**< command line argument: test run (no random results) */
