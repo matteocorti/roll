@@ -14,6 +14,8 @@
 #include "roll.h"
 #include "parser.h"
 
+void yyparse();
+
 int sum_flag     = FALSE; /**< command line argument: sum series     */
 static int test         = 0; /**< command line argument: test run (no random results) */
 static int verbose_flag = FALSE; /**< command line argument: verbose output */
@@ -145,17 +147,25 @@ int roll(int dice) {
    *  j=1+(int) (10.0*rand()/(RAND_MAX+1.0));
    */
 
+  int res;
+
+  if ( ! test ) {
+  
 #if defined HAVE_SRANDOMDEV || defined HAVE_SRANDOM
-  int res = 1+(int)(((double)dice)*random()/(RAND_MAX+1.0));
+    res = 1+(int)(((double)dice)*random()/(RAND_MAX+1.0));
 #else
-  int res = 1+(int)(((double)dice)*rand()/(RAND_MAX+1.0));
+    res = 1+(int)(((double)dice)*rand()/(RAND_MAX+1.0));
 #endif
 
+  } else {
+    res = test;
+  }
+  
   return res;
 
 }
 
-#if defined HAVE_SRANDOM
+#ifdef HAVE_SRANDOM
 /*!
  * \brief       Try to initialize random from /dev/urandom, otherwise fallback on srandom(time(0))
  */
@@ -217,10 +227,10 @@ int main(int argc, char **argv) {
     int c;
     
 #ifdef DEBUG
-    c = getopt_long (argc, argv, "hvspd",
+    c = getopt_long (argc, argv, "hvsptd",
 		     long_options, &option_index);
 #else
-    c = getopt_long (argc, argv, "hvsp",
+    c = getopt_long (argc, argv, "hvspt",
 		     long_options, &option_index);
 #endif
     
@@ -245,6 +255,10 @@ int main(int argc, char **argv) {
     case 'h':
       usage();
       exit(0);
+
+    case 't':
+      test = 3; /* value to be used as a fix result of a dice roll */
+      break;
 
     case '?':
       usage();
