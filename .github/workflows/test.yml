@@ -21,6 +21,10 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
 
+      - name: Install autoconf
+        run: |
+          port install autoconf
+
       - name: Git clone repository
         uses: actions/checkout@v2
         with:
@@ -59,68 +63,66 @@ jobs:
           - distro: 'debian:testing'
             pre: >-
               apt-get update &&
-              DEBIAN_FRONTEND=noninteractive apt-get -y install nmap shellcheck curl sudo perl make bzip2 file openssl dnsutils
+              DEBIAN_FRONTEND=noninteractive apt-get -y autoconf
           - distro: 'debian:10'
             pre: >-
               apt-get update &&
-              DEBIAN_FRONTEND=noninteractive apt-get -y install nmap shellcheck curl sudo perl make bzip2 file openssl dnsutils
+              DEBIAN_FRONTEND=noninteractive apt-get -y autoconf
           - distro: 'debian:9'
             pre: >-
               apt-get update &&
-              DEBIAN_FRONTEND=noninteractive apt-get -y install nmap shellcheck curl sudo perl make bzip2 file openssl dnsutils
+              DEBIAN_FRONTEND=noninteractive apt-get -y autoconf
           - distro: 'ubuntu:20.10'
             pre: >-
               apt-get update &&
-              DEBIAN_FRONTEND=noninteractive apt-get -y install nmap shellcheck curl sudo perl make bzip2 file openssl dnsutils
+              DEBIAN_FRONTEND=noninteractive apt-get -y autoconf
           - distro: 'ubuntu:16.04'
             pre: >-
               apt-get update &&
-              DEBIAN_FRONTEND=noninteractive apt-get -y install nmap shellcheck curl sudo perl make bzip2 file openssl dnsutils
+              DEBIAN_FRONTEND=noninteractive apt-get -y autoconf
           - distro: 'ubuntu:18.04'
             pre: >-
               apt-get update &&
-              DEBIAN_FRONTEND=noninteractive apt-get -y install nmap shellcheck curl sudo perl make bzip2 file openssl dnsutils
+              DEBIAN_FRONTEND=noninteractive apt-get -y autoconf
           - distro: 'ubuntu:20.04'
             pre: >-
               apt-get update &&
-              DEBIAN_FRONTEND=noninteractive apt-get -y install nmap shellcheck curl sudo perl make bzip2 file openssl dnsutils
+              DEBIAN_FRONTEND=noninteractive apt-get -y autoconf
           - distro: 'alpine:edge'
             pre: >-
               apk update &&
               apk upgrade &&
               apk add -U bash &&
-              apk add nmap shellcheck curl sudo perl make wget bzip2 file openssl bind-tools
+              apk add autoconf
           - distro: 'alpine:3.13'
             pre: >-
               apk update &&
               apk upgrade &&
               apk add -U bash &&
-              apk add nmap shellcheck curl sudo perl make wget 
+              apk add autoconf
           - distro: 'fedora:34'
             pre: >-
               dnf upgrade -y &&
               dnf install -y hostname &&
-              dnf install -y nmap ShellCheck curl sudo perl make bzip2 file openssl bind-utils
+              dnf install -y autoconf
           - distro: 'fedora:33'
             pre: >-
               dnf upgrade -y &&
               dnf install -y hostname &&
-              dnf install -y nmap ShellCheck curl sudo perl make bzip2 file openssl bind-utils
+              dnf install -y autoconf
           - distro: 'fedora:32'
             pre: >-
               dnf upgrade -y &&
               dnf install -y hostname &&
-              dnf install -y nmap ShellCheck curl sudo perl make bzip2 file openssl bind-utils
+              dnf install -y autoconf
           - distro: 'centos:7'
             pre: >-
               yum upgrade -y &&
-              yum install -y nmap curl sudo perl make bzip2 file openssl bind-utils perl-ExtUtils-MakeMaker perl-Test-Simple &&
-              scversion="stable"; curl -Ls "https://github.com/koalaman/shellcheck/releases/download/${scversion?}/shellcheck-${scversion?}.linux.x86_64.tar.xz" | tar -xJv && cp "shellcheck-${scversion}/shellcheck" /usr/bin/
+              yum install -y autoconf
           - distro: 'centos:8'
             pre: >-
               dnf upgrade -y &&
-              dnf install -y nmap curl sudo perl make bzip2 file openssl bind-utils &&
-              scversion="stable"; curl -Ls "https://github.com/koalaman/shellcheck/releases/download/${scversion?}/shellcheck-${scversion?}.linux.x86_64.tar.xz" | tar -xJv && cp "shellcheck-${scversion}/shellcheck" /usr/bin/
+              dnf install -y autoconf
     steps:
       - name: Git clone repository
         uses: actions/checkout@v2
@@ -131,7 +133,7 @@ jobs:
           PRE: ${{ matrix.pre }}
         run: |
           echo $PRE > ./prep-cmd.sh
-          docker run --network host -w /check_ssl_cert -v ${PWD}:/check_ssl_cert ${{ matrix.distro }} \
+          docker run --network host -w /roll -v ${PWD}:/roll ${{ matrix.distro }} \
               /bin/sh -c 'sh ./prep-cmd.sh \
               && uname -a \
               && ./regen.sh \
@@ -154,24 +156,19 @@ jobs:
         include:
           - distro: 'fedora:34'
             pre: >-
-              dnf install -y hostname &&
-              dnf install -y nmap ShellCheck curl sudo perl make bzip2 file openssl bind-utils rpm-build
+              dnf install -y autoconf rpm-build
           - distro: 'fedora:33'
             pre: >-
-              dnf install -y hostname &&
-              dnf install -y nmap ShellCheck curl sudo perl make bzip2 file openssl bind-utils rpm-build
+              dnf install -y autoconf rpm-build
           - distro: 'fedora:32'
             pre: >-
-              dnf install -y hostname &&
-              dnf install -y nmap ShellCheck curl sudo perl make bzip2 file openssl bind-utils rpm-build
+              dnf install -y autoconf rpm-build
           - distro: 'centos:7'
             pre: >-
-              yum install -y nmap curl sudo perl make bzip2 file openssl dig perl-ExtUtils-MakeMaker perl-Test-Simple rpm-build &&
-              scversion="stable"; curl -Ls "https://github.com/koalaman/shellcheck/releases/download/${scversion?}/shellcheck-${scversion?}.linux.x86_64.tar.xz" | tar -xJv && cp "shellcheck-${scversion}/shellcheck" /usr/bin/
+              yum install -y autoconf rpm-build
           - distro: 'centos:8'
             pre: >-
-              dnf install -y nmap curl sudo perl make bzip2 file openssl bind-utils rpm-build &&
-              scversion="stable"; curl -Ls "https://github.com/koalaman/shellcheck/releases/download/${scversion?}/shellcheck-${scversion?}.linux.x86_64.tar.xz" | tar -xJv && cp "shellcheck-${scversion}/shellcheck" /usr/bin/
+              dnf install -y autoconf rpm-build
     steps:
       - name: Git clone repository
         uses: actions/checkout@v2
@@ -182,7 +179,7 @@ jobs:
           PRE: ${{ matrix.pre }}
         run: |
           echo $PRE > ./prep-cmd.sh
-          docker run --network host -w /check_ssl_cert -v ${PWD}:/check_ssl_cert ${{ matrix.distro }} \
+          docker run --network host -w /roll -v ${PWD}:/roll ${{ matrix.distro }} \
               /bin/sh -c 'sh ./prep-cmd.sh \
               && uname -a \
               && make rpm'
