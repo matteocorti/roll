@@ -178,19 +178,19 @@ jobs:
         include:
           - distro: 'fedora:34'
             pre: >-
-              dnf install -y autoconf automake rpm-build make
+              dnf install -y autoconf automake rpm-build make gcc byacc flex pandoc
           - distro: 'fedora:33'
             pre: >-
-              dnf install -y autoconf automake rpm-build make
+              dnf install -y autoconf automake rpm-build make gcc byacc flex pandoc
           - distro: 'fedora:32'
             pre: >-
-              dnf install -y autoconf automake rpm-build make
+              dnf install -y autoconf automake rpm-build make gcc byacc flex pandoc
           - distro: 'centos:7'
             pre: >-
-              yum install -y autoconf automake rpm-build make
+              yum install -y autoconf automake rpm-build make gcc byacc flex pandoc
           - distro: 'centos:8'
             pre: >-
-              dnf install -y autoconf automake rpm-build make
+              dnf install -y autoconf automake rpm-build make gcc byacc flex pandoc
     steps:
       - name: Git clone repository
         uses: actions/checkout@v2
