@@ -35,6 +35,7 @@ jobs:
           uname -a &&
           ./regen.sh &&
           ./configure &&
+          make dist &&
           make check
 
   linux:
@@ -66,34 +67,34 @@ jobs:
           - distro: 'debian:testing'
             pre: >-
               apt-get update &&
-              DEBIAN_FRONTEND=noninteractive apt-get -y install autoconf automake gcc make bison
+              DEBIAN_FRONTEND=noninteractive apt-get -y install autoconf automake gcc make bison pandoc
           - distro: 'debian:10'
             pre: >-
               apt-get update &&
-              DEBIAN_FRONTEND=noninteractive apt-get -y install autoconf automake gcc make bison
+              DEBIAN_FRONTEND=noninteractive apt-get -y install autoconf automake gcc make bison pandoc
           - distro: 'debian:9'
             pre: >-
               apt-get update &&
-              DEBIAN_FRONTEND=noninteractive apt-get -y install autoconf automake gcc make bison
+              DEBIAN_FRONTEND=noninteractive apt-get -y install autoconf automake gcc make bison pandoc
 
 
 
           - distro: 'ubuntu:20.10'
             pre: >-
               apt-get update &&
-              DEBIAN_FRONTEND=noninteractive apt-get -y install autoconf automake gcc make bison
+              DEBIAN_FRONTEND=noninteractive apt-get -y install autoconf automake gcc make bison pandoc
           - distro: 'ubuntu:16.04'
             pre: >-
               apt-get update &&
-              DEBIAN_FRONTEND=noninteractive apt-get -y install autoconf automake gcc make bison
+              DEBIAN_FRONTEND=noninteractive apt-get -y install autoconf automake gcc make bison pandoc
           - distro: 'ubuntu:18.04'
             pre: >-
               apt-get update &&
-              DEBIAN_FRONTEND=noninteractive apt-get -y install autoconf automake gcc make bison
+              DEBIAN_FRONTEND=noninteractive apt-get -y install autoconf automake gcc make bison pandoc
           - distro: 'ubuntu:20.04'
             pre: >-
               apt-get update &&
-              DEBIAN_FRONTEND=noninteractive apt-get -y install autoconf automake gcc make bison
+              DEBIAN_FRONTEND=noninteractive apt-get -y install autoconf automake gcc make bison pandoc
 
 
 
@@ -116,28 +117,28 @@ jobs:
             pre: >-
               dnf upgrade -y &&
               dnf install -y hostname &&
-              dnf install -y autoconf automake gcc byacc make flex
+              dnf install -y autoconf automake gcc byacc make flex pandoc
           - distro: 'fedora:33'
             pre: >-
               dnf upgrade -y &&
               dnf install -y hostname &&
-              dnf install -y autoconf automake gcc byacc make flex
+              dnf install -y autoconf automake gcc byacc make flex pandoc
           - distro: 'fedora:32'
             pre: >-
               dnf upgrade -y &&
               dnf install -y hostname &&
-              dnf install -y autoconf automake gcc byacc make flex
+              dnf install -y autoconf automake gcc byacc make flex pandoc
 
 
 
           - distro: 'centos:7'
             pre: >-
               yum upgrade -y &&
-              yum install -y autoconf automake gcc byacc make flex
+              yum install -y autoconf automake gcc byacc make flex pandoc
           - distro: 'centos:8'
             pre: >-
               dnf upgrade -y &&
-              dnf install -y autoconf automake gcc byacc make flex
+              dnf install -y autoconf automake gcc byacc make flex pandoc
 
 
 
@@ -156,6 +157,7 @@ jobs:
               && uname -a \
               && ./regen.sh \
               && ./configure \
+              && make dist \
               && make check'
 
   rpm:
