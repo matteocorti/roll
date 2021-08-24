@@ -60,46 +60,58 @@ jobs:
           - 'fedora:33'
           - 'fedora:34'
         include:
+
+
+        
           - distro: 'debian:testing'
             pre: >-
               apt-get update &&
-              DEBIAN_FRONTEND=noninteractive apt-get -y install autoconf automake gcc make
+              DEBIAN_FRONTEND=noninteractive apt-get -y install autoconf automake gcc make bison
           - distro: 'debian:10'
             pre: >-
               apt-get update &&
-              DEBIAN_FRONTEND=noninteractive apt-get -y install autoconf automake gcc make
+              DEBIAN_FRONTEND=noninteractive apt-get -y install autoconf automake gcc make bison
           - distro: 'debian:9'
             pre: >-
               apt-get update &&
-              DEBIAN_FRONTEND=noninteractive apt-get -y install autoconf automake gcc make
+              DEBIAN_FRONTEND=noninteractive apt-get -y install autoconf automake gcc make bison
+
+
+
           - distro: 'ubuntu:20.10'
             pre: >-
               apt-get update &&
-              DEBIAN_FRONTEND=noninteractive apt-get -y install autoconf automake gcc make
+              DEBIAN_FRONTEND=noninteractive apt-get -y install autoconf automake gcc make bison
           - distro: 'ubuntu:16.04'
             pre: >-
               apt-get update &&
-              DEBIAN_FRONTEND=noninteractive apt-get -y install autoconf automake gcc make
+              DEBIAN_FRONTEND=noninteractive apt-get -y install autoconf automake gcc make bison
           - distro: 'ubuntu:18.04'
             pre: >-
               apt-get update &&
-              DEBIAN_FRONTEND=noninteractive apt-get -y install autoconf automake gcc make
+              DEBIAN_FRONTEND=noninteractive apt-get -y install autoconf automake gcc make bison
           - distro: 'ubuntu:20.04'
             pre: >-
               apt-get update &&
-              DEBIAN_FRONTEND=noninteractive apt-get -y install autoconf automake gcc make
+              DEBIAN_FRONTEND=noninteractive apt-get -y install autoconf automake gcc make bison
+
+
+
           - distro: 'alpine:edge'
             pre: >-
               apk update &&
               apk upgrade &&
               apk add -U bash &&
-              apk add autoconf automake
+              apk add autoconf automake gcc
           - distro: 'alpine:3.13'
             pre: >-
               apk update &&
               apk upgrade &&
               apk add -U bash &&
-              apk add autoconf automake
+              apk add autoconf automake gcc
+
+
+
           - distro: 'fedora:34'
             pre: >-
               dnf upgrade -y &&
@@ -115,6 +127,9 @@ jobs:
               dnf upgrade -y &&
               dnf install -y hostname &&
               dnf install -y autoconf automake gcc byacc make flex
+
+
+
           - distro: 'centos:7'
             pre: >-
               yum upgrade -y &&
@@ -123,6 +138,9 @@ jobs:
             pre: >-
               dnf upgrade -y &&
               dnf install -y autoconf automake gcc byacc make flex
+
+
+
     steps:
       - name: Git clone repository
         uses: actions/checkout@v2
@@ -156,19 +174,19 @@ jobs:
         include:
           - distro: 'fedora:34'
             pre: >-
-              dnf install -y autoconf automake rpm-build
+              dnf install -y autoconf automake rpm-build make
           - distro: 'fedora:33'
             pre: >-
-              dnf install -y autoconf automake rpm-build
+              dnf install -y autoconf automake rpm-build make
           - distro: 'fedora:32'
             pre: >-
-              dnf install -y autoconf automake rpm-build
+              dnf install -y autoconf automake rpm-build make
           - distro: 'centos:7'
             pre: >-
-              yum install -y autoconf automake rpm-build
+              yum install -y autoconf automake rpm-build make
           - distro: 'centos:8'
             pre: >-
-              dnf install -y autoconf automake rpm-build
+              dnf install -y autoconf automake rpm-build make
     steps:
       - name: Git clone repository
         uses: actions/checkout@v2
