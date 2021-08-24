@@ -23,7 +23,7 @@ jobs:
 
       - name: Install autoconf
         run: |
-          brew install autoconf
+          brew install autoconf automake libtool
 
       - name: Git clone repository
         uses: actions/checkout@v2
@@ -63,66 +63,66 @@ jobs:
           - distro: 'debian:testing'
             pre: >-
               apt-get update &&
-              DEBIAN_FRONTEND=noninteractive apt-get -y autoconf
+              DEBIAN_FRONTEND=noninteractive apt-get -y autoconf automake
           - distro: 'debian:10'
             pre: >-
               apt-get update &&
-              DEBIAN_FRONTEND=noninteractive apt-get -y autoconf
+              DEBIAN_FRONTEND=noninteractive apt-get -y autoconf automake
           - distro: 'debian:9'
             pre: >-
               apt-get update &&
-              DEBIAN_FRONTEND=noninteractive apt-get -y autoconf
+              DEBIAN_FRONTEND=noninteractive apt-get -y autoconf automake
           - distro: 'ubuntu:20.10'
             pre: >-
               apt-get update &&
-              DEBIAN_FRONTEND=noninteractive apt-get -y autoconf
+              DEBIAN_FRONTEND=noninteractive apt-get -y autoconf automake
           - distro: 'ubuntu:16.04'
             pre: >-
               apt-get update &&
-              DEBIAN_FRONTEND=noninteractive apt-get -y autoconf
+              DEBIAN_FRONTEND=noninteractive apt-get -y autoconf automake
           - distro: 'ubuntu:18.04'
             pre: >-
               apt-get update &&
-              DEBIAN_FRONTEND=noninteractive apt-get -y autoconf
+              DEBIAN_FRONTEND=noninteractive apt-get -y autoconf automake
           - distro: 'ubuntu:20.04'
             pre: >-
               apt-get update &&
-              DEBIAN_FRONTEND=noninteractive apt-get -y autoconf
+              DEBIAN_FRONTEND=noninteractive apt-get -y autoconf automake
           - distro: 'alpine:edge'
             pre: >-
               apk update &&
               apk upgrade &&
               apk add -U bash &&
-              apk add autoconf
+              apk add autoconf automake
           - distro: 'alpine:3.13'
             pre: >-
               apk update &&
               apk upgrade &&
               apk add -U bash &&
-              apk add autoconf
+              apk add autoconf automake
           - distro: 'fedora:34'
             pre: >-
               dnf upgrade -y &&
               dnf install -y hostname &&
-              dnf install -y autoconf
+              dnf install -y autoconf automake
           - distro: 'fedora:33'
             pre: >-
               dnf upgrade -y &&
               dnf install -y hostname &&
-              dnf install -y autoconf
+              dnf install -y autoconf automake
           - distro: 'fedora:32'
             pre: >-
               dnf upgrade -y &&
               dnf install -y hostname &&
-              dnf install -y autoconf
+              dnf install -y autoconf automake
           - distro: 'centos:7'
             pre: >-
               yum upgrade -y &&
-              yum install -y autoconf
+              yum install -y autoconf automake
           - distro: 'centos:8'
             pre: >-
               dnf upgrade -y &&
-              dnf install -y autoconf
+              dnf install -y autoconf automake
     steps:
       - name: Git clone repository
         uses: actions/checkout@v2
@@ -156,19 +156,19 @@ jobs:
         include:
           - distro: 'fedora:34'
             pre: >-
-              dnf install -y autoconf rpm-build
+              dnf install -y autoconf automake rpm-build
           - distro: 'fedora:33'
             pre: >-
-              dnf install -y autoconf rpm-build
+              dnf install -y autoconf automake rpm-build
           - distro: 'fedora:32'
             pre: >-
-              dnf install -y autoconf rpm-build
+              dnf install -y autoconf automake rpm-build
           - distro: 'centos:7'
             pre: >-
-              yum install -y autoconf rpm-build
+              yum install -y autoconf automake rpm-build
           - distro: 'centos:8'
             pre: >-
-              dnf install -y autoconf rpm-build
+              dnf install -y autoconf automake rpm-build
     steps:
       - name: Git clone repository
         uses: actions/checkout@v2
