@@ -29,6 +29,7 @@ jobs:
       - name: Run the tests
         run:  |
           uname -a \
+          && ./regen.sh
           && ./configure
           && make check
 
