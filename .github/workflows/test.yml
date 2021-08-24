@@ -204,4 +204,6 @@ jobs:
           docker run --network host -w /roll -v ${PWD}:/roll ${{ matrix.distro }} \
               /bin/sh -c 'sh ./prep-cmd.sh \
               && uname -a \
+              && ./regen.sh \
+              && ./configure \
               && make rpm'
