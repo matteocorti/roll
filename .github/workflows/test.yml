@@ -23,7 +23,7 @@ jobs:
 
       - name: Install autoconf
         run: |
-          port install autoconf
+          brew install autoconf
 
       - name: Git clone repository
         uses: actions/checkout@v2
