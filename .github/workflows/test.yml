@@ -1,0 +1,189 @@
+name: Test
+
+on:
+  push:
+    branches:
+      - $default-branch
+      - development
+      - master
+  # Run tests for any PRs
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  macos:
+    name: Running tests on ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os:
+          - macos-10.15
+    runs-on: ${{ matrix.os }}
+    steps:
+
+      - name: Git clone repository
+        uses: actions/checkout@v2
+        with:
+          submodules: true
+
+      - name: Run the tests
+        run:  |
+          uname -a \
+          && ./configure
+          && make check
+
+  linux:
+    # The host should always be linux
+    runs-on: ubuntu-latest
+    name: Running tests on ${{ matrix.distro }}
+    strategy:
+      fail-fast: false
+      matrix:
+        distro:
+          - 'debian:9'
+          - 'debian:10'
+          - 'debian:testing'
+          - 'ubuntu:16.04'
+          - 'ubuntu:18.04'
+          - 'ubuntu:20.04'
+          - 'ubuntu:20.10'
+          - 'alpine:3.13'
+          - 'alpine:edge'
+          - 'centos:7'
+          - 'centos:8'
+          - 'fedora:32'
+          - 'fedora:33'
+          - 'fedora:34'
+        include:
+          - distro: 'debian:testing'
+            pre: >-
+              apt-get update &&
+              DEBIAN_FRONTEND=noninteractive apt-get -y install nmap shellcheck curl sudo perl make bzip2 file openssl dnsutils
+          - distro: 'debian:10'
+            pre: >-
+              apt-get update &&
+              DEBIAN_FRONTEND=noninteractive apt-get -y install nmap shellcheck curl sudo perl make bzip2 file openssl dnsutils
+          - distro: 'debian:9'
+            pre: >-
+              apt-get update &&
+              DEBIAN_FRONTEND=noninteractive apt-get -y install nmap shellcheck curl sudo perl make bzip2 file openssl dnsutils
+          - distro: 'ubuntu:20.10'
+            pre: >-
+              apt-get update &&
+              DEBIAN_FRONTEND=noninteractive apt-get -y install nmap shellcheck curl sudo perl make bzip2 file openssl dnsutils
+          - distro: 'ubuntu:16.04'
+            pre: >-
+              apt-get update &&
+              DEBIAN_FRONTEND=noninteractive apt-get -y install nmap shellcheck curl sudo perl make bzip2 file openssl dnsutils
+          - distro: 'ubuntu:18.04'
+            pre: >-
+              apt-get update &&
+              DEBIAN_FRONTEND=noninteractive apt-get -y install nmap shellcheck curl sudo perl make bzip2 file openssl dnsutils
+          - distro: 'ubuntu:20.04'
+            pre: >-
+              apt-get update &&
+              DEBIAN_FRONTEND=noninteractive apt-get -y install nmap shellcheck curl sudo perl make bzip2 file openssl dnsutils
+          - distro: 'alpine:edge'
+            pre: >-
+              apk update &&
+              apk upgrade &&
+              apk add -U bash &&
+              apk add nmap shellcheck curl sudo perl make wget bzip2 file openssl bind-tools
+          - distro: 'alpine:3.13'
+            pre: >-
+              apk update &&
+              apk upgrade &&
+              apk add -U bash &&
+              apk add nmap shellcheck curl sudo perl make wget 
+          - distro: 'fedora:34'
+            pre: >-
+              dnf upgrade -y &&
+              dnf install -y hostname &&
+              dnf install -y nmap ShellCheck curl sudo perl make bzip2 file openssl bind-utils
+          - distro: 'fedora:33'
+            pre: >-
+              dnf upgrade -y &&
+              dnf install -y hostname &&
+              dnf install -y nmap ShellCheck curl sudo perl make bzip2 file openssl bind-utils
+          - distro: 'fedora:32'
+            pre: >-
+              dnf upgrade -y &&
+              dnf install -y hostname &&
+              dnf install -y nmap ShellCheck curl sudo perl make bzip2 file openssl bind-utils
+          - distro: 'centos:7'
+            pre: >-
+              yum upgrade -y &&
+              yum install -y nmap curl sudo perl make bzip2 file openssl bind-utils perl-ExtUtils-MakeMaker perl-Test-Simple &&
+              scversion="stable"; curl -Ls "https://github.com/koalaman/shellcheck/releases/download/${scversion?}/shellcheck-${scversion?}.linux.x86_64.tar.xz" | tar -xJv && cp "shellcheck-${scversion}/shellcheck" /usr/bin/
+          - distro: 'centos:8'
+            pre: >-
+              dnf upgrade -y &&
+              dnf install -y nmap curl sudo perl make bzip2 file openssl bind-utils &&
+              scversion="stable"; curl -Ls "https://github.com/koalaman/shellcheck/releases/download/${scversion?}/shellcheck-${scversion?}.linux.x86_64.tar.xz" | tar -xJv && cp "shellcheck-${scversion}/shellcheck" /usr/bin/
+    steps:
+      - name: Git clone repository
+        uses: actions/checkout@v2
+        with:
+          submodules: true
+      - name: Run the tests on ${{ matrix.distro }}
+        env:
+          PRE: ${{ matrix.pre }}
+        run: |
+          echo $PRE > ./prep-cmd.sh
+          docker run --network host -w /check_ssl_cert -v ${PWD}:/check_ssl_cert ${{ matrix.distro }} \
+              /bin/sh -c 'sh ./prep-cmd.sh \
+              && curl -L https://cpanmin.us | sudo perl - --sudo App::cpanminus \
+              && cpanm --sudo install Date::Parse \
+              && uname -a \
+              && make test \
+              && if command -v shellcheck > /dev/null 2>&1  ; then ./shell-ci-build.sh ; fi \
+              && if command -v shellcheck > /dev/null 2>&1  ; then shellcheck ./check_ssl_cert test/unit_tests.sh ; fi'
+
+  rpm:
+    # The host should always be linux
+    runs-on: ubuntu-latest
+    name: Running RPM tests on ${{ matrix.distro }}
+    strategy:
+      fail-fast: false
+      matrix:
+        distro:
+          - 'centos:7'
+          - 'centos:8'
+          - 'fedora:32'
+          - 'fedora:33'
+          - 'fedora:34'
+        include:
+          - distro: 'fedora:34'
+            pre: >-
+              dnf install -y hostname &&
+              dnf install -y nmap ShellCheck curl sudo perl make bzip2 file openssl bind-utils rpm-build
+          - distro: 'fedora:33'
+            pre: >-
+              dnf install -y hostname &&
+              dnf install -y nmap ShellCheck curl sudo perl make bzip2 file openssl bind-utils rpm-build
+          - distro: 'fedora:32'
+            pre: >-
+              dnf install -y hostname &&
+              dnf install -y nmap ShellCheck curl sudo perl make bzip2 file openssl bind-utils rpm-build
+          - distro: 'centos:7'
+            pre: >-
+              yum install -y nmap curl sudo perl make bzip2 file openssl dig perl-ExtUtils-MakeMaker perl-Test-Simple rpm-build &&
+              scversion="stable"; curl -Ls "https://github.com/koalaman/shellcheck/releases/download/${scversion?}/shellcheck-${scversion?}.linux.x86_64.tar.xz" | tar -xJv && cp "shellcheck-${scversion}/shellcheck" /usr/bin/
+          - distro: 'centos:8'
+            pre: >-
+              dnf install -y nmap curl sudo perl make bzip2 file openssl bind-utils rpm-build &&
+              scversion="stable"; curl -Ls "https://github.com/koalaman/shellcheck/releases/download/${scversion?}/shellcheck-${scversion?}.linux.x86_64.tar.xz" | tar -xJv && cp "shellcheck-${scversion}/shellcheck" /usr/bin/
+    steps:
+      - name: Git clone repository
+        uses: actions/checkout@v2
+        with:
+          submodules: true
+      - name: Build the RPM on ${{ matrix.distro }}
+        env:
+          PRE: ${{ matrix.pre }}
+        run: |
+          echo $PRE > ./prep-cmd.sh
+          docker run --network host -w /check_ssl_cert -v ${PWD}:/check_ssl_cert ${{ matrix.distro }} \
+              /bin/sh -c 'sh ./prep-cmd.sh \
+              && uname -a \
+              && make rpm'
