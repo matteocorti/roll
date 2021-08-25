@@ -54,6 +54,8 @@ jobs:
               && uname -a \
               && whoami \
               && pwd \
+              && ./regen.sh \
+              && ./configure \
               && . ./utils/prepare_rpm.sh \
               && echo "$RPM  --> $RPMDIR" \
               && echo "$SRPM --> $SRPMDIR" \

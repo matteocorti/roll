@@ -1,7 +1,5 @@
 #!/bin/sh
 
-make rpm
-
 echo "Building the RPMs"
 OUT=$( make rpm 2>&1 | grep ^Wrote )
 
