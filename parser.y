@@ -233,7 +233,7 @@ factor   :   NUMBER filtered_dice {
   $$ = new_op(OP_LOW, new_number($4), new_op(OP_REP, new_number($1), $2));
 
 }
-| NUMBER filtered_dice X LOW {
+| NUMBER filtered_dice LOW X {
 
 #ifdef DEBUG
   if (debug_flag > 0) {
@@ -248,7 +248,7 @@ factor   :   NUMBER filtered_dice {
   $$ = new_op(OP_HIGH, new_number($1-1), new_op(OP_REP, new_number($1), $2));
   
 }
-| NUMBER filtered_dice X HIGH {
+| NUMBER filtered_dice HIGH X {
 
 #ifdef DEBUG
   if (debug_flag > 0) {

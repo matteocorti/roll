@@ -98,7 +98,7 @@ d%         rolls 2 10-sided dices: one represents the tens and
 1d6 / 2    rolls 1 6-sided dice and divides the result by 2 (1d3)
 4d6h3      rolls 4 6-sided dices and keeps the 3 highest results
            (discarding the lowest)
-4d6 x L      rolls 4 6-sided dices and discards the lowest
+4d6LX      rolls 4 6-sided dices and discards the lowest
 "6{3d6}"   rolls 3d6 6 times (expression
            is quoted to avoid the { and { being interpreted
            by the shell)
@@ -116,7 +116,7 @@ d%         rolls 2 10-sided dices: one represents the tens and
 expression   := term { "+" term | "-" term } .
 term         := number | factor [ ("*"|"x"|"/") number |
                 number ("*"|"/") factor | "(" expression ")" .
-factor       := number FilteredDice [ ("h"|"H"|"l"|"L"|"k"|"K") number ] | number FiltreredDice ("X") ("h"|"H"|"l"|"L") | FilteredDice .
+factor       := number FilteredDice [ ("h"|"H"|"l"|"L"|"k"|"K") number ] | number FiltreredDice ("h"|"H"|"l"|"L") ("X") | FilteredDice .
 FilteredDice := dice | dice (">"|">="|"<"|"<="|"!=") number .
 dice         := "d" | "D" | "w" | "W" | "t" | "T" [ number | "%" | "F" | "f" | "X" ]
 ```

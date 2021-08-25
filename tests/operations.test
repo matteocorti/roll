@@ -6,3 +6,4 @@ test_expression  4 1d6 + 1
 test_expression  2 1d10-1
 test_expression 66 1d%*2
 test_expression  3 2D6/2
+test_expression 30 1d6x10
