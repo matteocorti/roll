@@ -158,7 +158,7 @@ jobs:
               /bin/sh -c 'sh ./prep-cmd.sh \
               && uname -a \
               && ./regen.sh \
-              && ./configure ; cat config.log \
+              && ./configure \
               && make dist \
               && make check'
 
