@@ -191,7 +191,8 @@ jobs:
               yum install -y --enablerepo=epel autoconf automake rpm-build make gcc byacc flex pandoc
           - distro: 'centos:8'
             pre: >-
-              dnf -y install epel-release &&
+              dnf -y install epel-release dnf-plugins-core &&
+              dnf config-manager --set-enabled powertools &&
               dnf install -y --enablerepo=epel autoconf automake rpm-build make gcc byacc flex pandoc
     steps:
       - name: Git clone repository
