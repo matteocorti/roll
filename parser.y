@@ -18,13 +18,22 @@
   void yyerror (char const *);
 
   extern int sum_flag;
-  extern int debug_flag;
 
 #ifdef DEBUG
-   yydebug=1;
+  extern int debug_flag;
 #endif
   
 %}
+
+%initial-action
+{
+#ifdef DEBUG
+  if (debug_flag > 0) { 
+    yydebug=1;
+  }
+#endif
+  
+};
 
 %union{
   struct ir_node * node;
@@ -151,7 +160,9 @@ expression_list : expression {
 expression : term {
 
 #ifdef DEBUG
-  printf("[DBG] [PARSE] expression : term\n");
+  if (debug_flag > 0) {
+    printf("[DBG] [PARSE] expression : term\n");
+  }
 #endif
 
   $$ = $1;
@@ -160,7 +171,9 @@ expression : term {
 | expression PLUS term {
 
 #ifdef DEBUG
-  printf("[DBG] [PARSE] expression : expression PLUS term\n");
+  if (debug_flag > 0) {
+    printf("[DBG] [PARSE] expression : expression PLUS term\n");
+  }
 #endif
 
   $$ = new_op(OP_PLUS, $1, $3);
@@ -169,7 +182,9 @@ expression : term {
 | expression MINUS term {
 
 #ifdef DEBUG
-  printf("[DBG] [PARSE] expression : expression MINUS term\n");
+  if (debug_flag > 0) {
+    printf("[DBG] [PARSE] expression : expression MINUS term\n");
+  }
 #endif
   
   $$ = new_op(OP_MINUS, $1, $3);
@@ -180,7 +195,9 @@ expression : term {
 factor   :   NUMBER filtered_dice {
 
 #ifdef DEBUG
-  printf("[DBG] [PARSE] factor: %i filtered_dice\n", $1);
+  if (debug_flag > 0) {
+    printf("[DBG] [PARSE] factor: %i filtered_dice\n", $1);
+  }
 #endif
   
   $$ = new_op(OP_REP, new_number($1), $2);
@@ -189,7 +206,9 @@ factor   :   NUMBER filtered_dice {
 | NUMBER filtered_dice HIGH NUMBER {
 
 #ifdef DEBUG
-  printf("[DBG] [PARSE] factor: %i filtered_dice HIGH NUMBER\n", $1);
+  if (debug_flag > 0) {
+    printf("[DBG] [PARSE] factor: %i filtered_dice HIGH NUMBER\n", $1);
+  }
 #endif
 
   if ($4 > $1) {
@@ -202,7 +221,9 @@ factor   :   NUMBER filtered_dice {
 | NUMBER filtered_dice LOW NUMBER {
 
 #ifdef DEBUG
-  printf("[DBG] [PARSE] factor: %i filtered_dice LOW NUMBER\n", $1);
+  if (debug_flag > 0) {
+    printf("[DBG] [PARSE] factor: %i filtered_dice LOW NUMBER\n", $1);
+  }
 #endif
 
   if ($4 > $1) {
@@ -215,7 +236,9 @@ factor   :   NUMBER filtered_dice {
 | NUMBER filtered_dice DISCARD LOW {
 
 #ifdef DEBUG
-  printf("[DBG] factor: %i filtered_dice MINUS LOW\n", $1);
+  if (debug_flag > 0) {
+    printf("[DBG] factor: %i filtered_dice MINUS LOW\n", $1);
+  }
 #endif
 
   if ($1 <= 1) {
@@ -228,7 +251,9 @@ factor   :   NUMBER filtered_dice {
 | NUMBER filtered_dice DISCARD HIGH {
 
 #ifdef DEBUG
-  printf("[DBG] [PARSE] factor: %i filtered_dice MINUS HIGH\n", $1);
+  if (debug_flag > 0) {
+    printf("[DBG] [PARSE] factor: %i filtered_dice MINUS HIGH\n", $1);
+  }
 #endif
 
   if ($1 <= 1) {
@@ -241,7 +266,9 @@ factor   :   NUMBER filtered_dice {
 | filtered_dice {
 
 #ifdef DEBUG
-  printf("[DBG] factor: filtered_dice\n");
+  if (debug_flag > 0) {
+    printf("[DBG] factor: filtered_dice\n");
+  }
 #endif
 
   $$ = $1;

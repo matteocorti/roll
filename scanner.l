@@ -12,6 +12,10 @@
 #include <limits.h>
 #include "parser.h"
 
+#ifdef DEBUG
+  extern int debug_flag;
+#endif
+
 %} 
 
 %%
@@ -32,7 +36,9 @@
     yylval.int_type = (int)number;
 
 #ifdef DEBUG
-    printf("[DBG] [SCAN] NUMBER = %i\n", yylval.int_type);
+    if (debug_flag > 0) {
+      printf("[DBG] [SCAN] NUMBER = %i\n", yylval.int_type);
+    }
 #endif
 
     return NUMBER;
@@ -40,9 +46,13 @@
 \+          { return PLUS;    }
 
 \-          {
+
 #ifdef DEBUG
-printf("[DBG] [SCAN] MINUS\n");
+  if (debug_flag > 0) {
+    printf("[DBG] [SCAN] MINUS\n");
+  }
 #endif
+
 return MINUS;
 }
 
@@ -51,7 +61,9 @@ return MINUS;
 
 d|D|w|W|t|T {
 #ifdef DEBUG
-printf("[DBG] [SCAN] DICE\n");
+  if (debug_flag > 0) {
+    printf("[DBG] [SCAN] DICE\n");
+  }
 #endif
 return DICE;
 }

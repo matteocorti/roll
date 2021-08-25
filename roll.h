@@ -123,5 +123,6 @@ struct ir_node * new_op        ( unsigned short int op, struct ir_node * left, s
 struct ir_node * new_dice      ( struct ir_node *  sides);
 
 #ifdef DEBUG
+void debug( char * message);
 void print_tree( char * prefix, struct ir_node * node, int indent);
 #endif

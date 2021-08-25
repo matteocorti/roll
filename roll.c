@@ -34,6 +34,13 @@ YY_BUFFER_STATE yy_scan_string ( const char *yy_str  );
 int debug_flag = 0; /**< command line argument: debug output */
 #endif
 
+#ifdef DEBUG
+void debug( char * message ) {
+  if ( debug_flag > 0 ) {
+    printf("[DBG] %s\n", message);
+  }
+}
+#endif
 
 /*!
  * \brief Prints the program's usage
@@ -194,7 +201,7 @@ int main(int argc, char **argv) {
   int    expression_size;
 
 #ifdef DEBUG
-  printf("[DBG] Debug mode enabled\n");
+  debug("[DBG] Debug mode enabled");
 #endif
 
   
@@ -304,19 +311,19 @@ int main(int argc, char **argv) {
   if (expression_size > 0) {
 
 #ifdef DEBUG
-    printf("[DBG] expression '%s'\n", expression);
+    debug(expression);
 #endif
     
     yy_scan_string(expression);
 
 #ifdef DEBUG
-    printf("[DBG] expression scanned\n");
+    debug("expression scanned");
 #endif
     
     yyparse();
 
 #ifdef DEBUG
-    printf("[DBG] expression parsed\n");
+    debug("expression parsed\n");
 #endif
 
   } else {
