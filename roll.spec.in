@@ -12,7 +12,7 @@ Group:     Amusements/Games
 BuildRoot: %{_tmppath}/%{name}-%{version}-root
 Source:    https://github.com/matteocorti/%name}/releases/download/v%{version}/%{name}-%{version}.tar.gz
 URL:       http://matteocorti.github.io/roll/
-BuildRequires: byacc, flex
+BuildRequires: bison, flex
 
 %description
 roll is a program to roll dices specified in a simple and intuitive way.
