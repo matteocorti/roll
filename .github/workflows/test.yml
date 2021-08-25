@@ -116,17 +116,17 @@ jobs:
             pre: >-
               dnf upgrade -y &&
               dnf install -y hostname &&
-              dnf install -y autoconf automake gcc byacc make flex pandoc
+              dnf install -y autoconf automake gcc bison make flex pandoc
           - distro: 'fedora:33'
             pre: >-
               dnf upgrade -y &&
               dnf install -y hostname &&
-              dnf install -y autoconf automake gcc byacc make flex pandoc
+              dnf install -y autoconf automake gcc bison make flex pandoc
           - distro: 'fedora:32'
             pre: >-
               dnf upgrade -y &&
               dnf install -y hostname &&
-              dnf install -y autoconf automake gcc byacc make flex pandoc
+              dnf install -y autoconf automake gcc bison make flex pandoc
 
 
 
@@ -134,13 +134,13 @@ jobs:
             pre: >-
               yum -y install epel-release &&
               yum upgrade -y &&
-              yum install -y --enablerepo=epel autoconf automake gcc byacc make flex pandoc
+              yum install -y --enablerepo=epel autoconf automake gcc bison make flex pandoc
           - distro: 'centos:8'
             pre: >-
               dnf -y install epel-release dnf-plugins-core &&
               dnf config-manager --set-enabled powertools &&
               dnf upgrade -y &&
-              dnf install -y --enablerepo=epel autoconf automake gcc byacc make flex pandoc
+              dnf install -y --enablerepo=epel autoconf automake gcc bison make flex pandoc
 
 
 
@@ -178,22 +178,22 @@ jobs:
         include:
           - distro: 'fedora:34'
             pre: >-
-              dnf install -y autoconf automake rpm-build make gcc byacc flex pandoc
+              dnf install -y autoconf automake rpm-build make gcc bison flex pandoc
           - distro: 'fedora:33'
             pre: >-
-              dnf install -y autoconf automake rpm-build make gcc byacc flex pandoc
+              dnf install -y autoconf automake rpm-build make gcc bison flex pandoc
           - distro: 'fedora:32'
             pre: >-
-              dnf install -y autoconf automake rpm-build make gcc byacc flex pandoc
+              dnf install -y autoconf automake rpm-build make gcc bison flex pandoc
           - distro: 'centos:7'
             pre: >-
               yum -y install epel-release &&
-              yum install -y --enablerepo=epel autoconf automake rpm-build make gcc byacc flex pandoc
+              yum install -y --enablerepo=epel autoconf automake rpm-build make gcc bison flex pandoc
           - distro: 'centos:8'
             pre: >-
               dnf -y install epel-release dnf-plugins-core &&
               dnf config-manager --set-enabled powertools &&
-              dnf install -y --enablerepo=epel autoconf automake rpm-build make gcc byacc flex pandoc
+              dnf install -y --enablerepo=epel autoconf automake rpm-build make gcc bison flex pandoc
     steps:
       - name: Git clone repository
         uses: actions/checkout@v2
