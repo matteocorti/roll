@@ -138,7 +138,7 @@ jobs:
           - distro: 'centos:8'
             pre: >-
               dnf -y install epel-release dnf-plugins-core &&
-              dnf config-manager --set-enabled PowerTools &&
+              dnf config-manager --set-enabled powertools &&
               dnf upgrade -y &&
               dnf install -y --enablerepo=epel autoconf automake gcc byacc make flex pandoc
 
