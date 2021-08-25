@@ -137,7 +137,7 @@ jobs:
               yum install -y --enablerepo=epel autoconf automake gcc byacc make flex pandoc
           - distro: 'centos:8'
             pre: >-
-              dnf -y install epel-release &&
+              dnf -y install epel-release dnf-plugins-core &&
               dnf config-manager --set-enabled PowerTools &&
               dnf upgrade -y &&
               dnf install -y --enablerepo=epel autoconf automake gcc byacc make flex pandoc
