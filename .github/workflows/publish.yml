@@ -1,0 +1,67 @@
+name: Publish RPM
+
+on:
+  workflow_dispatch:
+  release:
+    types: [published]
+jobs:
+  linux:
+    # The host should always be linux
+    runs-on: ubuntu-latest
+    name: Building RPMs on ${{ matrix.distro }}
+    strategy:
+      fail-fast: false
+      matrix:
+        distro:
+          - 'centos:7'
+          - 'centos:8'
+          - 'fedora:32'
+          - 'fedora:33'
+          - 'fedora:34'
+        include:
+          - distro: 'fedora:34'
+            pre: >-
+              dnf install -y autoconf automake rpm-build make gcc bison flex pandoc
+          - distro: 'fedora:33'
+            pre: >-
+              dnf install -y autoconf automake rpm-build make gcc bison flex pandoc
+          - distro: 'fedora:32'
+            pre: >-
+              dnf install -y autoconf automake rpm-build make gcc bison flex pandoc
+          - distro: 'centos:7'
+            pre: >-
+              yum -y install epel-release &&
+              yum install -y --enablerepo=epel autoconf automake rpm-build make gcc bison flex pandoc
+          - distro: 'centos:8'
+            pre: >-
+              dnf -y install epel-release dnf-plugins-core &&
+              dnf config-manager --set-enabled powertools &&
+              dnf install -y --enablerepo=epel autoconf automake rpm-build make gcc bison flex pandoc
+    steps:
+      - name: Git clone repository
+        uses: actions/checkout@v2
+        with:
+          submodules: true
+      - name: Build the RPM on ${{ matrix.distro }}
+        env:
+          PRE: ${{ matrix.pre }}
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        run: |
+          echo $PRE > ./prep-cmd.sh
+          echo "${SSH_PRIVATE_KEY}" > id_rsa
+          docker run --network host -w /roll -v ${PWD}:/roll ${{ matrix.distro }} \
+              /bin/sh -c 'sh ./prep-cmd.sh \
+              && uname -a \
+              && whoami \
+              && pwd \
+              && . ./utils/prepare_rpm.sh \
+              && echo "$RPM  --> $RPMDIR" \
+              && echo "$SRPM --> $SRPMDIR" \
+              && mkdir /root/.ssh \
+              && chmod 700 /root/.ssh \
+              && cp id_rsa /root/.ssh \
+              && chmod 600 /root/.ssh/id_rsa \
+              && scp -oStrictHostKeyChecking=no $RPM  github@rpm.corti.li:$RPMDIR \
+              && scp -oStrictHostKeyChecking=no $SRPM github@rpm.corti.li:$SRPMDIR \
+              && echo "Updating /var/www/rpm/$DIST/$RELEASE" \
+              && ssh -oStrictHostKeyChecking=no github@rpm.corti.li "createrepo /var/www/rpm/$DIST/$RELEASE" '
