@@ -42,7 +42,6 @@
 
 %token COMMA
 %token DICE
-%token DISCARD
 %token DIV
 %token FUDGE
 %token HIGH
@@ -55,6 +54,7 @@
 %token RCURLY
 %token RPAREN
 %token TIMES
+%token X
 %token LE
 %token LT
 %token GE
@@ -84,8 +84,8 @@ roll : top_level_expression_list {
 
 top_level_expression_list : top_level_expression {
 
-#ifdef DEBUG
-  printf("[DBG] top_level_expression_list : top_level_expression\n");
+#ifdef DEBUG  
+  debug("top_level_expression_list : top_level_expression");
 #endif
   
   if (! positive_flag || $1 > 0) {
@@ -233,7 +233,7 @@ factor   :   NUMBER filtered_dice {
   $$ = new_op(OP_LOW, new_number($4), new_op(OP_REP, new_number($1), $2));
 
 }
-| NUMBER filtered_dice DISCARD LOW {
+| NUMBER filtered_dice X LOW {
 
 #ifdef DEBUG
   if (debug_flag > 0) {
@@ -248,7 +248,7 @@ factor   :   NUMBER filtered_dice {
   $$ = new_op(OP_HIGH, new_number($1-1), new_op(OP_REP, new_number($1), $2));
   
 }
-| NUMBER filtered_dice DISCARD HIGH {
+| NUMBER filtered_dice X HIGH {
 
 #ifdef DEBUG
   if (debug_flag > 0) {
@@ -332,7 +332,7 @@ dice       : DICE NUMBER {
 | DICE FUDGE {
   $$ = new_dice(new_number(FUDGE_DICE));
  }
-| DICE NUMBER DISCARD {
+| DICE NUMBER X {
    $$ = new_op(OP_TIMES, new_dice(new_number($2)), new_dice(new_number($2)) );
  }
 ;

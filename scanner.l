@@ -56,7 +56,7 @@
 return MINUS;
 }
 
-["*"xX]     { return TIMES;   }
+["*"x]     { return TIMES;   }
 \/          { return DIV;     }
 
 d|D|w|W|t|T {
@@ -71,7 +71,7 @@ return DICE;
 f|F         { return FUDGE;   }
 h|H|k|K     { return HIGH;    }
 l|L         { return LOW;     }
-x|X         { return DISCARD; }
+X           { return X;       }
 
 "("         { return LPAREN;  }
 ")"         { return RPAREN;  }

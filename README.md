@@ -114,10 +114,10 @@ d%         rolls 2 10-sided dices: one represents the tens and
 
 ```
 expression   := term { "+" term | "-" term } .
-term         := number | factor [ ("*"|"/") number |
+term         := number | factor [ ("*"|"x"|"/") number |
                 number ("*"|"/") factor | "(" expression ")" .
-factor       := number FilteredDice [ ("h"|"H"|"l"|"L"|"k"|"K") number ] | number FiltreredDice ("x"|"X") ("h"|"H"|"l"|"L") | FilteredDice .
+factor       := number FilteredDice [ ("h"|"H"|"l"|"L"|"k"|"K") number ] | number FiltreredDice ("X") ("h"|"H"|"l"|"L") | FilteredDice .
 FilteredDice := dice | dice (">"|">="|"<"|"<="|"!=") number .
-dice         := "d" | "D" | "w" | "W" | "t" | "T" [ number | "%" | "F" | "f" | "x" | "X" ]
+dice         := "d" | "D" | "w" | "W" | "t" | "T" [ number | "%" | "F" | "f" | "X" ]
 ```
 

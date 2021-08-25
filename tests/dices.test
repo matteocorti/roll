@@ -6,4 +6,4 @@ test_expression  3 1d6
 test_expression  3 1d10
 test_expression 33 1d%
 test_expression  1 1DF
-# test_expression  9 d10x
+test_expression  9 d10X
