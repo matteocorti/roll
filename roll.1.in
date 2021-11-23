@@ -23,6 +23,9 @@ allow only positive results
 .B \-\-sum-series, \-s
 show the sum of roll series
 .TP
+.B \-\-test
+the result of the dice is always 3 (for testing purposes)
+.TP
 .B \-\-verbose, \-v
 verbose (displays the result for each roll)
 .TP
