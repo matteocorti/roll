@@ -14,7 +14,7 @@
 
 	* scanner.l: adding the K (keep) syntax (equivalent to H)
 
-	* parser.y: added "drop the lowes (-L) and drop the highest (-H) notation"
+	* parser.y: added "drop the lowest (-L) and drop the highest (-H) notation"
 
 2016-08-23  Matteo Corti  <matteo@corti.li>
 
@@ -31,7 +31,7 @@
 
 2014-09-07  Matteo Corti  <matteo@corti.li>
 
-	* roll.c: fixed node initialization (defaul field values)
+	* roll.c: fixed node initialization (default field values)
 
 2014-01-09  Matteo Corti  <matteo.corti@id.ethz.ch>
 
@@ -59,14 +59,14 @@
 
 2008-01-29  Matteo Corti  <matteo@corti.li>
 
-	* parser.y: applyed patch from Erik Greenwald about a missing ;
+	* parser.y: applied patch from Erik Greenwald about a missing ;
 	* regen.sh: added --add-missing and --copy to automake
 	* parser.y: corrected an error in the parser which was not accepting
 	            expressions with more than two terms
 
 2007-08-22  Matteo Corti  <matteo@corti.li>
 
-	* parser.y: correct the behaviour of d% (on dice 0 corresponds to 10 while
+	* parser.y: correct the behavior of d% (on dice 0 corresponds to 10 while
 	            it corresponds to 0 on the other)
 
 2007-05-25  Matteo Corti  <matteo@corti.li>
