@@ -28,3 +28,4 @@ tap-driver.sh
 test-driver
 ylwrap
 parser.output
+.DS_Store
