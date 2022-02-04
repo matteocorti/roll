@@ -198,6 +198,8 @@ jobs:
               yum install -y --enablerepo=epel autoconf automake rpm-build make gcc bison flex pandoc
           - distro: 'centos:8'
             pre: >-
+              sed -i 's/mirrorlist/#mirrorlist/g' /etc/yum.repos.d/CentOS-Linux-* &&
+              sed -i 's|#baseurl=http://mirror.centos.org|baseurl=http://vault.centos.org|g' /etc/yum.repos.d/CentOS-Linux-* &&
               dnf -y install epel-release dnf-plugins-core &&
               dnf config-manager --set-enabled powertools &&
               dnf install -y --enablerepo=epel autoconf automake rpm-build make gcc bison flex pandoc
