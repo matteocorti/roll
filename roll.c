@@ -614,7 +614,7 @@ int roll_expression ( struct ir_node * node, int print ) {
       
     default :
       
-      fprintf(stderr, "Implementation error: unkown IR node with code %i\n", cur->op);
+      fprintf(stderr, "Implementation error: unknown IR node with code %i\n", cur->op);
       exit(EXIT_FAILURE);
       
     }

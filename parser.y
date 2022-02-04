@@ -242,7 +242,7 @@ factor   :   NUMBER filtered_dice {
 #endif
 
   if ($1 <= 1) {
-    error("the number of dices must be greatet than 1");
+    error("the number of dices must be greater than 1");
   }
 
   $$ = new_op(OP_HIGH, new_number($1-1), new_op(OP_REP, new_number($1), $2));
@@ -257,7 +257,7 @@ factor   :   NUMBER filtered_dice {
 #endif
 
   if ($1 <= 1) {
-    error("the number of dices must be greatet than 1");
+    error("the number of dices must be greater than 1");
   }
 
   $$ = new_op(OP_LOW, new_number($1-1), new_op(OP_REP, new_number($1), $2));
