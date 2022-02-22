@@ -23,3 +23,8 @@ rpm: dist
 	mkdir -p rpmroot/SOURCES rpmroot/BUILD
 	cp roll-$(VERSION).tar.gz rpmroot/SOURCES
 	rpmbuild --define "_topdir `pwd`/rpmroot" -ba roll.spec
+
+if ENABLE_BASH_COMPLETION
+bashcompletiondir = $(BASH_COMPLETION_DIR)
+dist_bashcompletion_DATA = roll.completion
+endif

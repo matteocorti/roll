@@ -6,18 +6,19 @@ _roll() {
 
     COMPREPLY=()
 
-    cur="${COMP_WORDS[COMP_CWORD]}"
-    prev="${COMP_WORDS[COMP_CWORD - 1]}"
+ 	cur="${COMP_WORDS[COMP_CWORD]}"
+	prev="${COMP_WORDS[COMP_CWORD-1]}"
 
     # list of command line options
     #   we list only the long version (more readable)
-    opts="--positive --help --sum-series --test --verbose --version"
+	opts="--positive --help --sum-series --test --verbose --version"
 
-    if [[ "${cur}" == -* || ${COMP_CWORD} -eq 1 ]]; then
-        COMPREPLY=($(compgen -W "${opts}" -- "${cur}"))
+
+    if [[ ${cur} == -* ]]; then
+ 		COMPREPLY=( $(compgen -W "${opts}" -- ${cur}) )
         return 0
     fi
-    
+
 }
 
 complete -F _roll roll
