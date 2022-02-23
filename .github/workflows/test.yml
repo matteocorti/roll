@@ -55,7 +55,6 @@ jobs:
           - 'alpine:3.13'
           - 'alpine:edge'
           - 'centos:7'
-          - 'centos:8'
           - 'fedora:32'
           - 'fedora:33'
           - 'fedora:34'
@@ -67,30 +66,30 @@ jobs:
           - distro: 'debian:testing'
             pre: >-
               apt-get update &&
-              DEBIAN_FRONTEND=noninteractive apt-get -y install autoconf automake gcc make bison pandoc flex
+              DEBIAN_FRONTEND=noninteractive apt-get -y install autoconf automake gcc make bison pandoc flex pkg-config
           - distro: 'debian:10'
             pre: >-
               apt-get update &&
-              DEBIAN_FRONTEND=noninteractive apt-get -y install autoconf automake gcc make bison pandoc flex
+              DEBIAN_FRONTEND=noninteractive apt-get -y install autoconf automake gcc make bison pandoc flex pkg-config
           - distro: 'debian:9'
             pre: >-
               apt-get update &&
-              DEBIAN_FRONTEND=noninteractive apt-get -y install autoconf automake gcc make bison pandoc flex
+              DEBIAN_FRONTEND=noninteractive apt-get -y install autoconf automake gcc make bison pandoc flex pkg-config
 
 
 
           - distro: 'ubuntu:16.04'
             pre: >-
               apt-get update &&
-              DEBIAN_FRONTEND=noninteractive apt-get -y install autoconf automake gcc make bison pandoc flex
+              DEBIAN_FRONTEND=noninteractive apt-get -y install autoconf automake gcc make bison pandoc flex pkg-config
           - distro: 'ubuntu:18.04'
             pre: >-
               apt-get update &&
-              DEBIAN_FRONTEND=noninteractive apt-get -y install autoconf automake gcc make bison pandoc flex
+              DEBIAN_FRONTEND=noninteractive apt-get -y install autoconf automake gcc make bison pandoc flex pkg-config
           - distro: 'ubuntu:20.04'
             pre: >-
               apt-get update &&
-              DEBIAN_FRONTEND=noninteractive apt-get -y install autoconf automake gcc make bison pandoc flex
+              DEBIAN_FRONTEND=noninteractive apt-get -y install autoconf automake gcc make bison pandoc flex pkg-config
 
 
 
@@ -99,13 +98,13 @@ jobs:
               apk update &&
               apk upgrade &&
               apk add -U bash &&
-              apk add autoconf automake gcc binutils build-base bison flex
+              apk add autoconf automake gcc binutils build-base bison flex pkg-config
           - distro: 'alpine:3.13'
             pre: >-
               apk update &&
               apk upgrade &&
               apk add -U bash &&
-              apk add autoconf automake gcc binutils build-base bison flex
+              apk add autoconf automake gcc binutils build-base bison flex pkg-config
 
 
           - distro: 'fedora:32'
@@ -136,16 +135,6 @@ jobs:
               yum -y install epel-release &&
               yum upgrade -y &&
               yum install -y --enablerepo=epel autoconf automake gcc bison make flex pandoc
-          - distro: 'centos:8'
-            pre: >-
-              sed -i 's/mirrorlist/#mirrorlist/g' /etc/yum.repos.d/CentOS-Linux-* &&
-              sed -i 's|#baseurl=http://mirror.centos.org|baseurl=http://vault.centos.org|g' /etc/yum.repos.d/CentOS-Linux-* &&
-              dnf -y install epel-release dnf-plugins-core &&
-              dnf config-manager --set-enabled powertools &&
-              dnf upgrade -y &&
-              dnf install -y --enablerepo=epel autoconf automake gcc bison make flex pandoc
-
-
 
     steps:
       - name: Git clone repository
@@ -174,7 +163,6 @@ jobs:
       matrix:
         distro:
           - 'centos:7'
-          - 'centos:8'
           - 'fedora:32'
           - 'fedora:33'
           - 'fedora:34'
@@ -196,13 +184,6 @@ jobs:
             pre: >-
               yum -y install epel-release &&
               yum install -y --enablerepo=epel autoconf automake rpm-build make gcc bison flex pandoc
-          - distro: 'centos:8'
-            pre: >-
-              sed -i 's/mirrorlist/#mirrorlist/g' /etc/yum.repos.d/CentOS-Linux-* &&
-              sed -i 's|#baseurl=http://mirror.centos.org|baseurl=http://vault.centos.org|g' /etc/yum.repos.d/CentOS-Linux-* &&
-              dnf -y install epel-release dnf-plugins-core &&
-              dnf config-manager --set-enabled powertools &&
-              dnf install -y --enablerepo=epel autoconf automake rpm-build make gcc bison flex pandoc
     steps:
       - name: Git clone repository
         uses: actions/checkout@v2
