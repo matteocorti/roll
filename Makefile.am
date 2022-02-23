@@ -19,6 +19,9 @@ EXTRA_DIST = $(man_MANS) roll.spec COPYRIGHT $(TESTS) tests/test_functions.sh
 README: README.md
 	if uname -a | grep -qi alpine ; then  pandoc -f markdown -t plain $< -o $@ ; else cp README.md README; fi
 
+NEWS: NEWS.md
+	if uname -a | grep -qi alpine ; then  pandoc -f markdown -t plain $< -o $@ ; else cp NEWS.md NEWS; fi
+
 rpm: dist
 	mkdir -p rpmroot/SOURCES rpmroot/BUILD
 	cp roll-$(VERSION).tar.gz rpmroot/SOURCES
