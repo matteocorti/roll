@@ -22,11 +22,13 @@ Dices can be rolled multiple times by prepending the number of
 repetitions (e.g., 3d6) and used in simple mathematical expressions 
 (e.g., 2d8+4).
 
+%global completions_dir %( pkg-config --variable=completionsdir bash-completion )
+
 %prep
 %setup
 
 %build
-%configure %{_prefix}/usr
+%configure %{_prefix}/usr --with-bash-completion-dir=${RPM_BUILD_ROOT}%{completions_dir}
 %{__make} %{?_smp_mflags}
 
 %install
@@ -40,6 +42,7 @@ repetitions (e.g., 3d6) and used in simple mathematical expressions
 %{_mandir}/man1/roll.1.gz
 %doc AUTHORS ChangeLog NEWS README TODO COPYING VERSION
 %attr(0755, root, root) %{_prefix}/bin/roll
+%{completions_dir}
 
 %changelog
 * Wed Feb 23 2022 Matteo Corti <matteo@corti.li> - 2.6.1-0

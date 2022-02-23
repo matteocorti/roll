@@ -1,5 +1,5 @@
 BUILT_SOURCES= parser.h
-VERSION=2.6.0
+VERSION=2.6.1
 AM_YFLAGS = -d
 
 bin_PROGRAMS = roll
@@ -29,5 +29,5 @@ rpm: dist
 
 if ENABLE_BASH_COMPLETION
 bashcompletiondir = $(BASH_COMPLETION_DIR)
-dist_bashcompletion_DATA = roll.completion
+dist_bashcompletion_DATA = bash_completion/roll
 endif
