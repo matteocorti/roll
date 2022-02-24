@@ -42,7 +42,7 @@ repetitions (e.g., 3d6) and used in simple mathematical expressions
 %{_mandir}/man1/roll.1.gz
 %doc AUTHORS ChangeLog NEWS README TODO COPYING VERSION
 %attr(0755, root, root) %{_prefix}/bin/roll
-%{completions_dir}
+%{completions_dir}/roll
 
 %changelog
 * Wed Feb 23 2022 Matteo Corti <matteo@corti.li> - 2.6.1-0
