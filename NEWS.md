@@ -1,4 +1,4 @@
-* 2022-02-23, 2.6.1: support for bash-completion
+* 2022-02-24, 2.6.1: support for bash-completion
 * 2021-08-24, 2.6.0: fixed several bugs and updated the grammar
 * 2019-04-18, 2.5.0: uses urandom if possible
 * 2018-07-15, 2.4.0: Added the ```d10x``` notation

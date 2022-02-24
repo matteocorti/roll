@@ -1,1 +1,1 @@
-Fixed several bugs and updated the grammar
+Support for bash completion
