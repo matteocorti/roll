@@ -55,6 +55,12 @@ case ${DIST} in
 	DIST='fedora'
 	RELEASE='35'
         ;;
+    fc36)
+        RPMDIR="${WEBROOT}/fedora/36/${ARCH}"
+        SRPMDIR="${WEBROOT}/fedora/36/SRPMS"
+	DIST='fedora'
+	RELEASE='36'
+        ;;
     el7)
         RPMDIR="${WEBROOT}/epel/7/${ARCH}"
         SRPMDIR="${WEBROOT}/epel/7/SRPMS"
