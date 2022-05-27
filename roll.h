@@ -58,7 +58,7 @@
 #include <unistd.h>
 
 /** @def srandomdev
- * defines srandomdev usig srand of the current time
+ * defines srandomdev using srand of the current time
  * bitwise anded with the PID if srandomdev is missing
  */
 #define srandomdev() srand((unsigned) time(NULL) & getpid())
@@ -66,7 +66,7 @@
 #else
 
 /** @def srandomdev
- * defines srandomdev usig srand of the current time
+ * defines srandomdev using srand of the current time
  * if srandomdev and getpid are missing
  */
 #define srandomdev() srand((unsigned) time(NULL))

@@ -165,7 +165,7 @@ dice         := "d" | "D" | "w" | "W" | "t" | "T" [ number | "%" | "F" | "f" | "
 .BR random (3)
 .SH "EXIT STATUS"
 @PACKAGE_NAME@ returns a zero exist status if it finds no error in the
-supplied expresssion
+supplied expression
 .SH BUGS
 Please report bugs to: Matteo Corti (matteo (at) corti.li )
 

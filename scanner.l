@@ -68,6 +68,15 @@ d|D|w|W|t|T {
 return DICE;
 }
 
+DD66 {
+#ifdef DEBUG
+  if (debug_flag > 0) {
+    printf("[DBG] [SCAN] DD66\n");
+  }
+#endif
+return D66;
+}
+
 f|F         { return FUDGE;   }
 h|H|k|K     { return HIGH;    }
 l|L         { return LOW;     }

@@ -42,6 +42,7 @@
 
 %token COMMA
 %token DICE
+%token D66
 %token DIV
 %token FUDGE
 %token HIGH
@@ -328,6 +329,9 @@ dice       : DICE NUMBER {
   }
 | DICE PERCENT {
   $$ = new_dice(new_number(HUNDRED));
+ }
+| DICE DICE NUMBER NUMBER {
+    $$ = new_op(OP_PLUS, new_op(OP_TIMES, new_dice(new_number(6)), new_number(10)), new_dice(new_number(6)));
  }
 | DICE FUDGE {
   $$ = new_dice(new_number(FUDGE_DICE));
