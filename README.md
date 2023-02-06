@@ -2,6 +2,8 @@
 
 roll is a program to roll dices specified in a simple and intuitive way.
 
+![](https://img.shields.io/github/v/release/matteocorti/roll)&nbsp;![](https://img.shields.io/github/downloads/matteocorti/roll/latest/total)&nbsp;![](https://img.shields.io/github/downloads/matteocorti/roll/total)&nbsp;![](https://img.shields.io/github/license/matteocorti/roll)&nbsp;![](https://img.shields.io/github/stars/matteocorti/roll)&nbsp;![](https://img.shields.io/github/forks/matteocorti/roll)
+
 see INSTALL on how to compile and install roll and the man page for instructions
 
 ## Synopsis
