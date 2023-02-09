@@ -33,7 +33,7 @@ jobs:
               yum install -y --enablerepo=epel autoconf automake rpm-build make gcc bison flex pandoc openssh-clients
     steps:
       - name: Git clone repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           submodules: true
       - name: Build the RPM on ${{ matrix.distro }}
