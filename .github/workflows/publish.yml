@@ -19,12 +19,12 @@ jobs:
         distro:
           - 'centos:7'
           - 'fedora:38'
-          - 'fedora:37'
+          - 'fedora:39'
         include:
           - distro: 'fedora:38'
             pre: >-
               dnf install -y autoconf automake rpm-build make gcc bison flex pandoc openssh-clients
-          - distro: 'fedora:37'
+          - distro: 'fedora:39'
             pre: >-
               dnf install -y autoconf automake rpm-build make gcc bison flex pandoc openssh-clients
           - distro: 'centos:7'
