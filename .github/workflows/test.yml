@@ -100,6 +100,10 @@ jobs:
             pre: >-
               apt-get update &&
               DEBIAN_FRONTEND=noninteractive apt-get -y install autoconf automake gcc make bison pandoc flex pkg-config
+          - distro: 'ubuntu:22.04'
+            pre: >-
+              apt-get update &&
+              DEBIAN_FRONTEND=noninteractive apt-get -y install autoconf automake gcc make bison pandoc flex pkg-config
 
 
 
