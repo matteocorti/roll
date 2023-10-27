@@ -22,6 +22,7 @@ jobs:
         os:
           - macos-11
           - macos-12
+          - macos-13
           - macos-latest
     runs-on: ${{ matrix.os }}
     steps:
@@ -58,6 +59,7 @@ jobs:
           - 'ubuntu:16.04'
           - 'ubuntu:18.04'
           - 'ubuntu:20.04'
+          - 'ubuntu:22.04'
           - 'alpine:3.13'
           - 'alpine:edge'
           - 'centos:7'
