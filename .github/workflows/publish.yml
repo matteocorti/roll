@@ -18,10 +18,10 @@ jobs:
       matrix:
         distro:
           - 'centos:7'
-          - 'fedora:38'
+          - 'fedora:40'
           - 'fedora:39'
         include:
-          - distro: 'fedora:38'
+          - distro: 'fedora:40'
             pre: >-
               dnf install -y autoconf automake rpm-build make gcc bison flex pandoc openssh-clients
           - distro: 'fedora:39'
