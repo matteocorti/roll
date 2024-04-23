@@ -63,7 +63,7 @@ jobs:
           - 'alpine:3.13'
           - 'alpine:edge'
           - 'centos:7'
-          - 'fedora:38'
+          - 'fedora:40'
           - 'fedora:39'
         include:
 
@@ -121,7 +121,7 @@ jobs:
               apk add autoconf automake gcc binutils build-base bison flex pkgconfig
 
 
-          - distro: 'fedora:38'
+          - distro: 'fedora:40'
             pre: >-
               dnf upgrade -y &&
               dnf install -y hostname &&
@@ -168,12 +168,12 @@ jobs:
         distro:
           - 'centos:7'
           - 'fedora:39'
-          - 'fedora:38'
+          - 'fedora:40'
         include:
           - distro: 'fedora:39'
             pre: >-
               dnf install -y autoconf automake rpm-build make gcc bison flex pandoc
-          - distro: 'fedora:38'
+          - distro: 'fedora:40'
             pre: >-
               dnf install -y autoconf automake rpm-build make gcc bison flex pandoc
           - distro: 'centos:7'
