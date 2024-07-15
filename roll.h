@@ -84,7 +84,7 @@
 #define OP_PLUS    5 /*!< Addition node                      */
 #define OP_MINUS   6 /*!< Subtraction node                   */
 #define OP_HIGH    7 /*!< Keep highest results node          */
-#define OP_LOW     8 /*!< Keep lowest resutls node           */
+#define OP_LOW     8 /*!< Keep lowest results node           */
 #define OP_GT      9 /*!< Keep results greater than          */
 #define OP_GE     10 /*!< Keep results greater or equal than */
 #define OP_LT     11 /*!< Keep results less than             */
