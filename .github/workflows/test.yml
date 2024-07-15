@@ -61,7 +61,6 @@ jobs:
           - 'ubuntu:22.04'
           - 'alpine:3.13'
           - 'alpine:edge'
-          - 'centos:7'
           - 'fedora:40'
           - 'fedora:39'
         include:
@@ -132,13 +131,6 @@ jobs:
               dnf install -y autoconf automake gcc bison make flex pandoc
 
 
-
-          - distro: 'centos:7'
-            pre: >-
-              yum -y install epel-release &&
-              yum upgrade -y &&
-              yum install -y --enablerepo=epel autoconf automake gcc bison make flex pandoc
-
     steps:
       - name: Git clone repository
         uses: actions/checkout@v3
@@ -165,7 +157,6 @@ jobs:
       fail-fast: false
       matrix:
         distro:
-          - 'centos:7'
           - 'fedora:39'
           - 'fedora:40'
         include:
@@ -175,10 +166,6 @@ jobs:
           - distro: 'fedora:40'
             pre: >-
               dnf install -y autoconf automake rpm-build make gcc bison flex pandoc
-          - distro: 'centos:7'
-            pre: >-
-              yum -y install epel-release &&
-              yum install -y --enablerepo=epel autoconf automake rpm-build make gcc bison flex pandoc
     steps:
       - name: Git clone repository
         uses: actions/checkout@v3
