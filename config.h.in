@@ -1,6 +1,6 @@
 /* config.h.in.  Generated from configure.ac by autoheader.  */
 
-/* Define to 1 if you have the `atol' function. */
+/* Define to 1 if you have the 'atol' function. */
 #undef HAVE_ATOL
 
 /* Define to 1 if you have the <errno.h> header file. */
@@ -9,25 +9,25 @@
 /* Define to 1 if you have the <getopt.h> header file. */
 #undef HAVE_GETOPT_H
 
-/* Define to 1 if you have the `getpid' function. */
+/* Define to 1 if you have the 'getpid' function. */
 #undef HAVE_GETPID
 
 /* Define to 1 if you have the <inttypes.h> header file. */
 #undef HAVE_INTTYPES_H
 
-/* Define to 1 if you have the `m' library (-lm). */
+/* Define to 1 if you have the 'm' library (-lm). */
 #undef HAVE_LIBM
 
 /* Define to 1 if you have the <limits.h> header file. */
 #undef HAVE_LIMITS_H
 
-/* Define to 1 if you have the `qsort' function. */
+/* Define to 1 if you have the 'qsort' function. */
 #undef HAVE_QSORT
 
-/* Define to 1 if you have the `srandom' function. */
+/* Define to 1 if you have the 'srandom' function. */
 #undef HAVE_SRANDOM
 
-/* Define to 1 if you have the `srandomdev' function. */
+/* Define to 1 if you have the 'srandomdev' function. */
 #undef HAVE_SRANDOMDEV
 
 /* Define to 1 if you have the <stdint.h> header file. */
@@ -75,7 +75,7 @@
 /* Define to the version of this package. */
 #undef PACKAGE_VERSION
 
-/* Define to 1 if all of the C90 standard headers exist (not just the ones
+/* Define to 1 if all of the C89 standard headers exist (not just the ones
    required in a freestanding environment). This macro is provided for
    backward compatibility; new code need not use it. */
 #undef STDC_HEADERS
@@ -83,6 +83,6 @@
 /* Version number of package */
 #undef VERSION
 
-/* Define to 1 if `lex' declares `yytext' as a `char *' by default, not a
-   `char[]'. */
+/* Define to 1 if 'lex' declares 'yytext' as a 'char *' by default, not a
+   'char[]'. */
 #undef YYTEXT_POINTER

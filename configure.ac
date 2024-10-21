@@ -32,19 +32,29 @@ esac
 
 AC_SUBST(PACKAGE_DATE, `date "+%Y-%m-%d"`)
 
-# bash complete
-AC_ARG_WITH([bash-completion-dir],
-    AS_HELP_STRING([--with-bash-completion-dir[=PATH]],
-        [Install the bash auto-completion script in this directory. @<:@default=yes@:>@]),
-    [],
-    [with_bash_completion_dir=yes])
+AC_CHECK_PROG([PKG_CONFIG], [pkg-config], [yes], [no])
 
-if test "x$with_bash_completion_dir" = "xyes"; then
-    PKG_CHECK_MODULES([BASH_COMPLETION], [bash-completion >= 2.0],
-        [BASH_COMPLETION_DIR="`pkg-config --variable=completionsdir bash-completion`"],
-        [BASH_COMPLETION_DIR="$datadir/bash-completion/completions"])
+if test "$PKG_CONFIG" = "yes"; then
+
+  #bash complete
+  AC_ARG_WITH([bash-completion-dir],
+      AS_HELP_STRING([--with-bash-completion-dir[=PATH]],
+          [Install the bash auto-completion script in this directory. @<:@default=yes@:>@]),
+      [],
+      [with_bash_completion_dir=yes])
+
+  if test "x$with_bash_completion_dir" = "xyes"; then
+      PKG_CHECK_MODULES([BASH_COMPLETION], [bash-completion >= 2.0],
+          [BASH_COMPLETION_DIR="`pkg-config --variable=completionsdir bash-completion`"],
+          [BASH_COMPLETION_DIR="$datadir/bash-completion/completions"])
+  else
+      BASH_COMPLETION_DIR="$with_bash_completion_dir"
+  fi
+
 else
-    BASH_COMPLETION_DIR="$with_bash_completion_dir"
+
+  AC_MSG_WARN([pkg-config not found, skipping bash completion])
+
 fi
 
 AC_SUBST([BASH_COMPLETION_DIR])
