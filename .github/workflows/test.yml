@@ -100,13 +100,9 @@ jobs:
       fail-fast: false
       matrix:
         distro:
-          - 'fedora:39'
-          - 'fedora:40'
+          - 'fedora:latest'
         include:
-          - distro: 'fedora:39'
-            pre: >-
-              dnf install -y autoconf automake rpm-build make gcc bison flex pandoc
-          - distro: 'fedora:40'
+          - distro: 'fedora:latest'
             pre: >-
               dnf install -y autoconf automake rpm-build make gcc bison flex pandoc
     steps:
