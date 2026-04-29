@@ -20,8 +20,6 @@ jobs:
       fail-fast: false
       matrix:
         os:
-          - macos-12
-          - macos-13
           - macos-latest
     runs-on: ${{ matrix.os }}
     steps:
@@ -51,85 +49,30 @@ jobs:
       fail-fast: false
       matrix:
         distro:
-          - 'debian:10'
-          - 'debian:11'
-          - 'debian:12'
-          - 'debian:testing'
-          - 'ubuntu:16.04'
-          - 'ubuntu:18.04'
-          - 'ubuntu:20.04'
-          - 'ubuntu:22.04'
-          - 'alpine:3.13'
-          - 'alpine:edge'
-          - 'fedora:40'
-          - 'fedora:39'
-        include:
-
-
-        
-          - distro: 'debian:testing'
+          - 'debian:latest'
+          - 'ubuntu:latest'
+          - 'alpine:latest'
+          - 'fedora:latest'
+        include:        
+          - distro: 'debian:latest'
             pre: >-
               apt-get update &&
               DEBIAN_FRONTEND=noninteractive apt-get -y install autoconf automake gcc make bison pandoc flex pkg-config
-          - distro: 'debian:10'
+          - distro: 'ubuntu:latest'
             pre: >-
               apt-get update &&
               DEBIAN_FRONTEND=noninteractive apt-get -y install autoconf automake gcc make bison pandoc flex pkg-config
-          - distro: 'debian:11'
-            pre: >-
-              apt-get update &&
-              DEBIAN_FRONTEND=noninteractive apt-get -y install autoconf automake gcc make bison pandoc flex pkg-config
-          - distro: 'debian:12'
-            pre: >-
-              apt-get update &&
-              DEBIAN_FRONTEND=noninteractive apt-get -y install autoconf automake gcc make bison pandoc flex pkg-config
-
-
-
-          - distro: 'ubuntu:16.04'
-            pre: >-
-              apt-get update &&
-              DEBIAN_FRONTEND=noninteractive apt-get -y install autoconf automake gcc make bison pandoc flex pkg-config
-          - distro: 'ubuntu:18.04'
-            pre: >-
-              apt-get update &&
-              DEBIAN_FRONTEND=noninteractive apt-get -y install autoconf automake gcc make bison pandoc flex pkg-config
-          - distro: 'ubuntu:20.04'
-            pre: >-
-              apt-get update &&
-              DEBIAN_FRONTEND=noninteractive apt-get -y install autoconf automake gcc make bison pandoc flex pkg-config
-          - distro: 'ubuntu:22.04'
-            pre: >-
-              apt-get update &&
-              DEBIAN_FRONTEND=noninteractive apt-get -y install autoconf automake gcc make bison pandoc flex pkg-config
-
-
-
-          - distro: 'alpine:edge'
+          - distro: 'alpine:latest'
             pre: >-
               apk update &&
               apk upgrade &&
               apk add -U bash &&
               apk add autoconf automake gcc binutils build-base bison flex pkgconfig
-          - distro: 'alpine:3.13'
-            pre: >-
-              apk update &&
-              apk upgrade &&
-              apk add -U bash &&
-              apk add autoconf automake gcc binutils build-base bison flex pkgconfig
-
-
-          - distro: 'fedora:40'
+          - distro: 'fedora:latest'
             pre: >-
               dnf upgrade -y &&
               dnf install -y hostname &&
               dnf install -y autoconf automake gcc bison make flex pandoc
-          - distro: 'fedora:39'
-            pre: >-
-              dnf upgrade -y &&
-              dnf install -y hostname &&
-              dnf install -y autoconf automake gcc bison make flex pandoc
-
 
     steps:
       - name: Git clone repository
