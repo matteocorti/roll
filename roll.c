@@ -29,6 +29,7 @@ extern int positive_flag; /**< command line argument: allow only positive result
 typedef struct yy_buffer_state *YY_BUFFER_STATE;
 #endif
 YY_BUFFER_STATE yy_scan_string ( const char *yy_str  );
+void yy_delete_buffer ( YY_BUFFER_STATE b );
 
 #ifdef DEBUG
 int debug_flag = 0; /**< command line argument: debug output */
@@ -93,6 +94,7 @@ int roll_dice(int sides) {
     if (verbose_flag) {
       printf("d10 -> %i\n", d1);
     }
+    d1 = d1 % 10;
     
     if (d1 == 0 && d10 == 0) {
       result = 100;
@@ -321,13 +323,14 @@ int main(int argc, char **argv) {
     debug(expression);
 #endif
     
-    yy_scan_string(expression);
+    YY_BUFFER_STATE scan_buffer = yy_scan_string(expression);
 
 #ifdef DEBUG
     debug("expression scanned");
 #endif
     
     yyparse();
+    yy_delete_buffer(scan_buffer);
 
 #ifdef DEBUG
     debug("expression parsed\n");
@@ -443,11 +446,73 @@ int checked_sum( int op1, int op2 ) {
 }
 
 int checked_multiplication( int op1, int op2 ) {
-  int result = op1 * op2;
-  if (op1 != 0 && result / op1 != op2 ) {
+  if ((op1 > 0 && op2 > 0 && op1 > INT_MAX / op2) ||
+      (op1 > 0 && op2 < 0 && op2 < INT_MIN / op1) ||
+      (op1 < 0 && op2 > 0 && op1 < INT_MIN / op2) ||
+      (op1 < 0 && op2 < 0 && op1 < INT_MAX / op2)) {
     error("Overflow");
   }
-  return result;
+  return op1 * op2;
+}
+
+static void check_divisor( int divisor ) {
+  if (divisor == 0) {
+    error("Division by zero");
+  }
+}
+
+static int is_direct_number( struct ir_node * node, int * value ) {
+  if (node != NULL && node->op == OP_NUMBER) {
+    *value = node->value;
+    return TRUE;
+  }
+  return FALSE;
+}
+
+static int direct_dice_range( struct ir_node * node, int * min, int * max ) {
+  int sides;
+
+  if (node == NULL || node->op != OP_DICE ||
+      !is_direct_number(node->right, &sides)) {
+    return FALSE;
+  }
+
+  if (sides == HUNDRED) {
+    *min = 1;
+    *max = 100;
+    return TRUE;
+  }
+
+  if (sides == FUDGE_DICE) {
+    *min = -1;
+    *max = 1;
+    return TRUE;
+  }
+
+  if (sides <= 0) {
+    error("Dice must have a positive number of sides");
+  }
+
+  *min = 1;
+  *max = sides;
+  return TRUE;
+}
+
+static void check_filter_possible( struct ir_node * dice, unsigned short int op, int limit ) {
+  int min;
+  int max;
+
+  if (!direct_dice_range(dice, &min, &max)) {
+    return;
+  }
+
+  if ((op == OP_GT && max <= limit) ||
+      (op == OP_GE && max <  limit) ||
+      (op == OP_LT && min >= limit) ||
+      (op == OP_LE && min >  limit) ||
+      (op == OP_NE && min == max && min == limit)) {
+    error("Impossible dice filter");
+  }
 }
 
 /*!
@@ -507,11 +572,13 @@ int roll_expression ( struct ir_node * node, int print ) {
                                    roll_expression( cur->right, FALSE ) );
       break;
       
-    case OP_DIV:
-      sum = (int)
-        ceil( (float)roll_expression( cur->left,  FALSE ) /
-              roll_expression( cur->right, FALSE ) );
+    case OP_DIV: {
+      int dividend = roll_expression( cur->left,  FALSE );
+      int divisor  = roll_expression( cur->right, FALSE );
+      check_divisor(divisor);
+      sum = (int)ceil( (double)dividend / divisor );
       break;
+    }
       
     case OP_HIGH:
 
@@ -566,7 +633,8 @@ int roll_expression ( struct ir_node * node, int print ) {
 
     case OP_GT:
       
-      limit = roll_expression(cur->right, FALSE);      
+      limit = roll_expression(cur->right, FALSE);
+      check_filter_possible(cur->left, cur->op, limit);
       tmp   = roll_expression(cur->left,  FALSE);
       while (tmp <= limit) {
         tmp = roll_expression(cur->left, FALSE);
@@ -577,7 +645,8 @@ int roll_expression ( struct ir_node * node, int print ) {
       
     case OP_GE:
       
-      limit = roll_expression(cur->right, FALSE);      
+      limit = roll_expression(cur->right, FALSE);
+      check_filter_possible(cur->left, cur->op, limit);
       tmp   = roll_expression(cur->left,  FALSE);
       while (tmp < limit) {
         tmp = roll_expression(cur->left, FALSE);
@@ -588,7 +657,8 @@ int roll_expression ( struct ir_node * node, int print ) {
       
     case OP_LT:
       
-      limit = roll_expression(cur->right, FALSE);      
+      limit = roll_expression(cur->right, FALSE);
+      check_filter_possible(cur->left, cur->op, limit);
       tmp   = roll_expression(cur->left,  FALSE);
       while (tmp >= limit) {
         tmp = roll_expression(cur->left, FALSE);
@@ -599,7 +669,8 @@ int roll_expression ( struct ir_node * node, int print ) {
       
     case OP_LE:
       
-      limit = roll_expression(cur->right, FALSE);      
+      limit = roll_expression(cur->right, FALSE);
+      check_filter_possible(cur->left, cur->op, limit);
       tmp   = roll_expression(cur->left,  FALSE);
       while (tmp > limit) {
         tmp = roll_expression(cur->left, FALSE);
@@ -610,7 +681,8 @@ int roll_expression ( struct ir_node * node, int print ) {
       
     case OP_NE:
       
-      limit = roll_expression(cur->right, FALSE);      
+      limit = roll_expression(cur->right, FALSE);
+      check_filter_possible(cur->left, cur->op, limit);
       tmp   = roll_expression(cur->left,  FALSE);
       while (tmp == limit) {
         tmp = roll_expression(cur->left, FALSE);
