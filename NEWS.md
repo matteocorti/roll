@@ -1,3 +1,4 @@
+* 2026-05-13, 2.7.0: fixed a bug when rolling a 0-sides dice
 * 2022-02-24, 2.6.1: support for bash-completion
 * 2021-08-24, 2.6.0: fixed several bugs and updated the grammar
 * 2019-04-18, 2.5.0: uses urandom if possible

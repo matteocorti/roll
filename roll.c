@@ -1,4 +1,4 @@
-/* Copyright (c) 2005-2023  Matteo Corti
+/* Copyright (c) 2005-2026  Matteo Corti
  * This file is part of roll
  *
  * You may distribute this file under the terms the GNU General Public
@@ -122,7 +122,7 @@ int roll_dice(int sides) {
     }
     
   } else {
-
+    
     result = roll(sides);
     
     if (verbose_flag) {
@@ -156,16 +156,23 @@ int roll(int dice) {
 
   int res;
 
-  if ( ! test ) {
-  
+  if (dice == 0) {
+      res = 0;
+  } else {
+
+      if ( ! test ) {
+      
 #if defined HAVE_SRANDOMDEV || defined HAVE_SRANDOM
-    res = 1+(int)(((double)dice)*random()/(RAND_MAX+1.0));
+          res = 1+(int)(((double)dice)*random()/(RAND_MAX+1.0));
 #else
-    res = 1+(int)(((double)dice)*rand()/(RAND_MAX+1.0));
+          res = 1+(int)(((double)dice)*rand()/(RAND_MAX+1.0));
 #endif
 
-  } else {
-    res = test;
+      } else {
+
+          res = test;
+      }
+
   }
   
   return res;

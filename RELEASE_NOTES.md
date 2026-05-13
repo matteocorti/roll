@@ -1,1 +1,1 @@
-Support for bash completion
+Fixed a bug when rolling a 0-sides dice

@@ -1,3 +1,7 @@
+2026-05-13  Matteo Corti  <matteo@corti.li>
+
+        * roll.c (roll): fixed a bug when rolling a 0-sides dice
+
 2021-08-25  Matteo Corti  <matteo@corti.li>
 
 	* parser.y: Fixed the grammar
