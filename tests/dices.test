@@ -1,6 +1,6 @@
 #!/bin/sh
 
-. ./tests/test_functions.sh
+. "$srcdir/tests/test_functions.sh"
 
 test_expression  3 1d6
 test_expression  3 1d10

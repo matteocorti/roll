@@ -1,5 +1,5 @@
 BUILT_SOURCES= parser.h
-VERSION=2.6.1
+VERSION=2.7.0
 AM_YFLAGS = -d
 
 bin_PROGRAMS = roll
@@ -10,11 +10,15 @@ man_MANS = roll.1
 
 TEST_LOG_DRIVER = env AM_TAP_AWK='$(AWK)' $(SHELL) \
                   $(top_srcdir)/tap-driver.sh
-TESTS=tests/*test
+TESTS = \
+  tests/dices.test \
+  tests/operations.test \
+  tests/special.test
+
 AUTOMAKE_OPTIONS = serial-tests
 
 
-EXTRA_DIST = $(man_MANS) roll.spec COPYRIGHT $(TESTS) tests/test_functions.sh
+EXTRA_DIST = $(man_MANS) roll.spec COPYRIGHT $(TESTS) tests/test_functions.sh NEWS.md README.md
 
 README: README.md
 	if uname -a | grep -qi alpine ; then  pandoc -f markdown -t plain $< -o $@ ; else cp README.md README; fi
