@@ -8,3 +8,4 @@ test_expression 33 1d%
 test_expression  1 1DF
 test_expression  9 d10X
 test_expression  0 42d0
+test_expression  0 0d6

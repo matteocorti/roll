@@ -17,7 +17,6 @@ TESTS = \
 
 AUTOMAKE_OPTIONS = serial-tests
 
-
 EXTRA_DIST = $(man_MANS) roll.spec COPYRIGHT $(TESTS) tests/test_functions.sh NEWS.md README.md
 
 README: README.md
